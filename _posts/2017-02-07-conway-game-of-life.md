@@ -8,6 +8,7 @@ header-img: "img/water.jpg"
 tags:
     - Racket
     - Scheme
+    - Lisp
     - Functional Programming
     - Computer Science
     - Game of Life

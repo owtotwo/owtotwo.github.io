@@ -8,6 +8,7 @@ header-img: "img/wave.jpg"
 tags:
     - Computer Science
     - Scheme
+    - Lisp
     - R5RS
     - Programming Language
     - Language Standard
