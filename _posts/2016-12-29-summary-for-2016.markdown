@@ -1,0 +1,46 @@
+---
+layout:     post
+title:      "2016年终总结"
+subtitle:   "GoodBye 2016"
+date:       2016-12-29
+author:     "owtotwo"
+header-img: "img/hello-blog.jpg"
+tags:
+    - Life
+    - summary
+---
+
+> "Aha! it's almost done."
+
+## 前言
+
+神tm还有第二篇。
+
+---
+
+## 正文
+
+> 如果神知道有这个世界，那就没有活下去的意义了。
+
+2016年可以大概分为四段，分别是
+* 从一月开始到三月中旬
+* 三月下旬到八月底
+* 九月初到十一月末
+* 十二月整月
+
+### 勤奋学习
+TODO
+
+### 无所事事
+TODO
+
+### 败家国度
+TODO
+
+### 思考人生
+TODO
+
+
+## 后记
+
+暂时还没有

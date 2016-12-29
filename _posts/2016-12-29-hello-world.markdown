@@ -4,7 +4,7 @@ title:      "Hello Blog"
 subtitle:   "Hello World, Hello Blog"
 date:       2016-12-29
 author:     "owtotwo"
-header-img: "img/home-bg-2.jpg"
+header-img: "img/hello-blog.jpg"
 tags:
     - Life
 ---
