@@ -1,8 +1,50 @@
-title: owtotwo.github.io
-description: Blog for owtotwo's journals.
-google_analytics: 
-show_downloads: false
-theme: jekyll-theme-cayman
+title: "owtotwo"
+SEOTitle: "owtotwo blog | 神奇的博客"
+header-img: img/home-bg.jpg
+email: owtotwo@163.com
+description: "Blog for owtotwo's journals."
+keyword: ""
+url: "http://owtotwo.github.io/"              # your host, for absolute URL
+baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
-gems:
-  - jekyll-mentions
+
+
+# SNS settings
+RSS: false
+github_username:     owtotwo
+zhihu_username:      owtotwo
+
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "Sorry world."
+sidebar-avatar: /img/owtotwo-avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
