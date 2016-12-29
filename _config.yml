@@ -7,7 +7,7 @@ keyword: ""
 url: "http://owtotwo.github.io/"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
-
+timezone: CN
 
 # SNS settings
 RSS: false
