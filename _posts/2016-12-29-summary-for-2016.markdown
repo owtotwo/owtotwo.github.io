@@ -7,7 +7,7 @@ author:     "owtotwo"
 header-img: "img/hello-blog.jpg"
 tags:
     - Life
-    - summary
+    - Summary
 ---
 
 > "Aha! it's almost done."
