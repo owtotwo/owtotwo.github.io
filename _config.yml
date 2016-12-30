@@ -38,7 +38,7 @@ kramdown:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "School of Software, Sun Yat-sen University. <email: owtotwo@163.com> <mobile: (+86)13250332579>"
+sidebar-about-description: "School of Software, Sun Yat-sen University. <br>&lt;Email: owtotwo@163.com&gt; <br>&lt;Tel: (+86)13250332579&gt;"
 sidebar-avatar: /img/owtotwo-avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
