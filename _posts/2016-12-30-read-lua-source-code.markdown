@@ -57,8 +57,8 @@ tags:
 顺其自然地看这个版本了。虽然相比于很早之前的版本代码量增加了约一倍，也就是20k行左右的标准C，但整体上应该变
 化不会非常大。
 
-这里提供了很多的源码阅读相关建议和链接： http://lua-users.org/wiki/LuaSource
-Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
+这里提供了很多的源码阅读相关建议和链接： http://lua-users.org/wiki/LuaSource  
+Lua5.3源码在线阅读： http://www.lua.org/source/5.3/  
 
 [1]: https://www.reddit.com/r/programming/comments/63hth/ask_reddit_which_oss_codebases_out_there_are_so/c02pxbp/
 
