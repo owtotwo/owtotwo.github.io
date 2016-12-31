@@ -68,47 +68,47 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 看了云风的Blog发现有 _The Implementation of Lua 5.0_ 的译文，也就顺便中英对照着看了。先阅读了前六节
 （共八节），发现还是有不少看不懂的地方。  
 
-- 第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加入
-等。
+-   第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加
+    入等。
 
-- 第二节是提出Lua的设计理念和目标，如简洁、高效、可移植（ANSI C）、可嵌入并易于嵌入（即实现需小巧高效）。
+-   第二节是提出Lua的设计理念和目标，如简洁高效、可移植（ANSI C）、可嵌入并易于嵌入（即实现需小巧高效）。
 
-- 第三节讲解了Lua的值的内部表示，即其八种基本类型在C中的实现结构。Lua将值表示成带标志的联合结构(tagged 
-unions)，这里的联合更像是组合，用(tag, value)表示。其中value储存值或相应的引用（指针）。特别的，字符串
-因常被用于比较等操作，所以lua会对内部化(internalized)了的字符串(string)进行hash并保存下hash值，此后可
-通过对比hash值来快速判断两字符串是否相等。
+-   第三节讲解了Lua的值的内部表示，即其八种基本类型在C中的实现结构。Lua将值表示成带标志的联合结构(tagged 
+    unions)，这里的联合更像是组合，用(tag, value)表示。其中value储存值或相应的引用（指针）。特别的，字
+    符串因常被用于比较等操作，所以lua会对内部化(internalized)了的字符串(string)进行hash并保存下hash
+    值，此后可通过对比hash值来快速判断两字符串是否相等。
 
-- 第四节讲了Lua的表(table)。因为表作为lua唯一的表示数据结构的方式（数组通过表的整数索引来支持），意义重
-大。因为这种混合型结构，Lua5.0中，对被用作数组的表使用了一种特殊的优化方式，即对于整数索引，将不保存此键（即
-索引），而是将值存入一个真正的数组（C的原生数组）中。并且此数组的内存空间大小将由一种特殊的算法来确定（较复
-杂，具体需看文章）。另外散列表那一part的实现暂时看不太懂（本节最后一段）。
+-   第四节讲了Lua的表(table)。因为表作为lua唯一的表示数据结构的方式（数组通过表的整数索引来支持），意义重
+    大。因为这种混合型结构，Lua5.0中，对被用作数组的表使用了一种特殊的优化方式，即对于整数索引，将不保存此
+    键（即索引），而是将值存入一个真正的数组（C的原生数组）中。并且此数组的内存空间大小将由一种特殊的算法来
+    确定（较复杂，具体需看文章）。另外散列表那一part的实现暂时看不太懂（本节最后一段）。
 
-- 第五节讲了函数和闭包的实现。在编译期会生成函数原型，在运行期会创建闭包（即函数原型的引用、环境的引用、
-upvalue引用的数组）。upvalue即外部局部变量，引用[Quora中一个答案][2]的描述： “The local variable 
-that has been closed over by that function 'jumps up' into the new scope which is why 
-it's called an upvalue.”。另外本节最后一段的flat闭包不太能理解。  
+-   第五节讲了函数和闭包的实现。在编译期会生成函数原型，在运行期会创建闭包（即函数原型的引用、环境的引用、
+    upvalue引用的数组）。upvalue即外部局部变量，引用[Quora中一个答案][2]的描述： “The local 
+    variable that has been closed over by that function 'jumps up' into the new scope 
+    which is why it's called an upvalue.”。另外本节最后一段的flat闭包不太能理解。  
 
     鉴于译文的翻译有点迷，难以理解，所以我在这里翻译一下第五节的倒数第二段（关键段落）：  
 
     **原文**： Mutable state is shared correctly among closures by creating at most one 
-upvalue per variable and reusing it as needed. To ensure this uniqueness, Lua
-keeps a linked list with all open upvalues (that is, those that still point to the
-stack) of a stack (the pending vars list in Figure 4). When Lua creates a new
-closure, it goes through all its outer local variables. For each one, if it can find
-an open upvalue in the list, it reuses that upvalue. Otherwise, Lua creates a new
-upvalue and links it in the list. Notice that the list search typically probes only
-a few nodes, because the list contains at most one entry for each local variable
-that is used by a nested function. Once a closed upvalue is no longer referred by
-any closure, it is eventually garbage collected.
+    upvalue per variable and reusing it as needed. To ensure this uniqueness, Lua
+    keeps a linked list with all open upvalues (that is, those that still point to the
+    stack) of a stack (the pending vars list in Figure 4). When Lua creates a new
+    closure, it goes through all its outer local variables. For each one, if it can find
+    an open upvalue in the list, it reuses that upvalue. Otherwise, Lua creates a new
+    upvalue and links it in the list. Notice that the list search typically probes only
+    a few nodes, because the list contains at most one entry for each local variable
+    that is used by a nested function. Once a closed upvalue is no longer referred by
+    any closure, it is eventually garbage collected.
 
     **译文**：对每个变量通过创建至多一个upvalue（按需重用）来保证它们在不同的闭包间正确地被共享。为了保证
-其唯一性，Lua维护一个链表来储存所有打开状态(open)的upvalues（即仍指向栈中变量的upvalues）。当Lua创建
-一个新的闭包时，Lua将遍历所有其外部局部变量。对于其中的每一个，如果能在链表中找到相应的打开状态的
-upvalue，就使用这个upvalue。否则，Lua将会创建一个新的upvalue并且将其插入到链表中。注意其中的链表搜
-索过程一般只用检查少数几个节点，因为链表为每个被嵌套函数使用到的局部变量包含了至多一个入口（即
-upvalue）。一旦一个关闭状态(closed)的upvalue不再被任何闭包引用时，其储存空间最终就会被GC回收。  
+    其唯一性，Lua维护一个链表来储存所有打开状态(open)的upvalues（即仍指向栈中变量的upvalues）。当Lua创
+    建一个新的闭包时，Lua将遍历所有其外部局部变量。对于其中的每一个，如果能在链表中找到相应的打开状态的
+    upvalue，就使用这个upvalue。否则，Lua将会创建一个新的upvalue并且将其插入到链表中。注意其中的链表搜
+    索过程一般只用检查少数几个节点，因为链表为每个被嵌套函数使用到的局部变量包含了至多一个入口（即
+    upvalue）。一旦一个关闭状态(closed)的upvalue不再被任何闭包引用时，其储存空间最终就会被GC回收。  
 
-- 第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。
+-   第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。
 
 `待续...`
 
