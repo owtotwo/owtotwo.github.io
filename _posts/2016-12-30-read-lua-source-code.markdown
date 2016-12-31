@@ -65,9 +65,11 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 --- 
 `update on 2016-12-31`  
 
-看了云风的Blog发现有 _The Implementation of Lua 5.0_ 的译文，也就顺便中英对照着看了。先阅读了前六节（共
-八节），发现还是有不少看不懂的地方。
-- 第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加入等。
+看了云风的Blog发现有 _The Implementation of Lua 5.0_ 的译文，也就顺便中英对照着看了。先阅读了前六节
+（共八节），发现还是有不少看不懂的地方。  
+
+- 第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加入
+等。
 
 - 第二节是提出Lua的设计理念和目标，如简洁、高效、可移植（ANSI C）、可嵌入并易于嵌入（即实现需小巧高效）。
 
@@ -88,7 +90,7 @@ it's called an upvalue.”。另外本节最后一段的flat闭包不太能理�
 
     鉴于译文的翻译有点迷，难以理解，所以我在这里翻译一下第五节的倒数第二段（关键段落）：  
 
-    > 原文： Mutable state is shared correctly among closures by creating at most one 
+    原文： Mutable state is shared correctly among closures by creating at most one 
 upvalue per variable and reusing it as needed. To ensure this uniqueness, Lua
 keeps a linked list with all open upvalues (that is, those that still point to the
 stack) of a stack (the pending vars list in Figure 4). When Lua creates a new
@@ -99,7 +101,7 @@ a few nodes, because the list contains at most one entry for each local variable
 that is used by a nested function. Once a closed upvalue is no longer referred by
 any closure, it is eventually garbage collected.
 
-    > 译文：对每个变量通过创建至多一个upvalue（按需重用）来保证它们在不同的闭包间正确地被共享。为了保证其
+    译文：对每个变量通过创建至多一个upvalue（按需重用）来保证它们在不同的闭包间正确地被共享。为了保证其
 唯一性，Lua维护一个链表来储存所有打开状态(open)的upvalues（即仍指向栈中变量的upvalues）。当Lua创建
 一个新的闭包时，Lua将遍历所有其外部局部变量。对于其中的每一个，如果能在链表中找到相应的打开状态的
 upvalue，就使用这个upvalue。否则，Lua将会创建一个新的upvalue并且将其插入到链表中。注意其中的链表搜
@@ -107,6 +109,7 @@ upvalue，就使用这个upvalue。否则，Lua将会创建一个新的upvalue�
 upvalue）。一旦一个关闭状态(closed)的upvalue不再被任何闭包引用时，其储存空间最终就会被GC回收。  
 
 - 第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。  
+
 `待续...`
 
 [1]: https://www.reddit.com/r/programming/comments/63hth/ask_reddit_which_oss_codebases_out_there_are_so/c02pxbp/
