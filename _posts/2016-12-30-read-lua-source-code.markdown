@@ -65,8 +65,8 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 --- 
 `update on 2016-12-31`  
 
-看了云风的Blog发现有 _The Implementation of Lua 5.0_ 的译文，也就顺便中英对照着看了。先阅读了前六节
-（共八节），发现还是有不少看不懂的地方。  
+看了[云风的Blog][2]发现有 _The Implementation of Lua 5.0_ 的[译文][3]，也就顺便中英对照着看了。先阅
+读了前六节（共八节），发现还是有不少看不懂的地方。([原文在此][4])  
 
 -   第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加
     入等。
@@ -84,7 +84,7 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
     确定（较复杂，具体需看文章）。另外散列表那一part的实现暂时看不太懂（本节最后一段）。
 
 -   第五节讲了函数和闭包的实现。在编译期会生成函数原型，在运行期会创建闭包（即函数原型的引用、环境的引用、
-    upvalue引用的数组）。upvalue即外部局部变量，引用[Quora中一个答案][2]的描述： “The local 
+    upvalue引用的数组）。upvalue即外部局部变量，引用[Quora中一个答案][5]的描述： “The local 
     variable that has been closed over by that function 'jumps up' into the new scope 
     which is why it's called an upvalue.”。另外本节最后一段的flat闭包不太能理解。  
 
@@ -112,8 +112,11 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 
 `待续...`
 
-[1]: https://www.reddit.com/r/programming/comments/63hth/ask_reddit_which_oss_codebases_out_there_are_so/c02pxbp/
-[2]: https://www.quora.com/What-are-upvalues-in-Lua
+[1]: https://www.reddit.com/r/programming/comments/63hth/ask_reddit_which_oss_codebases_out_there_are_so/c02pxbp/  
+[2]: http://blog.codingnow.com/
+[3]: http://blog.codingnow.com/2008/05/the_implementation_of_lua_50.html  
+[4]: http://www.lua.org/doc/jucs05.pdf  
+[5]: https://www.quora.com/What-are-upvalues-in-Lua  
 
 ## 后记
 暂时略过
