@@ -2,7 +2,7 @@
 layout:     post
 title:      "Lua5.3源码阅读计划"
 subtitle:   "Reading for fun!"
-date:       2017-01-01
+date:       2016-12-30
 author:     "owtotwo"
 header-img: "img/wave.jpg"
 tags:
@@ -112,7 +112,7 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 
 -   第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。和Python的generator不
     同，Lua的协程能够在多级函数嵌套中yield（即挂起，暂停执行），这是因为受利于每个协程都有各自的栈。当Lua
-    解释器的主循环里有CALL调用时，Lua将会像真实的CPU一般进行操作（具体参考CSAPP第三章）。  
+    解释器的主循环里有CALL调用时，Lua将会像真实的CPU一般进行操作（具体参考CSAPP第三章）。
 
 `update on 2017-01-01`
 
@@ -130,6 +130,11 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 -   第八节总结了Lua5.0的各方面。文中展示了一个程序执行效率测试(benchmarks)，我们可以从中看出Lua5.0的整
     体效率是较优于Lua4.0的。
 
+--- 
+
+忽然想起以前在github上Star过一个叫[ _Lua源码剖析(Lua-Source-Internal)_ ][8]的reposity，似乎写得不
+错，可以研究一下。另外在作者的Blog中有一篇[学习LUA源代码的一些经验和参考资料推荐][9]写得不错，可供参考。
+
 `待续...`
 
 [1]: https://www.reddit.com/r/programming/comments/63hth/ask_reddit_which_oss_codebases_out_there_are_so/c02pxbp/  
@@ -139,6 +144,8 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 [5]: https://www.quora.com/What-are-upvalues-in-Lua  
 [6]: http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions.pdf  
 [7]: http://www.lua.org/source/5.3/lopcodes.h.html  
+[8]: https://github.com/lichuang/Lua-Source-Internal  
+[9]: http://www.codedump.info/?p=464  
 
 ## 后记
 暂时略过
