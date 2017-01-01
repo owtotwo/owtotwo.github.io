@@ -2,12 +2,14 @@
 layout:     post
 title:      "Lua5.3源码阅读计划"
 subtitle:   "Reading for fun!"
-date:       2016-12-31
+date:       2017-01-01
 author:     "owtotwo"
 header-img: "img/wave.jpg"
 tags:
+    - Computer Science
     - Lua
     - Compiler
+    - Interpreter
 ---
 
 > "Huh... it will never be done."
@@ -65,8 +67,8 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 --- 
 `update on 2016-12-31`  
 
-看了[云风的Blog][2]发现有 _The Implementation of Lua 5.0_ 的[译文][3]，也就顺便中英对照着看了。先阅
-读了前六节（共八节），发现还是有不少看不懂的地方。([原文在此][4])  
+看了[云风的Blog][2]发现有 _The Implementation of Lua 5.0_ 的[译文][3]([原文在此][4])，也就顺便中
+英对照着看了。先阅读了前六节（共八节），发现还是有不少看不懂的地方。后补充了第七、八节。  
 
 -   第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加
     入等。
@@ -108,7 +110,25 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
     索过程一般只用检查少数几个节点，因为链表为每个被嵌套函数使用到的局部变量包含了至多一个入口（即
     upvalue）。一旦一个关闭状态(closed)的upvalue不再被任何闭包引用时，其储存空间最终就会被GC回收。  
 
--   第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。
+-   第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。和Python的generator不
+    同，Lua的协程能够在多级函数嵌套中yield（即挂起，暂停执行），这是因为受利于每个协程都有各自的栈。当Lua
+    解释器的主循环里有CALL调用时，Lua将会像真实的CPU一般进行操作（具体参考CSAPP第三章）。  
+
+`update on 2017-01-01`
+
+-   第七节讲的是虚拟机的实现。先解释了一波register-based有多好多好，为此Lua5.0从stack-based切到 
+    register-based。接下来用一个图简要解释了Lua虚拟机的35条指令（具体请看参考[ _A No-Frills 
+    Introduction to Lua 5.1 VM Instructions_ ][6]），还有4bytes的指令的组成结构（具体请参考
+    源代码头文件[lopcodes.h][7]），特别要注意的是函数中的常量（如a.f中的'f'索引）都存储在常量数组中而非
+    指令中。指令中毕竟特殊的实现是分支指令，有单独作处理。对于函数调用，Lua使用了 _register window_ 来
+    处理调用参数传递的问题（这里不太能理解“the activation record of the function”代表什么，下面有对
+    应的猜测）。Lua使用双栈结构来处理函数调用的情况。一个栈储存被调用的函数的信息（即函数调用栈），另一个用
+    来储存activation record（我认为是指局部变量、函数参数等函数运行中的求值栈中的信息，文中“Each 
+    activation record keeps all temporary values of the function (parameters, local 
+    variables, etc.)”证实了这一猜想）。  
+
+-   第八节总结了Lua5.0的各方面。文中展示了一个程序执行效率测试(benchmarks)，我们可以从中看出Lua5.0的整
+    体效率是较优于Lua4.0的。
 
 `待续...`
 
@@ -117,6 +137,8 @@ Lua5.3源码在线阅读： http://www.lua.org/source/5.3/
 [3]: http://blog.codingnow.com/2008/05/the_implementation_of_lua_50.html  
 [4]: http://www.lua.org/doc/jucs05.pdf  
 [5]: https://www.quora.com/What-are-upvalues-in-Lua  
+[6]: http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions.pdf  
+[7]: http://www.lua.org/source/5.3/lopcodes.h.html  
 
 ## 后记
 暂时略过
