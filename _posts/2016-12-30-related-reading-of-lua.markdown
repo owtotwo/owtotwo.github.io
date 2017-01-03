@@ -6,6 +6,7 @@ date: 2016-12-30
 author: owtotwo
 tags:
     - Lua
+    - Reading
 ---
 
 ## [采访 Lua 发明人的一篇文章][1]
