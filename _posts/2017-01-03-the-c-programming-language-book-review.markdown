@@ -84,7 +84,7 @@ tags:
         printf("hello, world!\n");
     }
     ```
-    
+
     首先我们注意到main函数是没有返回值的，这并非是Undefined behavior，因为根据各版本的标准我们可以知道
     不标明返回值程序就会返回一个不确定的值，但这并非是未定义行为。（注意区分两者差别，也就是说若是一个未定义
     行为，那么这个程序可以选择死循环也可以选择偷偷打电话给你点一份外卖，也就是运行程序后程序的执行行为是不确
@@ -217,7 +217,39 @@ tags:
 *   字符字面量的类型是int，也就是说sizeof('a') == sizeof(int)。
     > An integer character constant has type int. (From ANSI C Draft 3.1.3.4)
 
-*   
+*   注意事实上并没有else if这种语法，只是因为if-else语句嵌套而出现的if...else if...else...的情况。
+
+    > if ( expression ) statement [ else statement ]  （方括号为选）
+
+    ```
+    if (cond_1)
+        statement_1
+    else if (cond_2)
+        statement_2
+    else
+        statement_3
+    ```
+
+    实际上是
+
+    ```
+    if (cond_1)
+        statement_1
+    else
+        if (cond_2)
+            statement_2
+        else
+            statement_3
+    ```
+
+    只是因为花括号可以省略而出现更加可读的else if的语句而已。
+
+    并且我们经常错误地认为`if () {} else {}`中的花括号可以省掉是因为if-else语句支持有无花括号的两种
+    形式，实际上是因为`{ many-statements }`也是一个statement，然后参照上面列出的公式代入即可。
+
+    while同理，即`while (cond) { many-statements }` => `while (cond) statement`。
+
+*   最后吐槽一下，最后一个练习1-24竟然要写一个C语言的语法正确性检查器……这是要裸写C的lexer和parser啊……
 
 ### Types Operators and Expressions
 
