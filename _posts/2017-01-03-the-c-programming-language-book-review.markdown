@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "\"The C Programming Language - Secpnd Edition\" Book Review"
+title:      "The C Programming Language - Second Edition" Book Review
 subtitle:   "《C程序设计语言第二版》阅读记录"
 date:       2017-01-03
 author:     "owtotwo"
@@ -17,7 +17,8 @@ tags:
 
 忽然心血来潮想挖个小坑，约280页的 _The C Programming Language_ 全书阅读浅评～
 复习马原压力大，容易让人想减压，挖坑是一个很好的方式，有效地转移了主要矛盾，符合马克思主义的现实指导思想。
-为什么我会选这本书呢，根本原因有三个：  
+为什么我会选这本书呢，根本原因有三个：
+
 1. 非常薄，比C primer plus薄到不知哪里去了。
 2. C语言应用的广泛性，也同时因为有Unix这个强大的后盾，基本再过20年也不会被彻底淘汰的。
 3. C语言是较“低级”的编程语言，特别是作为毕竟原始的系统编程语言，C语言毫无疑问是精简而底层的。（较接近汇编）
