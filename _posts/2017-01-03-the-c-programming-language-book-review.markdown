@@ -104,8 +104,8 @@ tags:
     是clang……
 
 *   在上一点中我们引出了一个有趣而经典的话题，就是C的各个版本的标准问题。
-    在本书中使用的是ANSI C也就是传说中的C89/C90的最经典版本，根据维基百科的定义[ANSI C][1]我们可以得
-    知最重要的三个版本就是[C89/C90][2]，[C99][3]以及[C11][4]。我们主要讨论的是最早的版本，但也会设计部分的最新版本，毕
+    在本书中使用的是ANSI C也就是传说中的C89/C90的最经典版本，根据维基百科的定义[ANSI C][2]我们可以得
+    知最重要的三个版本就是[C89/C90][3]，[C99][4]以及[C11][5]。我们主要讨论的是最早的版本，但也会设计部分的最新版本，毕
     竟需要与时俱进。
 
     main函数的标准在多个版本中都基本是如下的定义：
@@ -124,18 +124,13 @@ tags:
     也就是说虽然main函数可以不需要显示写出返回值或者可以返回void值，但标准建议理应是返回int值的。（其他平
     台与实现相关，如某些嵌入式平台可能需要返回值为void）
 
-    [1]: https://en.wikipedia.org/wiki/ANSI_C
-    [2]: http://flash-gordon.me.uk/ansi.c.txt
-    [3]: http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf
-    [4]: http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
-
 *   **C语言程序都是由函数和变量组成的。**
 
 *   如果字符串字面量中包含\0那么字符串会在对应地方截断，如
     ``` C
     printf("hello\0 world!\n");
     ```
-    会显示`hello`并且不带换行。
+    会显示`hello`并且不带换行。具体请看维基的[转义字符][6]。
 
 *   由上一点我想到了最近在知乎上看到的一道C语言劝退题，差点就被劝退了：
     ``` C
@@ -171,7 +166,7 @@ tags:
 *   1.4的最后提到printf和putchar两个函数可以交替调用，输出的次序与调用的次序一致。那什么情况下输出的次序
     与调用的次序不一致呢？这时候我们联想到了C++中的cout和C的printf的同步问题了：C++中ios_base库中有定义sync_with_stdio函数，当参数为true时cout则同步stdio中的printf，在这里就不展开讲了。
 
-*   1.5中实现了一个类似[echo][1]的程序，即输出所有输入的字符：
+*   1.5中实现了一个类似[echo][7]的程序，即输出所有输入的字符：
     ``` C
     #include <stdio.h>
 
@@ -207,10 +202,12 @@ tags:
     如果这里声明了`char c`而不是`int c`，那么有可能char是无符号整数而导致EOF被转换为非负整数（char并不
     是unsigned char或者signed char，他们是三种类型）再提升为int，而使得`c != EOF`永远不成立。
 
-    具体可以看看阮一峰老师写的一篇[关于EOF的博文][2]。
+    具体可以看看阮一峰老师写的一篇[关于EOF的博文][8]。
 
-[1]: http://www.gnu.org/software/core‐utils/echo
-[2]: http://www.ruanyifeng.com/blog/2011/11/eof.html
+*   字符字面量的类型是int，也就是说sizeof('a') == sizeof(int)。
+    > An integer character constant has type int. (From ANSI C Draft 3.1.3.4)
+
+*   
 
 ### Types Operators and Expressions
 
@@ -234,6 +231,13 @@ tags:
 
 
 [1]: https://en.wikipedia.org/wiki/Scope_(computer_science)
+[2]: https://en.wikipedia.org/wiki/ANSI_C
+[3]: http://flash-gordon.me.uk/ansi.c.txt
+[4]: http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf
+[5]: http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
+[6]: https://en.wikipedia.org/wiki/Escape_sequences_in_C
+[7]: http://www.linfo.org/echo.html
+[8]: http://www.ruanyifeng.com/blog/2011/11/eof.html
 
 ---
 ## 后记
