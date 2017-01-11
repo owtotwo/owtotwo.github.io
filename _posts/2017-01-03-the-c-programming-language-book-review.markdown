@@ -206,7 +206,10 @@ tags:
     如果这里声明了`char c`而不是`int c`，那么有可能char是无符号整数而导致EOF被转换为非负整数（char并不
     是unsigned char或者signed char，他们是三种类型）再提升为int，而使得`c != EOF`永远不成立。
 
+    具体可以看看阮一峰老师写的一篇[关于EOF的博文][2]。
+
 [1]: http://www.gnu.org/software/core‐utils/echo
+[2]: http://www.ruanyifeng.com/blog/2011/11/eof.html
 
 ### Types Operators and Expressions
 
