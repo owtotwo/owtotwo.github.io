@@ -253,6 +253,35 @@ tags:
 
 ### Types Operators and Expressions
 
+*   2.1提到`Don't begin variable names with underscore since libaray routines often use 
+    such names.`。
+
+*   > 31 significant initial characters in an internal identifier or a macro name.
+
+    > 6 significant initial characters in an external identifier.
+
+    各种Translation limits具体请参考[ANSI C标准][3]的2.2.4.1部分。（如参数最多有31个之类的）
+
+*   char == 1byte(不一定为8bits); 16bits <= short <= int <= long >= 32bits;
+
+*   char不一定为unsigned char或signed char，又对应机器决定。
+
+*   printable char > 0;
+
+*   ![sizeof-types](/img/c-programming/sizeof-types.png)
+
+*   卡在练习2-1了，没什么头绪，不知道怎么写才能简洁准确。
+
+*   同一枚举中不同的名字可以拥有相同的常量。（冷知识）
+
+*   > The expression that defines the value of an enumeration constant
+    shall be an integral constant expression that has a value representable as an int.
+
+*   2.4的最后一段说`The result is implementation-defined if an attempt is made to change
+    a const.`是错的，不是implementation-defined而是Undefined-behavior。
+    （具体请看[ANSI C标准][3] 3.5.3第/57/点）
+
+ 
 ### Control Flow
 
 ### Functions and Program Structure
