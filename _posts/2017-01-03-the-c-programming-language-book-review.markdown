@@ -72,6 +72,8 @@ tags:
 
 ### A Tutorial Introduction
 
+`updated on 2017-01-11`
+
 这章是C语言的快速入门教程。下面列出其中的一些有趣的点：
 
 *   对于文中的第一个例程，即hello world：
@@ -252,6 +254,8 @@ tags:
 *   最后吐槽一下，最后一个练习1-24竟然要写一个C语言的语法正确性检查器……这是要裸写C的lexer和parser啊……
 
 ### Types Operators and Expressions
+
+`updated on 2017-01-12`
 
 *   2.1提到`Don't begin variable names with underscore since libaray routines often use 
     such names.`。
