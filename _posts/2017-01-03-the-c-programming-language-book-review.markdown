@@ -253,6 +253,8 @@ tags:
 
 *   最后吐槽一下，最后一个练习1-24竟然要写一个C语言的语法正确性检查器……这是要裸写C的lexer和parser啊……
 
+---
+
 ### Types Operators and Expressions
 
 `updated on 2017-01-12`
@@ -285,7 +287,73 @@ tags:
     a const.`是错的，不是implementation-defined而是Undefined-behavior。
     （具体请看[ANSI C标准][3] 3.5.3第/57/点）
 
+`updated on 2017-01-13`
+
+*   对于modulo operation，假设a (the dividend) and n (the divisor), a modulo n 
+    (abbreviated as a mod n)，那么在[ANSI C][3]标准下运算结果的符号是Implementation-defined的，
+    而[C99][4]则是与Dividend一致。
+
+    另外mod这里对于大部分语言来说有个小坑，即不同语言进行mod操作后正负符号取决于dividend还是divisor
+    的问题。如lua和python是与divisor一致（较特别），而C++98与[ANSI C][3]一样是
+    Implementation-defined，C++11和[C99][4]以及大部分语言如Rust是与Dividend一致。
+
+*   要在char类型中储存非字符数据，请使用signed char或者unsigned char。（这条炸了，这么多年一直都直
+    接用char）即当需要将char转换为int时，请先转换为signed char或unsigned char再让其自动类型转换到
+    int，否则正负无法确定。所以千万别用char做下标，有越界的可能，而数组越界是UB。
+
+*   忽然想到，一个很通用的UB就是整数溢出，也就是说
+    `int n = 0; while(n++) { ...(n not be changed) }`
+    也算是Undefined-behavior，是不保证n从正到溢出为负再增到零然后结束循环的。
+
+*   容我吐槽一下C语言实在太多UB了具体请看[ANSI C][3]的`A.6.2 Undefined behavior`部分。（非空源文
+    件不以换行(new-line)结尾也是UB，我的天）
+
+*   进行二元算术运算时不同的算术类型会进行类型提升，表达式整体的类型就取决于此，具体请看[ANSI C标准][3]
+    中的`3.2.1.5 Usual arithmetic conversions`部分，或者阅读msdn上的[Usual Arithmetic 
+    Conversions][9]。
+
+*   2.7节中有一个有趣的部分，即rand和srand俩函数的实现，我查了一下标准发现它们就是标准里的Example：
+
+    ``` C
+    static unsigned long int next = 1;
+
+    int rand(void)   /* RAND_MAX assumed to be 32767 */
+    {
+        next = next * 1103515245 + 12345;
+        return (unsigned int)(next/65536) % 32768;
+    }
+
+    void srand(unsigned int seed) { next = seed; }
+    ```
+
+    用的是线性同余法求的伪随机数，具体看wiki上的[Linear congruential generator][10]。
+
+*   2.8讲的是自增自减，这里坑毕竟多。
+
+    + (i+j)++不合法，因为右值不能后缀自增，对于左值右值的问题（以及C++里的prvalue、xvalue、glvalue等
+      不同类型的值）请参考wiki上的[Value (computer science)][11]。
+
+    + `i++ + ++i`是UB，因为无法确定左操作数和右操作数哪一个先进行求值，同理`func(i++, i)`也是，
+      `i = i++`也是，还有很多，具体原理请看序列点原理，即wiki上的[Sequence point][12]。其中最重要的
+      一点是：
+
+      > Between the previous and next sequence point a scalar object shall have its stored value modified at most once by the evaluation of an expression.
+
+      摘录一段StackOverflow上关于[序列点产生UB][13]的内容：
+
+      ``` C
+      i++ * ++i;   // UB, i is modified more than once btw two SPs
+      i = ++i;     // UB, same as above
+      ++i = 2;     // UB, same as above
+      i = ++i + 1; // UB, same as above
+      ++++++i;     // UB, parsed as (++(++(++i)))
+
+      i = (i, ++i, ++i); // UB, there's no SP between `++i` (right most) and assignment
+                            to `i` (`i` is modified more than once btw two SPs
+      ```
  
+*    [strpbrk()][14]这个函数用来写lexer好像很不错啊之前都没有发现。
+
 ### Control Flow
 
 ### Functions and Program Structure
@@ -313,6 +381,12 @@ tags:
 [6]: https://en.wikipedia.org/wiki/Escape_sequences_in_C
 [7]: http://www.linfo.org/echo.html
 [8]: http://www.ruanyifeng.com/blog/2011/11/eof.html
+[9]: https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx
+[10]: https://en.wikipedia.org/wiki/Linear_congruential_generator
+[11]: https://en.wikipedia.org/wiki/Value_(computer_science)
+[12]: https://en.wikipedia.org/wiki/Sequence_point
+[13]: http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points
+[14]: http://www.cplusplus.com/reference/cstring/strpbrk/
 
 ---
 ## 后记
