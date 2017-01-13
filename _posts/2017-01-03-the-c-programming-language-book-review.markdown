@@ -407,6 +407,44 @@ tags:
 
 ### Control Flow
 
+*   练习3-1中测不出binsearch函数在两种情况下的时间差，因为耗时实在太小了，贴上代码：
+
+    ``` C
+    int binsearch(int x, int v[], int n) {
+        int first = 0, last = n, mid;
+
+        while (first < last - 1) {
+            mid = (first + last) / 2;
+            x < v[mid] ? (last = mid) : (first = mid);
+        }
+
+        return v[first] == x ? first : -1;
+    }
+    ```
+
+*   3.5中有提到希尔排序的实现，我认为wiki上的实现比书里的好一些：
+
+    ``` C
+    void shell_sort(int arr[], int len) {
+        int gap, i, j;
+        int temp;
+        for (gap = len >> 1; gap > 0; gap >>= 1) {
+            for (i = gap; i < len; i++) {
+                temp = arr[i];              /* 保存下key值 */
+                for (j = i - gap; j >= 0 && arr[j] > temp; j -= gap)
+                    arr[j + gap] = arr[j];  /* 书里是在这里进行swap */
+                arr[j + gap] = temp;        /* 而wiki这里是最后才恢复临时保存的key值 */
+            }
+        }
+    }
+    ```
+
+    wiki上的以列排序解释步长排序挺清晰的，可以参考[Shellsort][15]。
+
+*   atoi()和itoa()函数很有必要自己实现一遍，书里的实现很不错。特别是itoa有坑。（练习3-4）
+
+*   3.8提到goto来跳出多层循环或进行统一错误处理，并显式说明不建议使用。
+
 ### Functions and Program Structure
 
 ### Pointers and Arrays
@@ -438,6 +476,7 @@ tags:
 [12]: https://en.wikipedia.org/wiki/Sequence_point
 [13]: http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points
 [14]: http://www.cplusplus.com/reference/cstring/strpbrk/
+[15]: https://en.wikipedia.org/wiki/Shellsort
 
 ---
 ## 后记
