@@ -447,6 +447,190 @@ tags:
 
 ### Functions and Program Structure
 
+*   [ANSI C][3]允许函数省略返回值，这种情况下返回值为int，所以以前可以写成`main() { return 0; }`
+    而[C99][4]后必须要显式写为`int main() { return 0; }`，也可以省略为`int main() {}`，因为：
+
+    > If the return type of the main function is a type compatible with int, a return 
+    from the initial call to the main function is equivalent to calling the exit function 
+    with the value returned by the main function as its argument; reaching the } that 
+    terminates the main function returns a value of 0. (From 5.1.2.2.3 Program 
+    termination in [C99 standard draft][4])
+
+    所以现在就不能写没有返回值的函数了噢。
+
+*   4.3信息量挺大的，提到了用外部变量共享栈来实现push和pop，以及用外部变量共享缓冲区（字符数组）实现getch
+    和ungetch（即对应标准库的getchar和ungetc）。感觉代码写得挺优雅的……这节实现了一个逆波兰表达式计算
+    器，很经典。
+
+*   练习4-4的几种操作都和栈式计算机上的指令很像，如peek和dup什么的。
+
+*   练习4-6是为计算器增加变量储存……想起了以前写过一个带变量的计算器，实际做起来也挺复杂的。
+
+*   extern声明不需要指定数组的长度。
+
+*   读4.7节register variables的时候忽然想到一个点，就是函数参数的类型声明可以有register修饰符但是不允
+    许使用auto或者static等其它的storage-class specifier，顺便register这个关键词现在基本是被抛弃了。
+
+*   4.9节中关于变量初始化有点和C++不一样的是：
+
+    ![](/img/c-programming/variables-initialization.png)
+
+*   这里可以看书此书写得很严谨，除了表达严谨，内容排布也很严谨，即不会有超前的知识点，也不会有过多的交叉引
+    用等让初学者混乱的内容设计排布，如在3.3节中（尚未提到初始化）使用的是先声明后赋值。
+
+*   4.10提到递归，有三个很经典的例子：
+
+    ``` C
+    /* Greatest Common Divisor */
+    int gcd(int a, int b) {
+        return b > 0 ? gcd(b, a % b) : a;
+    }
+    ```
+
+    ``` C
+    /* The Nth Fibonacci Number */
+    int fib(int n) {
+        return n < 3 ? 1 : fib(n - 1) + fib(n - 2);
+    }
+    ```
+
+    ``` C
+    /* Quicksort */
+    void qsort(int v[], int left, int right) {
+        if (left >= right) return;
+
+        int key = v[left], i = left, j = right;
+        while (i < j) {
+            while (i < j && key <= v[j]) j--;
+            v[i] = v[j];
+            while (i < j && key >= v[i]) i++;
+            v[j] = v[i];
+        }
+        v[i] = key;
+
+        qsort(v, left, i - 1);
+        qsort(v, i + 1, right);
+    }
+    ```
+
+    书里的qsort也写得不错，只是需要额外的swap函数比较麻烦，练习4-13是用递归翻转字符串。
+
+    ``` C
+    #include <string.h>
+
+    /* ugly code... */
+    void reverse_aux(char s[], int left, int right) {
+        if (left >= right) return;                  /* the terminating procedure */
+        s[left] ^= s[right] ^= s[left] ^= s[right]; /* swap s[left] and s[right] */
+        reverse_aux(s, left + 1, right - 1);        /* recursive */
+    }
+
+    void reverse(char s[]) {
+        reverse_aux(s, 0, strlen(s) - 1);
+    }
+    ```
+
+*   原来宏在4.11节预处理这部分啊…这节并没有提到`do { ... } while(0)`大法，只提到了宏的不卫生性，对
+    应的有卫生宏([Hygienic macro][16])的概念。Scheme和Rust等语言有对应的卫生宏实现，rust的实现可
+    以参考[Macro-By-Example][17]。
+
+*   宏有很多黑魔法，在这里只提最常用的一个，就是连接两个token：
+
+    ``` C
+    /* Macros for concatenating tokens */
+    #define __CAT_TOKEN(A, B) A##B
+    #define CAT_TOKEN(A, B) __CAT_TOKEN(A, B)
+    ```
+
+    附上一个简单的静态栈的宏实现：
+
+    ``` Cpp
+    // The Template Stack implementation in C Macro.
+
+    #ifndef STACK_S_MACRO_H_
+    #define STACK_S_MACRO_H_
+
+    #ifdef __cplusplus
+    extern "C" {
+    #endif
+
+    #include <stdlib.h> // for malloc
+
+    typedef struct {
+        void *top;
+        void *bottom;
+    } Stack_s;
+
+    #define initStack(P, TYPE, SIZE) \
+        do {\
+            (P).top = (P).bottom = malloc(((SIZE) + 1) * sizeof(TYPE));\
+        } while (0)
+
+    #define destroyStack(P) \
+        do {\
+            free((P).bottom);\
+        } while (0)
+
+    #define sizeStack(P, TYPE) \
+        ((size_t)(((TYPE*)(P).top) - ((TYPE*)(P).bottom)))
+
+    #define emptyStack(P) \
+        ((P).top == (P).bottom)
+
+    #define pushStack(P, TYPE, VALUE) \
+        do {\
+            TYPE* tmp = (TYPE*)((P).top);\
+            *tmp = (VALUE);\
+            (P).top = (void*)(tmp + 1);\
+        } while (0)
+
+    #define popStack(P, TYPE) \
+        do {\
+            TYPE* tmp = (TYPE*)((P).top);\
+            (P).top = (void*)(tmp - 1);\
+        } while (0)
+
+    #define peekStack(P, TYPE) \
+        (*(((TYPE*)((P).top)) - 1))
+
+    #ifdef __cplusplus
+    }
+    #endif
+
+    #endif // STACK_S_MACRO_H_
+    ```
+
+    这里可能有人会问为什么要用`do { ... } while(0)`而不直接用`{ ... }`。考虑以下情况：
+
+    ``` C
+    if (<condition>)
+        func_a();
+    else
+        func_b();
+    ```
+
+    如果func_a是个宏函数，并且是用`{ ... }`(block)实现，那么就会出现
+
+    ``` C
+    if (<condition>)
+        { ... }         /* 因为是文本替换 */
+        ;               /* 接下来是原来的分号，而非else，所以使得if语句结束 */
+    else                /* else没有对应的if，编译错误 */
+        func_b();
+    ```
+
+*   再次提醒初学者，头文件加哨兵防止重复包含很重要：
+
+    ``` C
+    /* a header file named XXX */
+    #ifndef __XXX_H_
+    #define __XXX_H_
+
+    /* Some declarations */
+
+    #endif /* __XXX_H_ */
+    ```
+
 ### Pointers and Arrays
 
 ### Structures
@@ -477,6 +661,8 @@ tags:
 [13]: http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points
 [14]: http://www.cplusplus.com/reference/cstring/strpbrk/
 [15]: https://en.wikipedia.org/wiki/Shellsort
+[16]: https://en.wikipedia.org/wiki/Hygienic_macro
+[17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
 
 ---
 ## 后记
