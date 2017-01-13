@@ -352,7 +352,58 @@ tags:
                             to `i` (`i` is modified more than once btw two SPs
       ```
  
-*    [strpbrk()][14]这个函数用来写lexer好像很不错啊之前都没有发现。
+*   [strpbrk()][14]这个函数用来写lexer好像很不错啊之前都没有发现。
+
+*   练习2-9有点有趣：
+
+    ``` C
+    /* bitcount函数：统计x中值为1的二进制位数 */
+    int bitcount(unsigned x) {
+        int b = 0;
+        while (x &= (x - 1)) b++; /* 利用了x &= (x - 1)可以删除x中最右边值为1的一个二进制位 */
+        return b;
+    }
+    ```
+
+*   三元表达式（condition expression，即?:表达式)的类型由上面提到的[算术提升][9]有关。
+
+*   善用三元表达式：
+
+    ``` C
+    /* 格式输出：每10个元素及最后一行换行，其余每个元素用空格隔开 */
+    for (int i = 0; i < n; i++)
+        printf("%6d%c", a[i], (i % 10 == 9 || i == n - 1) ? '\n' : ' ');
+    ```
+
+*   注意sizeof是运算符(operator)不是函数(function)，即事实上不是`sizeof(expr)`而是
+    `sizeof expr`或`sizeof(type)`：
+
+    ``` C
+    puts(sizeof 'c' == sizeof(int) ? "Equal" : "Not Equal");
+    
+    /* Output: Equal */
+    ```
+
+*   `x = f() + g()`并非一定先运行f()再运行g()，两者求值顺序不定，详细请看上面的“序列点”部分。
+
+*   下面代码会输出什么？
+
+    ``` C
+    #include <stdio.h>
+
+    int n;
+
+    void func(int _) { printf("%d\n", n++); }
+
+    int main() {
+        printf("%d\n", n);
+        func(n++);
+        printf("%d\n", n);
+        return 0;
+    }
+    ```
+
+    重点在于 _**标准规定所有对参数的副作用都必须在函数调用前生效**_。
 
 ### Control Flow
 
