@@ -633,6 +633,60 @@ tags:
 
 ### Pointers and Arrays
 
+*   `void *`是通用指针的类型。
+
+*   类似*和++这样的一元运算符遵循从右至左的结合顺序，故`*p++`事实上等价于`*(p++)`。
+
+*   C语言只有传值一种参数传递方式，因为指针也是值。
+
+*   数组下标其实是偏移量(offset)，即`p[i]`等价于`*(p + i)`，其中i就是偏移量，故“从零开始”。
+
+*   数组名不是变量，也不等价于指针常量，只是在作为 _函数形式参数_ 的情况下`char s[]`和`char *s`
+    是等价的。
+
+*   C语言只保证对任意大小为N的合法数组提供最多N+1的连续空间，即当对数组arr[N]取&arr[N + 1]时即为
+    Undefined-behavior，即使不对其地址解引用（访问其元素）也是UB，这点需要注意。
+
+*   C语言保证，0永远不是有效的数据地址。并且指向不同数组的元素的指针之间的算术或比较运算是未定义行为。
+
+*   注意以下两种定义的区别：
+
+    ``` C
+    char amessage[] = "now is the time";    /* define an array */
+    char *pmessage = "now is the time";     /* define a pointer */
+    ```
+
+    通过pmessage来试图修改字符串是未定义行为。
+
+*   书中的strcpy()函数的实现很美观：
+
+    ``` C
+    void strcpy(char *s, char *t) {
+        while (*s++ = *t++) /* loop */;
+    }
+    ```
+
+*   练习5-7想说明访问栈空间比访问堆空间的速度快？
+
+*   除数组的第一维可以不指定大小外，其余各维都必须明确指定大小。
+
+*   5.9节对二维数组和指针数组的区别解释得很清楚，前者储存空间是矩形连续的，而后者不一定。
+
+    ``` C
+    int a[10][20];
+    int *b[10];
+    ```
+
+    前者分配了大小为`10 * 20 * sizeof(int)`的空间，而后者只分配了`10 * sizeof(int*)`的空间。
+
+*   5.10节的命令行参数是毕竟多初学者不清楚的，很多书都对其略过，但还是毕竟重要的。起码需要知道为什么
+    main函数的signature是`int main(int argc, char* argv[])`，并且知道两个参数代表什么。
+
+*   5.11中用qsort的改版来解说函数指针，这里用的应该是策略模式([Strategy pattern][18])。
+
+*   5.12中实现了一个简单的递归下降分析算法来解析C语言的复杂的声明（如`char (*(*x[3])())[5]`这类），
+    看得我一脸懵逼。
+
 ### Structures
 
 ### Input and Output
@@ -663,6 +717,7 @@ tags:
 [15]: https://en.wikipedia.org/wiki/Shellsort
 [16]: https://en.wikipedia.org/wiki/Hygienic_macro
 [17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
+[18]: https://en.wikipedia.org/wiki/Strategy_pattern
 
 ---
 ## 后记
