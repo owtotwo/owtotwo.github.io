@@ -538,8 +538,10 @@ tags:
 
     ``` C
     /* Macros for concatenating tokens */
+    #define suffix 1
     #define __CAT_TOKEN(A, B) A##B
     #define CAT_TOKEN(A, B) __CAT_TOKEN(A, B)
+    #define FUNC(name) CAT_TOKEN(name, suffix) /* can not use '##' */
     ```
 
     附上一个简单的静态栈的宏实现：
@@ -720,5 +722,34 @@ tags:
 [18]: https://en.wikipedia.org/wiki/Strategy_pattern
 
 ---
+
 ## 后记
+
+最后补一个C语言劝退题，C89/C90/C99/C11皆可：以下代码能否编译通过？若不行，为什么？若可以，是否是未定义
+行为？若是则指出对应位置，若不是那么是否会出现Runtime Error？若不会，输出是什么？若会，为什么？
+
+``` C
+#include <stdio.h>
+
+#define r c
+#define s t
+#define _(a, b) a##b
+#define __(a, b) _(a, b)
+#define ___(a, b, c) __(__(a, b), c)
+#define rev(f, a, b) f(b, a)
+#define love(a) __(__(a, r), s)
+#define for(a) love(a)
+#define i(hate) {hate}
+#define ever
+
+int main() {
+    char uct[] = "123\0x456";
+    rev(__, uct, str) { char* str; }
+    a[(char)2 % (signed char)253] = {
+        {for(u)}, i(love(u)+4 ever)
+    }, *p = a;
+    printf("%""c""\\""n\n", (*p->str+=printf(&*p++->str), *++p->str));
+}
+```
+
 应该是不会有的了
