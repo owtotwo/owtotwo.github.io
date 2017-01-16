@@ -635,6 +635,8 @@ tags:
 
 ### Pointers and Arrays
 
+`updated on 2017-01-14`
+
 *   `void *`是通用指针的类型。
 
 *   类似*和++这样的一元运算符遵循从右至左的结合顺序，故`*p++`事实上等价于`*(p++)`。
@@ -691,6 +693,86 @@ tags:
 
 ### Structures
 
+`updated on 2017-01-16`
+
+*   在所有运算符中，以下四个运算符优先级最高：结构运算符"."和"->"、用于函数调用的"()"以及用于下标
+    的"[]"，即*p++->str意思是先读取指针str指向的对象的值，然后再将p加1。
+
+*   记得有人问过，指针的步长值保存在哪里？事实上是在编译时编译器通过记住指针指向类型的大小乘以对应的步
+    数来确定步长的。
+
+*   再次提醒，其实sizeof是一个操作符(operator)而不是函数(function)，即它可以`sizeof expression`
+    这样来使用的，而平常只是因为类型需要加上括号`sizeof(type)`所以才让人有它是函数的错觉。sizeof是一种
+    编译时(compile-time)的一元运算符。（特别的，[C99][4]的[VLA][19]除外）
+
+    > sizeof cannot be used with function types, incomplete types (including void), or 
+    bit field lvalues.
+
+    <del>这里的bit field lvalues不是很懂指代的是什么。</del>
+
+    搞懂了，这句话有点错，应该是[C99][4]里的`an expression that designates a bit-field member`
+    毕竟准确，即bit-field的struct的成员（如`struct { unsigned b: 3 } a;`这样的情况就不能
+    `sizeof a.b`）。
+
+    >  If the type of the operand is a variable length array([VLA][19]) type, the operand 
+    is evaluated; otherwise, the operand is not evaluated and the result is an integer 
+    constant.
+
+    VLA是sizeof内表达式(expression)求值的唯一特例，贴上一段C99标准里的例子：
+
+    ``` C
+    #include <stddef.h>
+    size_t fsize3(int n)
+    {
+        char b[n+3]; // variable length array
+        return sizeof b; // execution time sizeof
+    }
+
+    int main()
+    {
+        size_t size;
+        size = fsize3(10); // fsize3 returns 13
+        return 0;
+    }
+    ```
+
+
+*   注意所谓的”指针退化“指的是数组类型自动转换成指针类型的过程。
+
+    ``` C
+    #include <assert.h>
+
+    void func(int b[]) {
+        assert(sizeof b == sizeof(void*));
+    }
+
+    int main() {
+        int a[10];
+        assert(sizeof a / sizeof a[0] == 10);
+        func(a); /* 这里数组a（类型为int[10]）退化成了指针b（类型为int*） */
+    }
+    ```
+
+    为此现在的编译器基本都会报warning了。
+
+*   因多次用到了ungetc这个东西，简单说下它的实现：基本思想就是getchar和ungetc共享一个缓冲区(buffer)，
+    即一个变量。这个变量可以是一个字符或者是一个字符数组，这取决于你最多能ungetc多少内容。然后当调用
+    ungetc时就将内容放进缓冲区，调用getchar时就先判断缓冲区是否为空，不为空则返回缓冲区的值，为空则从标
+    准输入获取。特别的，为了储存EOF的值，可能缓冲区的类型需要是int而不是char（或者int[]）。
+
+*   结构体的长度不等于各成员长度之和：
+
+    ``` C
+    struct {
+        char c;
+        int i;
+    };
+    ```
+
+    可能需要`2 * sizeof(int)`这么多的bytes而不是`sizeof(char) + sizeof(int)`。
+
+    C语言似乎并没有规定ABI。
+
 ### Input and Output
 
 ### The UNIX System Interface
@@ -720,10 +802,13 @@ tags:
 [16]: https://en.wikipedia.org/wiki/Hygienic_macro
 [17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
 [18]: https://en.wikipedia.org/wiki/Strategy_pattern
+[19]: https://en.wikipedia.org/wiki/Variable-length_array
 
 ---
 
 ## 后记
+
+`updated on 2017-01-15`
 
 最后补一个C语言劝退题，C89/C90/C99/C11皆可：以下代码能否编译通过？若不行，为什么？若可以，是否是未定义
 行为？若是则指出对应位置，若不是那么是否会出现Runtime Error？若不会，输出是什么？若会，为什么？
