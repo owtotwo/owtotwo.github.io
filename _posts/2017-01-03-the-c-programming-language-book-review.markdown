@@ -910,6 +910,36 @@ tags:
     }
     ```
 
+*   对于scanf，书中描述”成功匹配并赋值的输入项的个数将作为函数值返回“，即`scanf("%*c");`的情况
+    下输入回车将会返回0，因为虽然匹配了一个值但是并没有赋值给输入项（没有输入项）而是直接抛弃。
+
+    scanf无法直接匹配空白字符，因为格式参数format中的空格或制表符将会被忽略。
+
+    总体来说scanf还是挺复杂的，文中提供了一个处理一般格式不确定的输入的例子：
+
+    ``` C
+    while (getline(line, sizeof(line)) > 0) {
+        if (sscanf(line, "%d %s %d, &day, monthname, &year) == 3)
+            printf("valid: %s\n", line);        /* 25 Dec 1988形式的日期数据 */
+        else if (sscanf(line, "%d/%d/%d", &month, &day, &year) == 3)
+            printf("valid: %s\n", line);        /* mm/dd/yy形式的日期数据 */
+        else
+            printf("invalid: %s\n", line);      /* 日期形式无效 */
+    }
+    ```
+
+*   大家可以思考一下，stdin, stdout, stderr都是常量，那么freopen是如何做到将它们重定向的呢？
+    （可能需要点操作系统里File Description的知识）
+
+*   调用fclose是一个好习惯（而非必须），是因为一般来说操作系统会限制一个程序同时打开的文件数，并且
+    fclose会执行fflush的行为，即把缓冲区中的内容写到对应文件上。而程序正常终止（调用exit亦可）的
+    情况下程序会为每个打开的文件自动调用fclose。
+
+*   吐槽一下malloc和calloc的接口不太一致，前者是”申请n个字节“而后者是”申请n个size字节大小的空间“。
+
+*   练习7-9不是很能明白它想让我干嘛，用节省空间或时间的实现方式实现isupper，难道不是直接
+    `#define isupper(c) ((c) >= 'A' && (c) <= 'Z')`吗。
+
 ### The UNIX System Interface
 
 ### Reference Manual
