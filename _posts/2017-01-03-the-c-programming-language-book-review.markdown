@@ -6,6 +6,7 @@ date:       2017-01-03
 author:     "owtotwo"
 header-img: "img/hill.jpg"
 tags:
+    - Computer Science
     - Reading
     - C
 ---
@@ -846,6 +847,69 @@ tags:
 
 ### Input and Output
 
+*   补上一个冷知识[C_trigraph][21]，另在[C99][4]中"<: :> <% %> %: %|%:"都是合法的punctuator。
+
+*   C语言不保证字符集一定是ASCII，所以用`(c >= 48 && c <= 57)`来代替`isdigit(c)`是不正确的。
+
+*   以下两个表达式不等价：
+
+    ``` C
+    printf(s);          /* cannot include the '%' */
+    printf("%s", s);    /* ok */
+    ```
+
+    以下是printf的格式例子：
+
+    ``` C
+    /* for "hello, world" (12 chars) */
+    +---------------+----------------+
+    |    format     |     output     |
+    +---------------+----------------+
+    |%s             |hello, world:   |
+    |%10s           |hello, world:   |
+    |%.10s          |hello, wor:     |
+    |%-10s          |hello, world:   |
+    |%.15s          |hello, world:   |
+    |%-15s          |hello, world   :|
+    |%15.10s        |     hello, wor:|
+    |%-15.10s       |hello, wor     :|
+    +---------------+----------------+
+    /* ps: ':' for ending of string. */
+    ```
+
+    另还有`printf("%*.*s", min_width, precision, string);`。
+    
+*   对于printf的接口实现，书中引出了一个概念叫变长参数列表(Variable Argument List)，具体参考
+    [stdarg.h][22]。下面演示一个简单的例子：
+
+    ``` C
+    #include <stdio.h>
+    #include <assert.h>
+    #include <stdarg.h>
+    
+    /* 找出并返回N个参数中最大的一个，N需要为正整数 */
+    int max(int N, ...) {
+        assert(N > 0);
+
+        va_list ap;
+        va_start(ap, N);
+
+        int max_val = va_arg(ap, int);
+        while (--N) {
+            int tmp = va_arg(ap, int);
+            if (tmp > max_val) max_val = tmp;
+        }
+
+        va_end(ap);
+
+        return max_val;
+    }
+
+    int main() {
+        printf("%d\n", max(4, -1, 3, 1, 0)); /* output: 3 */
+    }
+    ```
+
 ### The UNIX System Interface
 
 ### Reference Manual
@@ -875,6 +939,9 @@ tags:
 [18]: https://en.wikipedia.org/wiki/Strategy_pattern
 [19]: https://en.wikipedia.org/wiki/Variable-length_array
 [20]: https://en.wikipedia.org/wiki/Mask_(computing)
+[21]: https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C
+[22]: https://en.wikipedia.org/wiki/Stdarg.h
+
 ---
 
 ## 后记
