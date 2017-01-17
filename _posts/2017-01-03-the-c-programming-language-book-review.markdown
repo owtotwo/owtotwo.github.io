@@ -773,6 +773,77 @@ tags:
 
     C语言似乎并没有规定ABI。
 
+`updated on 2017-01-17`
+
+*   6.5节自引用结构部分提到相互引用，指针的大小是确定的所以非incomplete-type因此可以如下：
+
+    ``` C
+    struct t {
+        struct s *p;
+    }
+
+    struct s {
+        struct t *q;
+    }
+    ```
+
+*   这节用了一个Word-count的例子来讲解使用自引用结构（二叉树）以及递归操作的程序示例。程序实现得很漂亮，核
+    心接口是`struct tnode *addtree(struct tnode *p, char *w)`，即在p的位置或p的下方增加一个w节
+    点。这部分还展示了二叉树的中序遍历，还提示了二叉树会出现的worst-case（线性查找）。
+
+*   整型通常必须分配在偶数地址上（对其要求），为啥捏？据说第八章会讲解malloc的一种实现！
+
+    这里想到一个知识点，其实对malloc的返回值是不需要强制类型转换的，因为`void *`会无条件转换为相应的其他
+    指针类型（反之亦然），即对于一般写法`int *p = (int*)malloc(sizeof(int));`可以写成
+    `int *p = malloc(sizeof(int));`，大家可以按照自己的习惯进行取舍。
+
+*   6.6节讲了散列表的实现，其中出现了一个简短有效的hash函数用作映射字符串到非负整数下标：
+
+    ``` C
+    unsigned hash(char *s) {
+        unsigned hashval;
+        while (*s) hashval = *s++ + 31 * hashval;
+        return hashval % HASH_SIZE;
+    }
+    ```
+
+*   之前一直很容易把`typedef int Length;`中int和Length的位置混淆（因为`#define Length int`作用类
+    似），但书中提到的typedef在语法上类似于储存类extern、static等，即通过`extern int Length;`容易记
+    忆typedef语句的参数位置。
+
+*   联合(union)事实上就是一个结构(struct)，它的所有成员相对于基地址的偏移量都为0。
+
+    联合只能用其第一个成员类型的值进行初始化。
+
+    在lua的实现中联合起了一个很重要的作用（用于统一表示lua的所有对象的类型）。
+
+
+*   6.9节提到位字段，通常采用的方法是定义相应的屏蔽码([Mask][20])，即：
+
+    ``` C
+    #define KEYWORD  01
+    #define EXTERNAL 02
+    #define STATIC   04
+
+    flags |=  (EXTERNAL | STATIC);              /* set flags to 1 */
+    flags &= ~(EXTERNAL | STATIC);              /* set flags to 0 */
+    if (flags & (EXTERNAL | STATIC) == 0) ...;  /* check the flags */
+    ```
+
+    而C语言提供了位域(bit-field)来供替代。只是某些机器上字段的分配是从字的左端至右端进行的，而某些
+    机器上则相反（即大端小端问题）。这意味着，在选择外部定义数据的情况下，需要考虑大小端问题，即不可
+    移植。所以在lua的实现中，使用的是上面提到的Mask方法而非位域。因为编译后的lua二进制程序与大端还
+    是小端有关，而lua的目的是可移植的。
+
+    >  C gives no guarantee of the ordering of fields within machine words, so if you do 
+    use them for the latter reason, you program will not only be non-portable, it will be 
+    compiler-dependent too.
+
+    当你仅需要维护**内部定义的数据结构**时则可以使用。
+
+*   至此基本上C语言的语法部分就差不多了，后两章讲的主要是输入输出和各种库函数的使用和实现，还有Unix的接口，
+    内容将会比较多，估计是写不完了。
+
 ### Input and Output
 
 ### The UNIX System Interface
@@ -803,7 +874,7 @@ tags:
 [17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
 [18]: https://en.wikipedia.org/wiki/Strategy_pattern
 [19]: https://en.wikipedia.org/wiki/Variable-length_array
-
+[20]: https://en.wikipedia.org/wiki/Mask_(computing)
 ---
 
 ## 后记
