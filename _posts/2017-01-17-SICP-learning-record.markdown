@@ -4,7 +4,7 @@ title:      "Structure and Interpretation of Computer Programs - Second Editio
 subtitle:   "《计算机程序的构造和解释》学习记录"
 date:       2017-01-03
 author:     "owtotwo"
-header-img: "img/texture.jpg"
+header-img: "img/wood.jpg"
 tags:
     - Computer Science
     - Reading
@@ -15,8 +15,8 @@ tags:
 
 > This book is dedicated, in respect and admiration, to the spirit that lives in the 
 computer.
-> 
-> "I think that it's extraordinarily important that we in computer science keep   
+>  
+> "I think that it's extraordinarily important that we in computer science keep 
 fun in computing. When it started out, it was an awful lot of fun. Of course, the 
 paying customers got shafted every now and then, and after a while we began to 
 take their complaints seriously. We began to feel as if we really were 
@@ -29,7 +29,7 @@ those already. What you know about computing other people will learn. Don't feel
 as if the key to successful computing is only in your hands. What's in your hands,
 I think and hope, is intelligence: the ability to see the machine as more than 
 when you were first led up to it, that you can make it more."
-> 
+>   
 > Alan J. Perlis (April 1, 1922-February 7, 1990)
 
 ## 前言
