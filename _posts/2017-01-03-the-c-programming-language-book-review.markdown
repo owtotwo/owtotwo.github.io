@@ -64,7 +64,7 @@ tags:
     当语言标准看就好。
 10. [**Standard Library**](#standard-library)  
     考验背诵的时候到了，顺便学学用setjmp写异常处理的宏。
-11. [**Summary of Changes**](#summary-of-changes)
+11. [**Summary of Changes**](#summary-of-changes)  
     俩版本的不同。
 
 诶我发现好像没单独讲宏的章节啊，我想看看K&R是怎么花式写宏的哇。
