@@ -940,7 +940,32 @@ tags:
 *   练习7-9不是很能明白它想让我干嘛，用节省空间或时间的实现方式实现isupper，难道不是直接
     `#define isupper(c) ((c) >= 'A' && (c) <= 'Z')`吗。
 
+*   注意下rand()函数的最大取值是RAND_MAX。
+
+*   生成[0, 1)的浮点数可以用`#define frand() ((double)rand() / (RAND_MAX + 1.0))`。（我认
+    为这里的double类型转换应该是不用写的…因为1.0本身就是double，参考[ANSI C][3]中3.1.3.1部分中
+    的“An unsuffixed floating constant has type double.”，然后根据[算术提升规则][9]，二者
+    中有一为double则表达式为double，故除数也是double，同理frand()表达式整体也是double，即rand()
+    的强制类型转换是不必要的）
+
 ### The UNIX System Interface
+
+`updated on 2017-01-28`
+
+新年心情不好，就顺便更下吧。
+
+开章部分有提到“因为ANSI C标准函数是以UNIX系统为基础建立起来的”很重要。
+
+*   一个UNIX的常识是当用shell启动运行一个程序时，它将打开三个文件，分别是标准输入(0)、标准输出(1)、
+    标准错误(2)，所以我们平常才可以直接printf或者cout（即ostream头文件里**定义**的类对象），而
+    不用手动打开文件。
+
+*   `echo hello >file 2>&1`为“标准输出重定向到file中，标准错误重定向到标准输出（现为file）中”。
+
+*   原来C标准库中有个函数叫remove用于删除文件（底层是一般是unlink()函数或其他系统函数）。
+
+*   文件指针指向的结构(FILE)的内容包括一个指向缓冲区的指针、一个记录缓冲区剩余字符数的计数器、一个指
+    向缓冲区下一个字符的指针、文件描述符、读写标志、错误状态标志等。
 
 ### Reference Manual
 
