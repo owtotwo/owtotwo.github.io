@@ -1047,6 +1047,46 @@ tags:
 
 *   上面这个实例涉及到了与系统相关和与系统无关的代码，但仍非“系统程序”。
 
+*   8-7中的malloc-free实例很有实践意义（据说CSAPP里也有提到？）。首先是提到一点，malloc管理的
+    内存空间并一定不是连续的，因为如在Unix下，malloc所管理的空间是由`sbrk()`系统调用来获取相应
+    的空间。其中当有空间申请请求时，会通过first-fit方法来扫描malloc所管理的空闲块链表（有点像散
+    列表的线性探测法([Linear probing][23])。
+
+    其中有一个重要的点就是内存空间对齐问题，即确保由malloc函数返回的储存空间满足将要保存的对象的对
+    齐要求。
+
+    > Computers commonly address their memory in word-sized chunks. A word is a
+    computer’s natural unit for data. Its size is defined by the computers architecture.
+    Modern general purpose computers generally have a word-size of either 4 byte (32
+    bit) or 8 byte (64 bit). Classically, in early computers, memory could only be
+    addressed in words. This results in only being able to address memory at offsets
+    which are multiples of the word-size. It should be noted, however, that modern
+    computers do in fact have multiple word-sizes and can address memory down to
+    individual bytes as well as up to at least their natural word size. Recent computers
+    can operate on even larger memory chunks of 16 bytes and even a full cache line at
+    once (typically 64 bytes) in a single operation using special instructions.
+    (From [Alignment in C][24])
+
+    书中利用Union来实现最受限类型的对齐：
+
+    ``` C
+    typedef long Align;
+
+    union header {
+        struct {
+            union header *ptr;
+            unsigned size;
+        } s;
+        Align x;
+    };
+
+    typedef union header Header;
+    ```
+
+    整个内存管理的思想是通过空闲块链表来管理可用的内存块，每一个内存块都包含一个头部来储存相关信息
+    （如size以及下一个块的指针等），每个内存块大小都是头部大小的整数倍。调用malloc时会从链表中取
+    出合适的块并返回其可用地址（头部后面），而调用free时则会将空间放回链表中，若有相邻空闲块则合并。
+
 ### Reference Manual
 
 ### Standard Library
@@ -1076,6 +1116,8 @@ tags:
 [20]: https://en.wikipedia.org/wiki/Mask_(computing)
 [21]: https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C
 [22]: https://en.wikipedia.org/wiki/Stdarg.h
+[23]: https://en.wikipedia.org/wiki/Linear_probing
+[24]: https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2013_2014/epc-14-haase-svenhendrik-alignmentinc-paper.pdf
 
 ---
 
