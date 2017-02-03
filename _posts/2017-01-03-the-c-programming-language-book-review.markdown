@@ -976,6 +976,77 @@ tags:
 *   这章内容有点迷…略微有些看不懂，主要以一个用于递归显示文件（夹）大小的fsize的实例来描述UNIX的系统
     调用等知识，提到了inode（文件系统相关）还有文件夹也是文件等的系统相关的内容，反正我好像没学到啥。
 
+`updated on 2017-02-03`
+
+*   鉴于没搞懂8-6的fsize实例，我又认真看了一遍，把代码打了一遍，发现了一个很重要的问题，就是`read()`
+    这个系统调用并不能用于文件夹文件（Unix下文件夹也是文件，若read函数的第一个参数是一个文件夹的文件
+    描述符，则会出错返回-1，perror显示的结果是“: Is a directory”。所以若我的操作没有问题，那么书
+    上的例程应该是不适用于POSIX.1-2001标准的。利用POSIX的`readdir()`、`opendir()`以及`closedir()`
+    函数修改后的代码如下：
+
+    ``` C
+    #include <stdio.h>
+    #include <string.h>
+    #include <fcntl.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <unistd.h>
+    #include <sys/dir.h>
+
+    void fsize(char *);
+
+    int main(int argc, char* argv[]) {
+        if (argc == 1)
+            fsize(".");
+        else
+            while (--argc > 0) fsize(*++argv);
+    }
+
+    void dirwalk(char *, void (*fn)(char *));
+
+    void fsize(char *name) {
+        struct stat stbuf;
+
+        if (stat(name, &stbuf) == -1) {
+            fprintf(stderr, "fsize: can't access %s\n", name);
+            return;
+        }
+        if ((stbuf.st_mode & S_IFMT) == S_IFDIR)
+            dirwalk(name, fsize);
+        printf("%8ld %s\n", stbuf.st_size, name);
+    }
+
+    #define MAX_PATH 1024
+
+    void dirwalk(char *dir, void (*fn)(char *)) {
+        char name[MAX_PATH];
+        struct dirent *dp;
+        DIR *dfd;
+
+        if ((dfd = opendir(dir)) == NULL) {
+            fprintf(stderr, "dirwalk: can't open %s\n", dir);
+            return;
+        }
+        while ((dp = readdir(dfd)) != NULL) {
+            if (strcmp(dp->d_name, ".") == 0 ||
+                strcmp(dp->d_name, "..") == 0)
+                continue;
+            if (strlen(dir) + strlen(dp->d_name) + 2 > sizeof(name))
+                fprintf(stderr, "dirwalk: name %s/%s too long\n",
+                        dir, dp->d_name);
+            else {
+                sprintf(name, "%s/%s", dir, dp->d_name);
+                (*fn)(name);
+            }
+        }
+        closedir(dfd);
+    }
+    ```
+
+    仅供参考。
+
+*   上面这个实例涉及到了与系统相关和与系统无关的代码，但仍非“系统程序”。
+
 ### Reference Manual
 
 ### Standard Library
