@@ -1107,32 +1107,6 @@ tags:
 
 *   算了吐槽这章也没啥意思。
 
-
-[1]: https://en.wikipedia.org/wiki/Scope_(computer_science)
-[2]: https://en.wikipedia.org/wiki/ANSI_C
-[3]: http://flash-gordon.me.uk/ansi.c.txt
-[4]: http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf
-[5]: http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
-[6]: https://en.wikipedia.org/wiki/Escape_sequences_in_C
-[7]: http://www.linfo.org/echo.html
-[8]: http://www.ruanyifeng.com/blog/2011/11/eof.html
-[9]: https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx
-[10]: https://en.wikipedia.org/wiki/Linear_congruential_generator
-[11]: https://en.wikipedia.org/wiki/Value_(computer_science)
-[12]: https://en.wikipedia.org/wiki/Sequence_point
-[13]: http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points
-[14]: http://www.cplusplus.com/reference/cstring/strpbrk/
-[15]: https://en.wikipedia.org/wiki/Shellsort
-[16]: https://en.wikipedia.org/wiki/Hygienic_macro
-[17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
-[18]: https://en.wikipedia.org/wiki/Strategy_pattern
-[19]: https://en.wikipedia.org/wiki/Variable-length_array
-[20]: https://en.wikipedia.org/wiki/Mask_(computing)
-[21]: https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C
-[22]: https://en.wikipedia.org/wiki/Stdarg.h
-[23]: https://en.wikipedia.org/wiki/Linear_probing
-[24]: https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2013_2014/epc-14-haase-svenhendrik-alignmentinc-paper.pdf
-
 ---
 
 ## 后记
@@ -1179,4 +1153,33 @@ int main() {
 }
 ```
 
-应该是不会有的了
+如果这本书的所有内容以及我上面提到的所有内容以及这道劝退题都搞懂了的话，那么你应该可以跟别人说“C语言
+吗，我之前学过”。当然，离精通还是毕竟远的。
+
+嗯我也是学过C语言的人了！
+
+
+[1]: https://en.wikipedia.org/wiki/Scope_(computer_science)
+[2]: https://en.wikipedia.org/wiki/ANSI_C
+[3]: http://flash-gordon.me.uk/ansi.c.txt
+[4]: http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf
+[5]: http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
+[6]: https://en.wikipedia.org/wiki/Escape_sequences_in_C
+[7]: http://www.linfo.org/echo.html
+[8]: http://www.ruanyifeng.com/blog/2011/11/eof.html
+[9]: https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx
+[10]: https://en.wikipedia.org/wiki/Linear_congruential_generator
+[11]: https://en.wikipedia.org/wiki/Value_(computer_science)
+[12]: https://en.wikipedia.org/wiki/Sequence_point
+[13]: http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points
+[14]: http://www.cplusplus.com/reference/cstring/strpbrk/
+[15]: https://en.wikipedia.org/wiki/Shellsort
+[16]: https://en.wikipedia.org/wiki/Hygienic_macro
+[17]: https://www.cs.indiana.edu/ftp/techreports/TR206.pdf
+[18]: https://en.wikipedia.org/wiki/Strategy_pattern
+[19]: https://en.wikipedia.org/wiki/Variable-length_array
+[20]: https://en.wikipedia.org/wiki/Mask_(computing)
+[21]: https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C
+[22]: https://en.wikipedia.org/wiki/Stdarg.h
+[23]: https://en.wikipedia.org/wiki/Linear_probing
+[24]: https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2013_2014/epc-14-haase-svenhendrik-alignmentinc-paper.pdf
