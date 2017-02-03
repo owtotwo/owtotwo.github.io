@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Structure and Interpretation of Computer Programs - Second Edition" Learning Record
+title:      "\"Structure and Interpretation of Computer Programs - Second Edition\" Learning Record"
 subtitle:   "《计算机程序的构造和解释》学习记录"
 date:       2017-01-17
 author:     "owtotwo"

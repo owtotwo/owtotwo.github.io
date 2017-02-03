@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      Timed Reminder
-subtitle:   "捣鼓一个定时提醒功能"
+title:      "Timed Reminder"
+subtitle:   "捣鼓一下定时提醒功能"
 date:       2017-02-03
 author:     "owtotwo"
 header-img: "img/wood.jpg"
 tags:
     - Ubuntu
-    - whim
+    - Whim
 ---
 
 忽然需要个类似于手机的定时任务的提醒功能，一开始是想着自己写一个的，但是造轮子似乎不太好，意义不大。

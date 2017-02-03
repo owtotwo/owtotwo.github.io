@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "The C Programming Language - Second Edition" Book Review
+title:      "\"The C Programming Language - Second Edition\" Book Review"
 subtitle:   "《C程序设计语言第二版》阅读记录"
 date:       2017-01-03
 author:     "owtotwo"
