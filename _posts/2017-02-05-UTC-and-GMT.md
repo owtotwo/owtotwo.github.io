@@ -53,19 +53,18 @@ only approximates GMT with a tolerance of 0.9 second.
 鉴于一般来说都是Windows比较奇葩（好吧应该说特立独行），所以解决方法就是**将Windows的硬件时间识
 别方式从local time改为UTC time/GMT time**。
 
-在Windows的cmd（可能需要管理员权限）输入
+在Windows的cmd（需要管理员权限）输入
 
 ```
 > Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v 
 RealTimeIsUniversal /t REG_DWORD /d 1
 ```
 
-回车即可。
+回车即可。(如果是Windows家庭版的那就没办法了……)
 
-Reference:
-
-http://www.cnblogs.com/shareidea/p/5465306.html
-http://lifehacker.com/5742148/fix-windows-clock-issues-when-dual-booting-with-os-x
+Reference:  
+http://www.cnblogs.com/shareidea/p/5465306.html  
+http://lifehacker.com/5742148/fix-windows-clock-issues-when-dual-booting-with-os-x  
 
 [1]: https://en.wikipedia.org/wiki/Time_zone
 [2]: https://en.wikipedia.org/wiki/Coordinated_Universal_Time
