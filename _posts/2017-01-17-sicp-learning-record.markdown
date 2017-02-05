@@ -232,6 +232,140 @@ when you were first led up to it, that you can make it more."
         (if (> (abs x) (abs y)) (/ y x) (/ x y)))
     ```
 
+*   练习1.9：
+
+    ``` Lisp
+    (define (+ a b)
+        (if (= a 0)
+            b
+            (inc (+ (dec a) b))))
+
+    (+ 4 5)
+    (inc (+ 3 5))
+    (inc (inc (+ 2 5)))
+    (inc (inc (inc (+ 1 5))))
+    (inc (inc (inc (inc (+ 0 5)))))
+    (inc (inc (inc (inc 5))))
+    (inc (inc (inc 6)))
+    (inc (inc 7))
+    (inc 8)
+    9
+
+    ; 以上计算过程是递归的，因为整个求值过程是一个推迟执行的运算
+    ```
+
+    ``` Lisp
+    (define (+ a b)
+        (if (= a 0)
+            b
+            (+ (dec a) (inc b))))
+    
+    (+ 4 5)
+    (+ 3 6)
+    (+ 2 7)
+    (+ 1 8)
+    (+ 0 9)
+    9 
+    ; 以上计算过程是迭代的，因为其状态可以用固定数目的状态变量描述
+    ```
+
+*   练习1.10：
+
+    ``` Lisp
+    ; Ackermann Function
+    (define (A x y)
+      (cond ((= y 0) 0)
+            ((= x 0) (* 2 y))
+            ((= y 1) 2)
+            (else (A (- x 1)
+                     (A x (- y 1))))))
+    
+    (A 1 10)
+    (A 0 (A 1 9))
+    (A 0 (A 0 (A 1 8)))
+    (A 0 ... (A 0 (A 1 1)))
+    (A 0 ... (A 0 2))
+    (A 0 ... 4)
+    (A 0 512)
+    1024
+
+    (A 2 4)
+    (A 1 (A 2 3))
+    (A 1 (A 1 (A 2 2)))
+    (A 1 (A 1 (A 1 (A 2 1))))
+    (A 1 (A 1 (A 1 2)))
+    (A 1 (A 1 (A 0 (A 1 1))))
+    (A 1 (A 1 (A 0 2)))
+    (A 1 (A 1 4))
+    (A 1 (A 0 (A 1 3)))
+    (A 1 (A 0 (A 0 (A 1 2))))
+    (A 1 (A 0 (A 0 (A 0 (A 1 1)))))
+    (A 1 (A 0 (A 0 (A 0 2))))
+    (A 1 16)
+    2^16
+
+    ; 由上可知 (A 1 m) 即 2^m
+
+    (A 3 3)
+    (A 2 (A 3 2))
+    (A 2 (A 2 (A 3 1)))
+    (A 2 (A 2 2))
+    (A 2 (A 1 (A 2 1)))
+    (A 2 (A 1 2))
+    (A 2 (A 0 (A 1 1)))
+    (A 2 (A 0 2))
+    (A 2 4)
+    2^16
+
+    ; 没有找到啥规律…
+
+    (define (f n) (A 0 n)) ; f(x) = 2 * x
+
+    (define (g n) (A 1 n)) ; g(x) = 2 ^ x
+
+    (define (h n) (A 2 n)) ; h(x) = 2 ^ 2 ^ ... ^ 2 (x in total)
+    ```
+
+*   练习1.11
+
+    ``` Lisp
+    ; 递归版
+    (define (f n)
+        (if (< n 3)
+            n
+            (+ (f (- n 1))
+               (* (f (- n 2)) 2)
+               (* (f (- n 3)) 3))))
+
+    ; 迭代版
+    (define (f n) (f-iter 0 1 2 n))
+
+    (define (f-iter a b c count)
+        (cond ((= count 0) a)
+              ((= count 1) b)
+              ((= count 2) c)
+              (else (f-iter b c (+ c (* 2 b) (* 3 a)) (- count 1)))))
+    ```
+
+*   练习1.12
+
+    ``` Lisp
+    ; 杨辉三角递归版
+    (define (pascal-triangle x y)
+        (cond ((= y 1) 1)
+              ((= y x) 1)
+              (else (+ (pascal-triangle (- x 1) (- y 1))
+                       (pascal-triangle (- x 1) y)))))
+    ```
+
+*   练习1.13
+
+    ``` Lisp
+    ; 数学题…先跳过吧，以前好像做过
+    ; 这本书贼难
+    ```
+
+
 [1]: https://owtotwo.github.io/2017/01/03/the-c-programming-language-book-review/
 [2]: https://en.wikipedia.org/wiki/Tail_call
 
