@@ -109,7 +109,13 @@ Hygienic Macro很让人期待呀。
     (define near-the-commentbeginning-of-line) ; Syntax Error!
     ```
 
-*   
+*   空表`()`在Scheme中不是一个有效的表达式。
+
+*   并不知道`set!`有啥用…赋值不太清真。
+
+*   `(and)` => `#t` ; `(or)` => `#f`.
+
+*   我发现后面看得无所适从，决定先缓缓。
 
 # 细读
 
