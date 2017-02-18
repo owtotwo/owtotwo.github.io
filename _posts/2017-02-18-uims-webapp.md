@@ -54,10 +54,9 @@ tags:
 
 3.  安装所需库：
 
-    `> npm install express mongoose --save`
+    `> npm install express --save`
 
-    通过npm这个包管理软件安装express4和mongodb的驱动mongoose。（--save表示将dependencies添加
-    到package.json文件中）
+    通过npm这个包管理软件安装express4。（--save表示将dependencies添加到package.json文件中）
 
 4.  先用尽量少的代码将app跑起来：
 
@@ -173,12 +172,15 @@ tags:
     doctype html
     html
     head
-        title= title
+      title= title
     body
-        h1= message         // 错误信息，即变量res.locals.message
-        h2= error.status    // 错误状态，即变量res.locals.error.status
-        pre #{error.stack}  // 错误栈，即变量res.locals.error.stack
+      h1= message         // 错误信息，即变量res.locals.message
+      h2= error.status    // 错误状态，即变量res.locals.error.status
+      pre #{error.stack}  // 错误栈，即变量res.locals.error.stack
     ```
+
+    jade的语法请参考[segmentfault上的文章](https://segmentfault.com/a/1190000000357534)，
+    现在jade已经更名为pug了。
 
     那怎么使用它呢？
 
@@ -224,10 +226,285 @@ tags:
         // 设置响应状态，状态码500也就是服务器炸了的意思，双竖线是短路操作
         res.status(err.status || 500);
         // 渲染模板error.jade并响应
-        res.render('error');
+        res.render('error', { title: err.message });
     });
 
     // ...
     ```
+
+8.  注册页面
+
+    错误处理算是搞定了，那么就进入正题。三个页面先写哪个呢？考虑到如果先写登录页或者信息页，那么
+    就可能没有测试的数据了，所以我们优先写注册页。
+
+    首先编写一个注册页的模板文件views/register.jade：
+
+    ``` jade
+    // register.jade
+    doctype html
+    head
+      title= title
+    body
+      h1 Register
+      form(method='post', action='/login')
+        div
+          label Username: 
+          input(type='text', name='username', placeholder='Username')
+        div
+          label Password:
+          input(type='password', name='password', placeholder='Password')
+        div
+          label Password Again:
+          input(type='password', name='password again', placeholder='Password Again')
+        div
+          label Age:
+          input(type='text', name='age', placeholder='Age')
+        button(type='submit') Confirm
+    ```
+
+    暂时用户信息只有年龄作为例子，之后再逐步添加另外的信息。
+
+    这里我们会发现有和error.jade模板重复的部分（即开头的doctype和head），我们可以提取公共部分。
+
+    在views文件夹下新建公共模板layout.jade：
+
+    ``` jade
+    // layout.jade
+    doctype html
+    head
+      title= title
+    body
+      block content
+    ```
+
+    同时修改另外两个jade文件：
+
+    ``` jade
+    // error.jade
+    extends layout
+    block content
+      // 错误信息，即变量res.locals.message
+      h1= message
+      // 错误状态，即变量res.locals.error.status
+      h2= error.status
+      // 错误栈，即变量res.locals.error.stack
+      pre #{error.stack}
+    ```
+
+    ``` jade
+    // register.jade
+    extends layout
+    block content
+      h1 Register
+      form(method='post', action='/register')
+        div
+          label Username: 
+          input(type='text', name='username', placeholder='Username')
+        div
+          label Password:
+          input(type='password', name='password', placeholder='Password')
+        div
+          label Password Again:
+          input(type='password', name='password again', placeholder='Password Again')
+        div
+          label Age:
+          input(type='text', name='age', placeholder='Age')
+        button(type='submit') Confirm
+    ```
+
+    既然注册页模板完成了，下面就是要在访问 http://localhost:3000/register 的时候渲染它并
+    返回注册页。这时候就要用到路由来解析`/register`。
+
+    在routes文件夹中添加路由文件register.js：
+
+    ``` javascript
+    // register.js
+
+    var express = require('express');
+    // 创建处理/register的路由本体
+    var router = express.Router();
+
+    // 在/register路径下解析根目录（即此路径本身）
+    router.get('/', (req, res, next) => {
+        res.render('register', { title: 'Register' });
+    });
+
+    // 作为package供app.js使用
+    module.exports = router;
+    ```
+
+    并且在app.js中添加此路由：
+
+    ``` javascript
+    // app.js
+
+    // ...
+    var path = require('path');
+    // 引入处理/register路径的路由
+    var register = require('./routes/register');
+
+    // ...
+    app.get('/', (req, res, next) => res.send('Hello UIMS!'));
+
+    // 为处理/register路径添加路由
+    app.use('/register', register);
+
+    // ...
+    ```
+
+    这时候打开 http://localhost:3000/register 就会看到注册页面了，非常丑，先不管了能用就好。
+
+9.  处理注册请求
+
+    点一下Confirm按钮就能在命令行处看到有个`POST /register`的请求，我们接下来就要处理这个。
+
+    `GET /register`是返回注册页面给用户，`POST /register`是根据用户的request body的信息
+    （也就是用户提交的信息如用户名密码还有年龄等）来在后台创建一个用户并存入到数据库中。这一步的
+    内容有点点复杂，因为开始涉及到了数据库。
+
+    首先我们来处理POST请求，在register.js中修改成链式调用来对同一个路径处理get和post：
+
+    ``` javascript
+    // register.js
+
+    // ...
+
+    // 在/register路径下解析根目录（即此路径本身）
+    router.route('/')
+        .get((req, res, next) => {
+            res.render('register', { title: 'Register' });
+        })
+        .post((req, res, next) => {
+            res.send('您发出了Post请求');
+        });
+
+    // 作为package供app.js使用
+    module.exports = router;
+    ```
+
+    先运行下看看效果。
+
+    然后我们得知道用户的request body里的信息，这就需要parse以下request了，我们需要用到第三方
+    中间件body-parser：
+
+    `> npm install body-parser --save`
+
+    然后使用它：
+
+    ``` javascript
+    // app.js
+
+    // ...
+    var register = require('./routes/register');
+    // 引入body-parser来解析post请求
+    var bodyParser = require('body-parser');
+
+    // ...
+    app.use(logger('dev'));
+    // 使用其中的URL-Parser
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    // ...
+    ```
+
+    当请求头里的Content-Type为`application/x-www-form-urlencoded`时就会进行parsing，
+    一般的表单提交都是这种格式。（而ajax提交json的时候则需要用到body-parser中的json部分）
+
+    这时候我们就可以在req.body中查看用户提交的内容了。
+
+
+10. 创建用户并存入数据库
+
+    既然已经收到了请求并且拿到了解析出来的用户的请求内容，那么我们就可以进行创建用户并存入数据库
+    的操作了。
+
+    首先在你的电脑上安装mongoDB。（非企业版的是免费的，具体下载安装请参考官网）
+
+    然后安装mongodb的驱动库mongoose，使用方法请参考[mongoose官网](http://mongoosejs.com/)。
+    （这东西贼好用）
+
+    `> npm install mongoose --save`
+
+    在根目录下创建一个models文件夹用于存放用户类模型，并在其中创建一个User.js：
+
+    ``` javascript
+    // User.js
+
+    // 引入mongoose来驱动mongoDB
+    var mongoose = require('mongoose');
+
+    // 连接到数据库，具体host和端口请参考自己系统中的mongoDB服务进程信息。
+    // 若数据库不存在则会自动创建一个新数据库
+    mongoose.connect('mongodb://127.0.0.1:27017/uims');
+    
+    // 判断连接成功与否
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function() {
+        console.log('Success to Connect the MongoDB...');
+    });
+
+    // 创建用户类模型
+    var User = mongoose.model('User', {
+        username: String,
+        password: String,
+        age: Number
+    });
+
+    module.exports = User;
+    ```
+
+    此时就可以使用这个类模型来创建用户并储存下来了，修改register.js如下：
+
+    ``` javascript
+    // register.js
+
+    var express = require('express');
+    // 创建处理/register的路由本体
+    var router = express.Router();
+    // 使用用户类模型
+    var User = require('../models/User');
+
+    // 在/register路径下解析根目录（即此路径本身）
+    router.route('/')
+        .get((req, res, next) => {
+            res.render('register', { title: 'Register' });
+        })
+        .post((req, res, next) => {
+            console.log('Requset to register a user: \n' + 
+                        '  Username: %s\n' + 
+                        '  Password: %s\n' + 
+                        '  Age:      %d\n',
+                        req.body.username, 
+                        req.body.password, 
+                        req.body.age);
+            // 密码确认
+            if (req.body['password'] !== req.body['password again']) {
+                res.send('两次输入的密码不一致');
+            }
+            // 创建新用户
+            var user = new User({
+                username: req.body.username,
+                password: req.body.password,
+                age: req.body.age
+            });
+            // 保存新用户到数据库中
+            user.save((err) => {
+                if (err) {
+                    console.log('Failed to save the new user `%s`', user.username);
+                    res.send('注册失败');
+                } else {
+                    console.log('Save the new user `%s`', user.username);
+                    //注册成功则重定向至登录页
+                    res.redirect('/login');
+                }
+            });
+        });
+
+    // 作为package供app.js使用
+    module.exports = router;
+    ```
+
+    至此我们完成了注册的部分。
 
 `待续`
