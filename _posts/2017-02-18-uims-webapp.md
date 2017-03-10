@@ -491,7 +491,8 @@ tags:
             // 保存新用户到数据库中
             user.save((err) => {
                 if (err) {
-                    console.log('Failed to save the new user `%s`', user.username);
+                    console.log('Failed to save the new user `%s` for `%s`', 
+                                user.username, err.message, err);
                     res.send('注册失败');
                 } else {
                     console.log('Save the new user `%s`', user.username);
@@ -506,5 +507,221 @@ tags:
     ```
 
     至此我们完成了注册的部分。
+
+11. 实现登录及cookie功能
+
+    登录功能实质就是判断用户输入是否与数据库中的数据匹配。
+
+    首先实现一个登录页面接收用户的输入：
+
+    ``` jade
+    // login.jade
+    extends layout
+    block content
+      h1 Login
+      form(method='post', action='/login')
+        div
+          label Username: 
+          input(type='text', name='username', placeholder='Username')
+        div
+          label Password: 
+          input(type='password', name='password', placeholder='Password')
+        button(type='submit') Confirm
+    ```
+
+    跟注册界面差不多。我们给它在routes文件夹中添加一个路由文件login.js以便我们可以处理对
+    `/login`的请求：
+
+    ``` javascript
+    // login.js
+
+    var express = require('express');
+    // 创建处理/login的路由本体
+    var router = express.Router();
+    // 使用用户类模型
+    var User = require('../models/User');
+
+    // 在/login路径下解析根目录（即此路径本身）
+    router.route('/')
+        .get((req, res, next) => {
+            res.render('login', { title: 'Login' });
+        })
+        .post((req, res, next) => {
+            console.log('Requset to login a user: \n' + 
+                        '  Username: %s\n' + 
+                        '  Password: %s\n',
+                        req.body.username, 
+                        req.body.password);
+            User.findOne({ username: req.body.username }, (err, user) => {
+                if (err) {
+                    console.log(err);
+                    res.send('数据库查询出错，可能不存在此用户');
+                    return;
+                }
+                if (req.body.password !== user.password) {
+                    console.log('密码错误');
+                    res.send('密码错误');
+                    return;
+                }
+                console.log('登录成功');
+                // 成功登录则重定向至主页
+                res.redirect('/');
+            });
+        });
+
+    // 作为package供app.js使用
+    module.exports = router;
+    ```
+
+    当然，我们得在app.js文件里引入此路由到本app中：
+
+    ``` javascript 
+    // app.js
+
+    // ...
+    var register = require('./routes/register');
+    // 引入处理/login路径的路由
+    var login = require('./routes/login');
+
+    // ...
+    app.use('/register', register);
+    // 为处理/login路径添加路由
+    app.use('/login', login);
+
+    // ...
+    ```
+
+    好了现在我们可以成功登录并跳转至首页了。但是浏览器并没有记住我们的登录状态为已登录，这时候就
+    需要用到cookie了。
+
+    首先安装cookie-parser中间件：
+
+    `> npm install cookie-parser --save`
+
+    这东西有什么用呢？本来呢express是有自带的req.cookies和req.signedCookies的，但是需要这
+    个中间件来解析request的header获得它们，所以我们就用它吧：
+
+    ``` javascript
+    // app.js
+
+    // ...
+    app.use(bodyParser.urlencoded({ extended: false }));
+    // 使用cookie-parser中间件，里面的参数是为cookie签名的密钥
+    app.use(cookieParser('uims_secret'));
+
+    // ...
+    ```
+
+    然后我们需要在登录成功的时候为用户设置一个签名的cookie来作为通行证：
+
+    ``` javascript
+    // login.js
+
+    // ...
+    console.log('登录成功');
+    // 为用户设置一个cookie作为通行证，signed表示为此cookie签名（使用uims_secret)
+    res.cookie('username', user.username);
+    res.cookie('alive', user.username, { signed: true });
+    // ...
+    ```
+
+    现在我们登录后可以在F12控制台看到我们的request带有含alive和username字段的cookie了，我
+    们将使用它来授权其他页面（其实就只有用户信息页一个）的访问，也就是登录后的操作。
+
+    因为express是通过一个个中间件串联起来的框架，有先后之分，所以我们只需要在需要授权的页面的
+    路由前放置一个自定义的中间件就可以拦截没有带含alive和username的cookie的请求：
+
+    ``` javascript
+    // app.js
+
+    // ...
+    app.use('/login', login);
+
+    // 拦截未登录用户，未登录的请求直接重定向至登录页面
+    // 注：此中间件后面的路由只有登录后才能访问
+    app.use((req, res, next) => {
+        if (!req.isAuthorized)
+            res.redirect('/login');
+        else
+            next();
+    });
+
+    // ...
+    ```
+
+    而req.isAuthorized的值我们需要对所有请求都进行处理，并通过其携带的cookie中的alive（使用
+    了`uims_secret`这个字符串签名了的username，故cookie解密后在signedCookies里的alive值
+    就是username的值）来为其赋值（编写中间件记得调用next）：
+
+    ``` javascript
+    // app.js
+
+    // ...
+    app.use(cookieParser('uims_secret'));
+
+    // 为所有请求添加req.isAuthorized参数，通过判断是否携带含alive和username字段的cookie
+    app.use((req, res, next) => {
+        if (req.signedCookies.alive && req.signedCookies.alive == req.cookies.username) {
+            req.isAuthorized = true;
+        } else {
+            req.isAuthorized = false;
+        }
+        next();
+    });
+
+    // ...
+    ```
+
+    我们为`/logout`写一个简单的路由，用于已登录的用户登出（实质为清除cookie），即此请求要求登录
+    后进行：
+
+    ``` javascript
+    // app.js
+
+    // ...
+
+    // 已登录的用户请求/logout时即为它清除响应的cookies
+    app.get('/logout', (req, res) => {
+        res.clearCookie('username');
+        res.clearCookie('alive');
+        // 登出后重定向至登录页面
+        res.redirect('/login');
+    });
+
+    // 假若上面的中间件（路由等）中没有结束，那就无条件地进入到这个中间件，除错误处理中间件以外，其
+    // ...
+    ```
+
+    同时访问`/`主页也必须已登录，否则重定向至登录页面，故将：
+
+    ``` javascript
+    // app.js
+
+    // 分析根路径的url的get请求，箭头函数请学习ES6，下同
+    app.get('/', (req, res, next) => res.send('Hello UIMS!'));
+    ```
+
+    移至拦截未登录请求的中间件后面。
+
+    而假如是已登录状态来访问/login，就应该直接重定向至主页，故在login.js里添加一小段：
+
+    ``` javascript
+    // login.js
+
+    // ...
+
+    // 在/login路径下解析根目录（即此路径本身）
+    router.route('/')
+        .get((req, res, next) => {
+            // 如果已经登录那么就直接重定向至首页
+            if (req.isAuthorized)
+                res.redirect('/');
+            else
+                res.render('login', { title: 'Login' });
+        })
+    // ...
+    ```
+
+    至此我们完成了登录功能
 
 `待续`
