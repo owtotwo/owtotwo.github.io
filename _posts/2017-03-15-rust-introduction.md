@@ -6,7 +6,9 @@ date:       2017-03-15
 author:     "owtotwo"
 header-img: "img/hello-blog.jpg"
 tags:
-    - Tag
+    - Computer Science
+    - Programming Language
+    - Rust
 ---
 
 > Rust大法好！
