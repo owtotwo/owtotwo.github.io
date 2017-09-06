@@ -4,7 +4,7 @@ header-img: img/home-bg.jpg
 email: owtotwo@163.com
 description: "Blog for owtotwo's journals."
 keyword: ""
-url: "http://owtotwo.github.io/"              # your host, for absolute URL
+url: "https://owtotwo.github.io/"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 timezone: CN
@@ -16,7 +16,7 @@ zhihu_username:      owtotwo
 
 highlighter: rouge
 permalink: pretty
-paginate: 100
+paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
@@ -24,7 +24,7 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 
 
