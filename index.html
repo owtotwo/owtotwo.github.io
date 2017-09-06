@@ -5,6 +5,8 @@ pagination:
 description: "Blog for owtotwo's journals."
 ---
 
+<p class="test">Hello world! There are {{ paginator.total_pages }} pages.</p>
+
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
