@@ -133,3 +133,140 @@ tags:
         gameObject.BroadcastMessage("ApplyDamage", 5.0F);
     }
     ```
+
+--- 
+
+# 井字棋
+这玩意儿叫[Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe)，没什么好介绍的。
+
+- 主要写代码流程是：
+    + 分析游戏需求，即游戏的整个流程，而这游戏刚好很简洁。游戏共两个状态：落子、获胜。
+    + 首先就是排布UI了，把格子和按钮都在每一次OnGUI()时放好，如果按钮处有落子则覆盖掉空格。
+    + 然后就是每一次的落子后的胜负状态检测了，若双方未有胜负，则继续回到落子状态，若其中一方获胜则处于获胜状态。
+    + 所以你会发现自动机就这么出现了，一个极其简单的自动机。
+    + 写代码的时候注意细节就好，比如优先级等。并且代码语义要清晰，尽量不要使用0、1、2这种莫名的数字来代替某个
+      有限集中的对象。可考虑Option<Enum>这种操作。C#有NullableType当然就更方便了。
+    + 直接上代码吧。
+
+``` C#
+using UnityEngine;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    enum Player { Player1, Player2 };
+    private Player turn = Player.Player1;
+    private Player?[,] grid = new Player?[3, 3];
+    public Texture2D background;
+    public Texture2D avatarPlayer1;
+    public Texture2D avatarPlayer2;
+    private GUIStyle guiStyle = new GUIStyle();
+    private GUIStyle fontStyle1 = new GUIStyle();
+    private GUIStyle fontStyle2 = new GUIStyle();
+
+    void Start()
+    {
+        guiStyle.normal.background = background;
+        fontStyle1.fontSize = fontStyle2.fontSize = 30;
+        fontStyle1.normal.textColor = new Color(255, 255, 255);
+        fontStyle2.normal.textColor = new Color(0, 0, 0);
+
+        Reset();
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 1024, 600), "", guiStyle);
+
+        GUI.Label(new Rect(50, 300, 200, 100), avatarPlayer1);
+        GUI.Label(new Rect(600, 300, 200, 100), avatarPlayer2);
+
+        if (GUI.Button(new Rect(350, 500, 100, 50), "重新开始"))
+        {
+            Reset();
+        }
+            
+        Player? winner = getWinner();
+
+        if (winner == Player.Player1)
+        {
+            GUI.Label(new Rect(50, 250, 100, 50), "Wins!", fontStyle1);
+        }
+        else if (winner == Player.Player2)
+        {
+            GUI.Label(new Rect(600, 250, 100, 50), "Wins!", fontStyle2);
+        }
+        else
+        {
+            // do nothing when winner is null
+        }
+
+        for (int i = 0; i < 3; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                if (grid[i, j] == Player.Player1)
+                {
+                    GUI.Button(new Rect(280 + i * 80, 220 + j * 80, 80, 80), avatarPlayer1);
+                }
+                if (grid[i, j] == Player.Player2)
+                {
+                    GUI.Button(new Rect(280 + i * 80, 220 + j * 80, 80, 80), avatarPlayer2);
+                }
+
+                if (GUI.Button(new Rect(280 + i * 80, 220 + j * 80, 80, 80), "") && winner == null)
+                {
+                    if (turn == Player.Player1)
+                    {
+                        grid[i, j] = Player.Player1;
+                        turn = Player.Player2;
+                    }
+                    else
+                    {
+                        grid[i, j] = Player.Player2;
+                        turn = Player.Player1;
+                    }
+                }
+            }
+        }
+    }
+
+    void Reset()
+    {
+        turn = Player.Player1;
+        System.Array.Clear(grid, 0, grid.Length);
+    }
+   
+    Player? getWinner()
+    {   
+        for (int i = 0; i < 3; ++i)
+        {
+            if (grid[i, 0] != null && grid[i, 0] == grid[i, 1] && grid[i, 1] == grid[i, 2])
+            {
+                return grid[i, 0];
+            }
+        }
+
+        for (int j = 0; j < 3; ++j)
+        {
+            if (grid[0, j] != null && grid[0, j] == grid[1, j] && grid[1, j] == grid[2, j])
+            {
+                return grid[0, j];
+            }
+        }
+
+        if (grid[1, 1] != null &&
+            (grid[0, 0] == grid[1, 1] && grid[1, 1] == grid[2, 2] ||
+             grid[0, 2] == grid[1, 1] && grid[1, 1] == grid[2, 0]))
+        {
+            return grid[1, 1];
+        }
+
+        return null;
+    }
+}
+```
+
+创建一个C# script作为Assets，然后因为这个类继承了MonoBehaviour故它是一个Component，直接挂到一个
+空GameObject（推荐）或者Camera上就好了。
+
+这周作业就这样吧！
