@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Lua5.3源码阅读计划 | Hexo</title>
+  <title>Lua5.3源码阅读计划 | owtotwo的小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="“Huh… it will never be done.”  前言暂时略过 正文created on 2016-12-30 谷歌发现reddit上有这个lua源码阅读建议，虽然是5.1版本的。  Recommended reading order:    lmathlib.c, lstrlib.c: get familiar with the external C API. Don’t both">
 <meta name="keywords" content="Computer Science,Lua,Compiler,Interpreter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua5.3源码阅读计划">
 <meta property="og:url" content="http://yoursite.com/2016/12/30/2016-12-30-read-lua-source-code/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="owtotwo的小博客">
 <meta property="og:description" content="“Huh… it will never be done.”  前言暂时略过 正文created on 2016-12-30 谷歌发现reddit上有这个lua源码阅读建议，虽然是5.1版本的。  Recommended reading order:    lmathlib.c, lstrlib.c: get familiar with the external C API. Don’t both">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T10:15:10.696Z">
+<meta property="og:updated_time" content="2019-10-07T12:26:53.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lua5.3源码阅读计划">
 <meta name="twitter:description" content="“Huh… it will never be done.”  前言暂时略过 正文created on 2016-12-30 谷歌发现reddit上有这个lua源码阅读建议，虽然是5.1版本的。  Recommended reading order:    lmathlib.c, lstrlib.c: get familiar with the external C API. Don’t both">
@@ -58,7 +58,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/Daily/">日常</a></li>
 	        
 			</ul>
 		</nav>
@@ -68,8 +68,6 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -126,7 +124,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/Daily/">日常</a></li>
 		        
 				</ul>
 			</nav>
@@ -205,6 +203,8 @@
 </blockquote>
 <p>源码的话当然是选择最新版本来阅读了，原因有两个：一是5.3版本区分了浮点数(float)和整数(int)，GC采用增量式<br>垃圾回收算法，虚拟机基于寄存器而使得instructions的数量大大减少；二是我之前写的lua都是用的5.3版本，也就<br>顺其自然地看这个版本了。虽然相比于很早之前的版本代码量增加了约一倍，也就是20k行左右的标准C，但整体上应该变<br>化不会非常大。</p>
 <p>这里提供了很多的源码阅读相关建议和链接： <a href="http://lua-users.org/wiki/LuaSource" target="_blank" rel="noopener">http://lua-users.org/wiki/LuaSource</a><br>Lua5.3源码在线阅读： <a href="http://www.lua.org/source/5.3/" target="_blank" rel="noopener">http://www.lua.org/source/5.3/</a>  </p>
+<a id="more"></a>
+
 <hr>
 <p><code>update on 2016-12-31</code>  </p>
 <p>看了<a href="http://blog.codingnow.com/" target="_blank" rel="noopener">云风的Blog</a>发现有 <em>The Implementation of Lua 5.0</em> 的<a href="http://blog.codingnow.com/2008/05/the_implementation_of_lua_50.html" target="_blank" rel="noopener">译文</a>(<a href="http://www.lua.org/doc/jucs05.pdf" target="_blank" rel="noopener">原文在此</a>)，也就顺便中<br>英对照着看了。先阅读了前六节（共八节），发现还是有不少看不懂的地方。后补充了第七、八节。  </p>
@@ -341,8 +341,8 @@
     </a>
   
   
-    <a href="/2016/12/29/2016-12-29-hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello Blog</div>
+    <a href="/2016/12/29/2016-12-29-summary-for-2016/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2016年终总结</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -426,8 +426,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -439,15 +437,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -468,6 +464,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Computer Science</a>
               </li>
              
@@ -484,22 +488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
               </li>
              
@@ -508,15 +496,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Life</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,7 +528,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,7 +536,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,15 +544,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Rust</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,19 +596,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color1">Daily</a>
               </li>
             
             <div class="clearfix"></div>
@@ -647,27 +647,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">最可悲的事是&lt;br&gt;写“关于我”这部分内容时&lt;br&gt;我竟然想不到有什么可以写</div>
   	  	
     	</section>
     

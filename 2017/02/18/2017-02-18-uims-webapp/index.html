@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>User Information Management System | Hexo</title>
+  <title>User Information Management System | owtotwo的小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Maybe AngularJS or CoffeeScript in the future?  created on 2017-02-18 最近被迫要写Web，所以就把上学期的Web课最后一次没做的作业拿出来写写。 大概目标就是写一个储存用户信息的系统，用户可以登录进系统（其实就一个页面）来对自己的信息进行修改。 主要着眼点在后端，前端暂且就随便一点。 其实后端也很随便。 需求 注册用户信息 登">
 <meta name="keywords" content="Computer Science,Whim,Web,JaveScript,NodeJS,Express,Bootstrap,MongoDB,Jade">
 <meta property="og:type" content="article">
 <meta property="og:title" content="User Information Management System">
 <meta property="og:url" content="http://yoursite.com/2017/02/18/2017-02-18-uims-webapp/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="owtotwo的小博客">
 <meta property="og:description" content="Maybe AngularJS or CoffeeScript in the future?  created on 2017-02-18 最近被迫要写Web，所以就把上学期的Web课最后一次没做的作业拿出来写写。 大概目标就是写一个储存用户信息的系统，用户可以登录进系统（其实就一个页面）来对自己的信息进行修改。 主要着眼点在后端，前端暂且就随便一点。 其实后端也很随便。 需求 注册用户信息 登">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T10:15:17.056Z">
+<meta property="og:updated_time" content="2019-10-07T12:23:03.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="User Information Management System">
 <meta name="twitter:description" content="Maybe AngularJS or CoffeeScript in the future?  created on 2017-02-18 最近被迫要写Web，所以就把上学期的Web课最后一次没做的作业拿出来写写。 大概目标就是写一个储存用户信息的系统，用户可以登录进系统（其实就一个页面）来对自己的信息进行修改。 主要着眼点在后端，前端暂且就随便一点。 其实后端也很随便。 需求 注册用户信息 登">
@@ -58,7 +58,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/Daily/">日常</a></li>
 	        
 			</ul>
 		</nav>
@@ -68,8 +68,6 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -126,7 +124,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/Daily/">日常</a></li>
 		        
 				</ul>
 			</nav>
@@ -174,6 +172,8 @@
 <li>登录管理系统</li>
 <li>更新用户信息</li>
 </ul>
+<a id="more"></a>
+
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>从无到有一步步地将整个webapp搭建起来吧！</p>
 <ol>
 <li><p>利用npm创建一个项目：</p>
@@ -534,8 +534,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -547,15 +545,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -576,6 +572,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Computer Science</a>
               </li>
              
@@ -592,22 +596,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
               </li>
              
@@ -616,15 +604,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Life</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,7 +636,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,7 +644,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,15 +652,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Rust</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,19 +704,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color1">Daily</a>
               </li>
             
             <div class="clearfix"></div>
@@ -755,27 +755,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">最可悲的事是&lt;br&gt;写“关于我”这部分内容时&lt;br&gt;我竟然想不到有什么可以写</div>
   	  	
     	</section>
     

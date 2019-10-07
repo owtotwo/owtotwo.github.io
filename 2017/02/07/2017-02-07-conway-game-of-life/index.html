@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Conway&#39;s Game of Life | Hexo</title>
+  <title>Conway&#39;s Game of Life | owtotwo的小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Solve problems · Make languages – Racket  明淇大腿跟我提到有Racket可以画画图，就跟Mmathematica一样，我就兴致勃勃地跑去看看官方的Quick Tutorials和The Racket Guide，简直有毒啊！ 实话说文档写得还可以，但是画图什么的谷歌一搜啥都没有啊这么大堆的东西鬼知道怎么绘图啊。 然后靠着只看过两分钟Scheme语法和一小">
-<meta name="keywords" content="Computer Science,Functional Programming,Scheme,Racket,Lisp,Game of Life">
+<meta name="keywords" content="Computer Science,Scheme,Lisp,Racket,Functional Programming,Game of Life">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Conway&#39;s Game of Life">
 <meta property="og:url" content="http://yoursite.com/2017/02/07/2017-02-07-conway-game-of-life/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="owtotwo的小博客">
 <meta property="og:description" content="Solve problems · Make languages – Racket  明淇大腿跟我提到有Racket可以画画图，就跟Mmathematica一样，我就兴致勃勃地跑去看看官方的Quick Tutorials和The Racket Guide，简直有毒啊！ 实话说文档写得还可以，但是画图什么的谷歌一搜啥都没有啊这么大堆的东西鬼知道怎么绘图啊。 然后靠着只看过两分钟Scheme语法和一小">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T10:15:14.888Z">
+<meta property="og:updated_time" content="2019-10-07T12:24:24.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Conway&#39;s Game of Life">
 <meta name="twitter:description" content="Solve problems · Make languages – Racket  明淇大腿跟我提到有Racket可以画画图，就跟Mmathematica一样，我就兴致勃勃地跑去看看官方的Quick Tutorials和The Racket Guide，简直有毒啊！ 实话说文档写得还可以，但是画图什么的谷歌一搜啥都没有啊这么大堆的东西鬼知道怎么绘图啊。 然后靠着只看过两分钟Scheme语法和一小">
@@ -58,7 +58,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/Daily/">日常</a></li>
 	        
 			</ul>
 		</nav>
@@ -68,8 +68,6 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -126,7 +124,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/Daily/">日常</a></li>
 		        
 				</ul>
 			</nav>
@@ -168,6 +166,8 @@
 <p>实话说文档写得还可以，但是画图什么的谷歌一搜啥都没有啊这么大堆的东西鬼知道怎么绘图啊。</p>
 <p>然后靠着只看过两分钟Scheme语法和一小节SICP的基础写了一个极其难看的康威生命游戏的实现，反正这种东西<br>能跑就行了不管了。</p>
 <p>用Racket可以跑跑（这么丑的代码竟然是我写出来的无法接受）</p>
+<a id="more"></a>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">#lang slideshow</span><br><span class="line"></span><br><span class="line">(require racket/gui/base)</span><br><span class="line"></span><br><span class="line">; A Conway&apos;s Game of Life</span><br><span class="line"></span><br><span class="line">(define (enum x)</span><br><span class="line">  (define (enum-iter i)</span><br><span class="line">    (if (= i (length x))</span><br><span class="line">        &apos;()</span><br><span class="line">        (append (list (cons i (list-ref x i))) (enum-iter (+ i 1)))))</span><br><span class="line">  (enum-iter 0))</span><br><span class="line"></span><br><span class="line">(define alive #t)</span><br><span class="line">(define dead  #f)</span><br><span class="line">(define (alive? x) (equal? x alive))</span><br><span class="line">(define (dead? x)  (equal? x dead))</span><br><span class="line">(define (show-cell x)</span><br><span class="line">  (if (alive? x)</span><br><span class="line">      (rectangle 10 10)</span><br><span class="line">      (filled-rectangle 10 10)))</span><br><span class="line"></span><br><span class="line">(define (show-grid grid)</span><br><span class="line">  (apply vc-append</span><br><span class="line">         (map (lambda (x) (apply hc-append (map show-cell x))) grid)))</span><br><span class="line"></span><br><span class="line">(define (Conway-Game row col)</span><br><span class="line">  (define frame (new frame% [label &quot;Conway-Game-of-Life&quot;]</span><br><span class="line">                            [width (* row 10)]</span><br><span class="line">                            [height (* col 10)]))</span><br><span class="line">  (define canvas (new canvas% [parent frame]))</span><br><span class="line">  (define (grid-ref grid x y)</span><br><span class="line">    (list-ref (list-ref grid x) y)) </span><br><span class="line">  (define (rand-grid)</span><br><span class="line">    (define (rand-state)</span><br><span class="line">      (if (= (random 1 3) 1) alive dead))</span><br><span class="line">    (define (make-list len elem-gen)</span><br><span class="line">      (if (= len 0)</span><br><span class="line">          &apos;()</span><br><span class="line">          (append (make-list (- len 1) elem-gen) (list (elem-gen)))))</span><br><span class="line">    (make-list row (lambda () (make-list col rand-state))))</span><br><span class="line">  </span><br><span class="line">  (define (evolve grid)</span><br><span class="line">    (define (grid-get x y)</span><br><span class="line">      (if (or (&lt; x 0) (&lt; y 0) (&gt;= x row) (&gt;= y col))</span><br><span class="line">          &apos;()</span><br><span class="line">          (list (grid-ref grid x y))))</span><br><span class="line">    (define (environment x y)</span><br><span class="line">      (define (neighbours x y)</span><br><span class="line">        (define (neighbour-get n)</span><br><span class="line">          (cond ((= n 1) (grid-get (- x 1) (- y 1)))</span><br><span class="line">                ((= n 2) (grid-get (- x 1) y))</span><br><span class="line">                ((= n 3) (grid-get (- x 1) (+ y 1)))</span><br><span class="line">                ((= n 4) (grid-get x (- y 1)))</span><br><span class="line">                ((= n 5) (grid-get x (+ y 1)))</span><br><span class="line">                ((= n 6) (grid-get (+ x 1) (- y 1)))</span><br><span class="line">                ((= n 7) (grid-get (+ x 1) y))</span><br><span class="line">                ((= n 8) (grid-get (+ x 1) (+ y 1)))))</span><br><span class="line">        (define (iter n)</span><br><span class="line">          (if (= n 0)</span><br><span class="line">              &apos;()</span><br><span class="line">              (append (iter (- n 1)) (neighbour-get n))))</span><br><span class="line">        (iter 8))</span><br><span class="line">      (count alive? (neighbours x y)))</span><br><span class="line">    (define (trans x y)</span><br><span class="line">      (let ((alive-cells (environment x y)))</span><br><span class="line">        (if (alive? (grid-ref grid x y))</span><br><span class="line">            (cond ((&lt; alive-cells 2) dead)</span><br><span class="line">                  ((&lt; alive-cells 4) alive)</span><br><span class="line">                  (else              dead))</span><br><span class="line">            (cond ((= alive-cells 3) alive)</span><br><span class="line">                  (else              dead)))))</span><br><span class="line">    (map</span><br><span class="line">     (lambda (m)</span><br><span class="line">       (let ((x (car m)))</span><br><span class="line">         (map</span><br><span class="line">          (lambda (n)</span><br><span class="line">            (let ((y (car n)))</span><br><span class="line">              (trans x y)))</span><br><span class="line">          (enum (cdr m)))))</span><br><span class="line">     (enum grid)))</span><br><span class="line">  (define (game-loop grid count)</span><br><span class="line">    (unless (= count 0)</span><br><span class="line">      (begin</span><br><span class="line">        (send canvas refresh-now</span><br><span class="line">             (lambda (dc)</span><br><span class="line">                (draw-pict (show-grid grid) dc 0 0)))</span><br><span class="line">        (send frame show #t)</span><br><span class="line">        (sleep 0.25)</span><br><span class="line">        (game-loop (evolve grid) (- count 1)))))</span><br><span class="line">  (game-loop (rand-grid) -1)) ; -1 means dead loop</span><br><span class="line"></span><br><span class="line">(Conway-Game 20 20)</span><br></pre></td></tr></table></figure>
 
 <p>反正看着它跑还是挺过瘾的。</p>
@@ -188,11 +188,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Functional Programming</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Scheme</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Scheme</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Lisp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -200,7 +200,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Lisp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Functional Programming</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -369,8 +369,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -382,15 +380,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -411,6 +407,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Computer Science</a>
               </li>
              
@@ -427,22 +431,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
               </li>
              
@@ -451,15 +439,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Life</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,7 +471,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,7 +479,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,15 +487,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Rust</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,19 +539,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color1">Daily</a>
               </li>
             
             <div class="clearfix"></div>
@@ -590,27 +590,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">最可悲的事是&lt;br&gt;写“关于我”这部分内容时&lt;br&gt;我竟然想不到有什么可以写</div>
   	  	
     	</section>
     

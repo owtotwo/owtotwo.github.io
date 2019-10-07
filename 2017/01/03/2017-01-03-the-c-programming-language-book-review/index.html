@@ -6,14 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>&#34;The C Programming Language - Second Edition&#34; Book Review | Hexo</title>
+  <title>&#34;The C Programming Language - Second Edition&#34; Book Review | owtotwo的小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="“Ok, let’s begin.”  前言created on 2017-01-03 忽然心血来潮想挖个小坑，约280页的 The C Programming Language 全书阅读浅评～复习马原压力大，容易让人想减压，挖坑是一个很好的方式，有效地转移了主要矛盾，符合马克思主义的现实指导思想。为什么我会选这本书呢，根本原因有三个：  非常薄，比C primer plus薄到不知哪里去了。">
 <meta name="keywords" content="Computer Science,Reading,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="&quot;The C Programming Language - Second Edition&quot; Book Review">
 <meta property="og:url" content="http://yoursite.com/2017/01/03/2017-01-03-the-c-programming-language-book-review/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="owtotwo的小博客">
 <meta property="og:description" content="“Ok, let’s begin.”  前言created on 2017-01-03 忽然心血来潮想挖个小坑，约280页的 The C Programming Language 全书阅读浅评～复习马原压力大，容易让人想减压，挖坑是一个很好的方式，有效地转移了主要矛盾，符合马克思主义的现实指导思想。为什么我会选这本书呢，根本原因有三个：  非常薄，比C primer plus薄到不知哪里去了。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/img/c-programming/main-return-unspecified-value.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/img/c-programming/cc.png">
 <meta property="og:image" content="http://yoursite.com/img/c-programming/sizeof-types.png">
 <meta property="og:image" content="http://yoursite.com/img/c-programming/variables-initialization.png">
-<meta property="og:updated_time" content="2019-10-06T10:15:12.119Z">
+<meta property="og:updated_time" content="2019-10-07T12:26:24.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&quot;The C Programming Language - Second Edition&quot; Book Review">
 <meta name="twitter:description" content="“Ok, let’s begin.”  前言created on 2017-01-03 忽然心血来潮想挖个小坑，约280页的 The C Programming Language 全书阅读浅评～复习马原压力大，容易让人想减压，挖坑是一个很好的方式，有效地转移了主要矛盾，符合马克思主义的现实指导思想。为什么我会选这本书呢，根本原因有三个：  非常薄，比C primer plus薄到不知哪里去了。">
@@ -64,7 +64,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/Daily/">日常</a></li>
 	        
 			</ul>
 		</nav>
@@ -74,8 +74,6 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -132,7 +130,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/Daily/">日常</a></li>
 		        
 				</ul>
 			</nav>
@@ -177,7 +175,9 @@
 <li>C语言应用的广泛性，也同时因为有Unix这个强大的后盾，基本再过20年也不会被彻底淘汰的。</li>
 <li>C语言是较“低级”的编程语言，特别是作为毕竟原始的系统编程语言，C语言毫无疑问是精简而底层的。（较接近汇编）</li>
 </ol>
-<p>希望能在有生之年把这个坑填完…</p>
+<p>希望能在有生之年把这个坑填完…（填完了）</p>
+<a id="more"></a>
+
 <hr>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="Preface-Preface-to-the-First-Edition-Introduction-Contents"><a href="#Preface-Preface-to-the-First-Edition-Introduction-Contents" class="headerlink" title="Preface / Preface to the First Edition / Introduction / Contents"></a>Preface / Preface to the First Edition / Introduction / Contents</h3><p>大意是说1978年从这本书的初版开始在计算机科学领域发生了很大的变化，C也有了其标准，即ANSI C，是一份为跨平台<br>而定制的标准。（Lua的出现也是建立在ANSI C优秀的跨平台表现的基础上的）</p>
 <p>序言中顺便提到了本书第二版新增的一些内容（如标准库等），作为C语言之父，K&amp;R（是两个人）的对C语言的相关叙述应<br>该算是很权威的，所以这本书的阅读价值也是有的，最起码在语言设计的思想上应该是表达得最准确而简洁的。</p>
@@ -820,8 +820,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -833,15 +831,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -862,6 +858,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Computer Science</a>
               </li>
              
@@ -878,22 +882,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
               </li>
              
@@ -902,15 +890,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Life</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -942,7 +922,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -950,7 +930,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -958,15 +938,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Rust</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -982,19 +990,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color1">Daily</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1041,27 +1041,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">最可悲的事是&lt;br&gt;写“关于我”这部分内容时&lt;br&gt;我竟然想不到有什么可以写</div>
   	  	
     	</section>
     

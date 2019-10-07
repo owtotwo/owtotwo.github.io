@@ -6,15 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>owtotwo的小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="owtotwo的小博客">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="owtotwo的小博客">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="owtotwo的小博客">
   
   
     <link rel="icon" href="/img/icon.png">
@@ -53,7 +53,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/Daily/">日常</a></li>
 	        
 			</ul>
 		</nav>
@@ -63,8 +63,6 @@
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
     			
             
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -121,7 +119,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/Daily/">日常</a></li>
 		        
 				</ul>
 			</nav>
@@ -162,22 +160,9 @@
 <p>然后当然就是跑去Ubuntu Software看看有没有这种小软件了，发现有一个叫Alarm-Clock-Applet的东西。</p>
 <p>配合Ubuntu下的<code>notify-send</code>命令，用了一下感觉还可以，但是提醒的时候和<code>notify-send</code>的气泡撞上<br>了，感觉怪怪的，然后就想着既然有<code>notify-send</code>这个东西，那么只需要一个定时执行的软件就OK了。</p>
 <p>接着就是crontab出场了。</p>
-<p><code>crontab -e</code>来编辑当前用户（可用<code>crontab -u &lt;user&gt; ...</code>来指定用户）的任务内容。（首次编辑需<br>要选择默认编辑器，选vim或者nano都是可以的。</p>
-<p>具体用法直接看编辑时的注释，简单的格式描述如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+---------------- minute (0 - 59)</span><br><span class="line">|  +------------- hour (0 - 23)</span><br><span class="line">|  |  +---------- day of month (1 - 31)</span><br><span class="line">|  |  |  +------- month (1 - 12)</span><br><span class="line">|  |  |  |  +---- day of week (0 - 6) (Sunday=0 or 7)</span><br><span class="line">|  |  |  |  |</span><br><span class="line">*  *  *  *  *  command to be executed</span><br></pre></td></tr></table></figure>
-
-<p>举个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4 5 notify-send haha</span><br></pre></td></tr></table></figure>
-
-<p>意思是在某年4月3号是星期五的时候的02:01am执行命令<code>notify-send haha</code>也就是有个气泡提示“haha”。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 19 * * 1 notify-send hey man</span><br></pre></td></tr></table></figure>
-
-<p>意思是每个星期一的晚上七点整用气泡显示标题为hey内容为man的提示。</p>
-<p>然而事实上你试一下会发现并没有成功，这应该跟GUI有关（如Gnome和Unity），命令需要在前面加上<br><code>export DISPLAY=:0.0 &amp;&amp;</code>，所以正确的内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 19 * * 1 export DISPLAY=:0.0 &amp;&amp; notify-send hey man</span><br></pre></td></tr></table></figure>
-
-<p>好了就这样。</p>
-
+        
+          <a class="article-more-a" href="/2017/02/03/2017-02-03-timed-reminder/#more">more >></a>
+        
       
 
       
@@ -262,80 +247,9 @@
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>created on 2017-01-17</code></p>
 <p>有别于上一篇的博文（<a href="https://owtotwo.github.io/2017/01/03/the-c-programming-language-book-review/" target="_blank" rel="noopener">“The C Programming Language - Second Edition” Book Review</a>），本<br>文并非是对 <em>Structure and Interpretation of Computer Programs</em> 一书的详细反馈及补充，而是<br>学习此书的过程记录。这是因为阅读前者是在已有C语言丰富的知识基础的情况下阅读的，所以只是将脑海里零碎的<br>知识点一一按照书中的目录结构列出，并根据网络资源及相关标准文案精准化。而阅读后者是在仅有部分计算机科学<br>领域的基础知识的前提下进行的，主要目的是为了初步学习函数式编程的相关思想以及抽象化程序设计的理念，同时<br>亲身感受一下这本被大多数编程者奉为神作的书的魅力。</p>
 <p>虽然在一年内基本是不可能填完这个坑的，也许第一章也不能完成，但是坑还是要挖的。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="第一章-构造过程抽象"><a href="#第一章-构造过程抽象" class="headerlink" title="第一章 构造过程抽象"></a>第一章 构造过程抽象</h3><h4 id="第一节-程序设计的基本元素"><a href="#第一节-程序设计的基本元素" class="headerlink" title="第一节 程序设计的基本元素"></a>第一节 程序设计的基本元素</h4><ul>
-<li><p>练习1.1：</p>
-<p><code>10 12 8 3 6 a b 19 #f 4 16 6 16</code></p>
-</li>
-<li><p>练习1.2：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 缩进换行不好看就不换了</span></span><br><span class="line">(<span class="name">/</span> (<span class="name">+</span> <span class="number">5</span> <span class="number">4</span> (<span class="name">-</span> <span class="number">2</span> (<span class="name">-</span> <span class="number">3</span> (<span class="name">+</span> <span class="number">6</span> (<span class="name">/</span> <span class="number">4</span> <span class="number">5</span>)))))</span><br><span class="line">   (<span class="name">*</span> <span class="number">3</span> (<span class="name">-</span> <span class="number">6</span> <span class="number">2</span>) (<span class="name">-</span> <span class="number">2</span> <span class="number">7</span>)))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.3：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 返回三个数中较大的两个数之和</span></span><br><span class="line"><span class="comment">; 即三个数之和减去最小的那个数</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">sum-of-greatest</span> x y z)</span><br><span class="line">    (<span class="name">-</span> (<span class="name">+</span> x y z)</span><br><span class="line">       (<span class="name">min</span> x y z)))</span><br></pre></td></tr></table></figure>
-
-<p>这题翻译有点问题，原题意应该是求三个数中较大两个数的平方和。</p>
-<p>最初版：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">largest-two-square-sum</span> x y z)</span><br><span class="line">    (<span class="name">square-sum</span> (<span class="name">first-largest</span> x y z)</span><br><span class="line">                (<span class="name">second-largest</span> x y z)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square-sum</span> x y)</span><br><span class="line">    (<span class="name">+</span> (<span class="name">square</span> x) (<span class="name">square</span> y)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square</span> x) (<span class="name">*</span> x x))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">first-largest</span> x y z)</span><br><span class="line">    (<span class="name">larger</span> (<span class="name">larger</span> x y) z))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">larger</span> x y)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&gt;</span> x y) x y))</span><br><span class="line"></span><br><span class="line"><span class="comment">; 这个写得好丑啊</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">second-largest</span> x y z)</span><br><span class="line">    (<span class="name">cond</span> ((<span class="name">=</span> x (<span class="name">first-largest</span> x y z)) (<span class="name">larger</span> y z))</span><br><span class="line">          ((<span class="name">=</span> y (<span class="name">first-largest</span> x y z)) (<span class="name">larger</span> x z))</span><br><span class="line">          ((<span class="name">=</span> z (<span class="name">first-largest</span> x y z)) (<span class="name">larger</span> x y))))</span><br></pre></td></tr></table></figure>
-
-<p>修改版：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">largest-two-square-sum</span> x y z)</span><br><span class="line">    (<span class="name">cond</span> ((<span class="name">=</span> x (<span class="name">min</span> x y z)) (<span class="name">square-sum</span> y z))</span><br><span class="line">          ((<span class="name">=</span> y (<span class="name">min</span> x y z)) (<span class="name">square-sum</span> x z))</span><br><span class="line">          ((<span class="name">=</span> z (<span class="name">min</span> x y z)) (<span class="name">square-sum</span> x y))))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square-sum</span> x y)</span><br><span class="line">    (<span class="name">+</span> (<span class="name">square</span> x) (<span class="name">square</span> y)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square</span> x) (<span class="name">*</span> x x))</span><br></pre></td></tr></table></figure>
-
-<p>网上的花式解法：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">sum-of-squares</span> x y z)  </span><br><span class="line">    (<span class="name">+</span> (<span class="name">square</span> (<span class="name">max</span> x y)) (<span class="name">square</span> (<span class="name">max</span> (<span class="name">min</span> x y) z))))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square</span> x) (<span class="name">*</span> x x))</span><br></pre></td></tr></table></figure>
-
-<p>真是费脑……</p>
-</li>
-<li><p>练习1.4：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">a-plus-abs-b</span> a b)</span><br><span class="line">    ((<span class="name">if</span> (<span class="name">&gt;</span> b <span class="number">0</span>) + -) a b))</span><br><span class="line"><span class="comment">; 如果b为正数则用a加b否则a减b，实现了a与b的绝对值相加的过程</span></span><br><span class="line"><span class="comment">; 这里突出了运算符（这里为'+'和'-'）也可以作为过程的运算对象（非第一个参数）</span></span><br><span class="line"><span class="comment">; 而不仅仅是运算过程（第一个参数）</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.5：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">p</span>) (<span class="name">p</span>))    <span class="comment">; 只要调用过程p或展开p则会无限递归</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">test</span> x y)  <span class="comment">; 根据假定条件（if过程首先求值谓词部分）</span></span><br><span class="line">    (<span class="name">if</span> (<span class="name">=</span> x <span class="number">0</span>)     <span class="comment">; 若以应用序求值则会先求值0然后求值(p)，即得死循环</span></span><br><span class="line">        <span class="number">0</span>           <span class="comment">; 若以正则序求值则会先展开为(if (= 0 0) 0 (p))得真值</span></span><br><span class="line">        y))         <span class="comment">;   返回0，而p部分不求值</span></span><br><span class="line">(<span class="name">test</span> <span class="number">0</span> (<span class="name">p</span>))        <span class="comment">; 假定条件应该就是为了防止(p)展开而设定的</span></span><br></pre></td></tr></table></figure>
-
-<p>貌似第四章会详细讲解正则序和应用序，但估计看不到那么后。</p>
-</li>
-<li><p>顺手写个斐波那契数列：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">fib</span> n)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&lt;</span> n <span class="number">3</span>) <span class="number">1</span> (<span class="name">+</span> (<span class="name">fib</span> (<span class="name">-</span> n <span class="number">1</span>) (<span class="name">fib</span> (<span class="name">-</span> n <span class="number">2</span>))))))</span><br></pre></td></tr></table></figure>
-
-<p>用mit-scheme跑了一下发现很慢，最多大概就(fib 35)左右，(fib 40)不知道等到什么时候才跑得完。</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; tail-recursive</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">fib-aux</span> n sum1 sum2)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&lt;</span> n <span class="number">3</span>) sum1 (<span class="name">fib-aux</span> (<span class="name">-</span> n <span class="number">1</span>) (<span class="name">+</span> sum1 sum2) sum1)))</span><br><span class="line">(<span class="name">define</span> (<span class="name">fib</span> n) (<span class="name">fib-aux</span> n <span class="number">1</span> <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-<p>这个有尾递归优化(<a href="https://en.wikipedia.org/wiki/Tail_call" target="_blank" rel="noopener">Tail_call</a>)所以跟循环一样快，大意就是将临时变量作为参数传递。</p>
-</li>
-<li><p>练习1.6：</p>
-<p>无限递归sqrt-iter，即死循环。因为new-if是一个常规过程，而Scheme是应用序求值，即先算出各参数<br>表达式的值再进行过程运算，所以会产生无限递归。</p>
-</li>
-<li><p>练习1.7：</p>
-<p>对于很小的数的平方根而言，0.001可能是一个很大的误差；而对于很大的数的平方根而言，guess的值的<br>平方很可能溢出而使得运算出错。如：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">good-enough</span>? <span class="number">0.01</span> <span class="number">0.0002</span>) <span class="comment">; #t</span></span><br><span class="line">(<span class="name">good-enough</span>? <span class="number">4938271605</span> <span class="number">9876543210</span>) <span class="comment">; maybe overflow for 32bit int</span></span><br></pre></td></tr></table></figure>
-
-<p>改进：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">sqrt</span> x) (<span class="name">sqrt-iter</span> <span class="number">1.0</span> x))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">sqrt-iter</span> guess x)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">good-enough</span>? guess x)</span><br><span class="line">        guess</span><br><span class="line">        (<span class="name">sqrt-iter</span> (<span class="name">improve</span> guess x) x)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">good-enough</span>? guess x)</span><br><span class="line">    (<span class="name">&gt;</span> (<span class="name">rate</span> (<span class="name">square</span> guess) x) (<span class="name">-</span> <span class="number">1</span> <span class="number">0.0001</span>)))  <span class="comment">; error in 0.0001</span></span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">improve</span> guess x)</span><br><span class="line">    (<span class="name">average</span> guess (<span class="name">/</span> x guess)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square</span> x) (<span class="name">*</span> x x))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">average</span> x y) (<span class="name">/</span> (<span class="name">+</span> x y) <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">; return rate which is less than 1</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">rate</span> x y)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&gt;</span> (<span class="name">abs</span> x) (<span class="name">abs</span> y)) (<span class="name">/</span> y x) (<span class="name">/</span> x y)))</span><br></pre></td></tr></table></figure>
-
-<p>对于很大很小的数都能工作。</p>
-</li>
-<li><p>练习1.8：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 牛顿迭代法求立方根</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">cbrt</span> x) (<span class="name">cbrt-iter</span> <span class="number">1.0</span> x))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">cbrt-iter</span> guess x)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">good-enough</span>? guess x)</span><br><span class="line">        guess</span><br><span class="line">        (<span class="name">cbrt-iter</span> (<span class="name">improve</span> guess x) x)))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">good-enough</span>? guess x)</span><br><span class="line">    (<span class="name">&gt;</span> (<span class="name">rate</span> (<span class="name">cube</span> guess) x) (<span class="name">-</span> <span class="number">1</span> <span class="number">0.0001</span>)))  <span class="comment">; error in 0.0001</span></span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">improve</span> guess x)</span><br><span class="line">    (<span class="name">/</span> (<span class="name">+</span> (<span class="name">/</span> x (<span class="name">square</span> guess)) (<span class="name">*</span> <span class="number">2</span> guess)) <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">square</span> x) (<span class="name">*</span> x x))</span><br><span class="line">(<span class="name">define</span> (<span class="name">cube</span> x) (<span class="name">*</span> x x x))</span><br><span class="line"></span><br><span class="line"><span class="comment">; return rate which is less than 1</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">rate</span> x y)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&gt;</span> (<span class="name">abs</span> x) (<span class="name">abs</span> y)) (<span class="name">/</span> y x) (<span class="name">/</span> x y)))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.9：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">+</span> a b)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">=</span> a <span class="number">0</span>)</span><br><span class="line">        b</span><br><span class="line">        (<span class="name">inc</span> (<span class="name">+</span> (<span class="name">dec</span> a) b))))</span><br><span class="line"></span><br><span class="line">(<span class="name">+</span> <span class="number">4</span> <span class="number">5</span>)</span><br><span class="line">(<span class="name">inc</span> (<span class="name">+</span> <span class="number">3</span> <span class="number">5</span>))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">+</span> <span class="number">2</span> <span class="number">5</span>)))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">+</span> <span class="number">1</span> <span class="number">5</span>))))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">+</span> <span class="number">0</span> <span class="number">5</span>)))))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> <span class="number">5</span>))))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> (<span class="name">inc</span> <span class="number">6</span>)))</span><br><span class="line">(<span class="name">inc</span> (<span class="name">inc</span> <span class="number">7</span>))</span><br><span class="line">(<span class="name">inc</span> <span class="number">8</span>)</span><br><span class="line"><span class="number">9</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; 以上计算过程是递归的，因为整个求值过程是一个推迟执行的运算</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">+</span> a b)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">=</span> a <span class="number">0</span>)</span><br><span class="line">        b</span><br><span class="line">        (<span class="name">+</span> (<span class="name">dec</span> a) (<span class="name">inc</span> b))))</span><br><span class="line"></span><br><span class="line">(<span class="name">+</span> <span class="number">4</span> <span class="number">5</span>)</span><br><span class="line">(<span class="name">+</span> <span class="number">3</span> <span class="number">6</span>)</span><br><span class="line">(<span class="name">+</span> <span class="number">2</span> <span class="number">7</span>)</span><br><span class="line">(<span class="name">+</span> <span class="number">1</span> <span class="number">8</span>)</span><br><span class="line">(<span class="name">+</span> <span class="number">0</span> <span class="number">9</span>)</span><br><span class="line"><span class="number">9</span> </span><br><span class="line"><span class="comment">; 以上计算过程是迭代的，因为其状态可以用固定数目的状态变量描述</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.10：</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; Ackermann Function</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">A</span> x y)</span><br><span class="line">  (<span class="name">cond</span> ((<span class="name">=</span> y <span class="number">0</span>) <span class="number">0</span>)</span><br><span class="line">        ((<span class="name">=</span> x <span class="number">0</span>) (<span class="name">*</span> <span class="number">2</span> y))</span><br><span class="line">        ((<span class="name">=</span> y <span class="number">1</span>) <span class="number">2</span>)</span><br><span class="line">        (<span class="name">else</span> (<span class="name">A</span> (<span class="name">-</span> x <span class="number">1</span>)</span><br><span class="line">                 (<span class="name">A</span> x (<span class="name">-</span> y <span class="number">1</span>))))))</span><br><span class="line"></span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> <span class="number">10</span>)</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">9</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">8</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> ... (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">1</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> ... (<span class="name">A</span> <span class="number">0</span> <span class="number">2</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> ... <span class="number">4</span>)</span><br><span class="line">(<span class="name">A</span> <span class="number">0</span> <span class="number">512</span>)</span><br><span class="line"><span class="number">1024</span></span><br><span class="line"></span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> <span class="number">4</span>)</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">2</span> <span class="number">3</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">2</span> <span class="number">2</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">2</span> <span class="number">1</span>))))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">2</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">1</span>))))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> <span class="number">2</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">4</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">3</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">2</span>))))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">1</span>)))))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">0</span> <span class="number">2</span>))))</span><br><span class="line">(<span class="name">A</span> <span class="number">1</span> <span class="number">16</span>)</span><br><span class="line">2^16</span><br><span class="line"></span><br><span class="line"><span class="comment">; 由上可知 (A 1 m) 即 2^m</span></span><br><span class="line"></span><br><span class="line">(<span class="name">A</span> <span class="number">3</span> <span class="number">3</span>)</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">3</span> <span class="number">2</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">3</span> <span class="number">1</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">2</span> <span class="number">2</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">1</span> (<span class="name">A</span> <span class="number">2</span> <span class="number">1</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">2</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">0</span> (<span class="name">A</span> <span class="number">1</span> <span class="number">1</span>)))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> (<span class="name">A</span> <span class="number">0</span> <span class="number">2</span>))</span><br><span class="line">(<span class="name">A</span> <span class="number">2</span> <span class="number">4</span>)</span><br><span class="line">2^16</span><br><span class="line"></span><br><span class="line"><span class="comment">; 没有找到啥规律…</span></span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">f</span> n) (<span class="name">A</span> <span class="number">0</span> n)) <span class="comment">; f(x) = 2 * x</span></span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">g</span> n) (<span class="name">A</span> <span class="number">1</span> n)) <span class="comment">; g(x) = 2 ^ x</span></span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">h</span> n) (<span class="name">A</span> <span class="number">2</span> n)) <span class="comment">; h(x) = 2 ^ 2 ^ ... ^ 2 (x in total)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.11</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 递归版</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">f</span> n)</span><br><span class="line">    (<span class="name">if</span> (<span class="name">&lt;</span> n <span class="number">3</span>)</span><br><span class="line">        n</span><br><span class="line">        (<span class="name">+</span> (<span class="name">f</span> (<span class="name">-</span> n <span class="number">1</span>))</span><br><span class="line">           (<span class="name">*</span> (<span class="name">f</span> (<span class="name">-</span> n <span class="number">2</span>)) <span class="number">2</span>)</span><br><span class="line">           (<span class="name">*</span> (<span class="name">f</span> (<span class="name">-</span> n <span class="number">3</span>)) <span class="number">3</span>))))</span><br><span class="line"></span><br><span class="line"><span class="comment">; 迭代版</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">f</span> n) (<span class="name">f-iter</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> n))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> (<span class="name">f-iter</span> a b c count)</span><br><span class="line">    (<span class="name">cond</span> ((<span class="name">=</span> count <span class="number">0</span>) a)</span><br><span class="line">          ((<span class="name">=</span> count <span class="number">1</span>) b)</span><br><span class="line">          ((<span class="name">=</span> count <span class="number">2</span>) c)</span><br><span class="line">          (<span class="name">else</span> (<span class="name">f-iter</span> b c (<span class="name">+</span> c (<span class="name">*</span> <span class="number">2</span> b) (<span class="name">*</span> <span class="number">3</span> a)) (<span class="name">-</span> count <span class="number">1</span>)))))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.12</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 杨辉三角递归版</span></span><br><span class="line">(<span class="name">define</span> (<span class="name">pascal-triangle</span> x y)</span><br><span class="line">    (<span class="name">cond</span> ((<span class="name">=</span> y <span class="number">1</span>) <span class="number">1</span>)</span><br><span class="line">          ((<span class="name">=</span> y x) <span class="number">1</span>)</span><br><span class="line">          (<span class="name">else</span> (<span class="name">+</span> (<span class="name">pascal-triangle</span> (<span class="name">-</span> x <span class="number">1</span>) (<span class="name">-</span> y <span class="number">1</span>))</span><br><span class="line">                   (<span class="name">pascal-triangle</span> (<span class="name">-</span> x <span class="number">1</span>) y)))))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习1.13</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; 数学题…先跳过吧，以前好像做过</span></span><br><span class="line"><span class="comment">; 这本书贼难</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>不会有的。</p>
-
+        
+          <a class="article-more-a" href="/2017/01/17/2017-01-17-sicp-learning-record/#more">more >></a>
+        
       
 
       
@@ -356,7 +270,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SCIP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Scheme</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -364,7 +278,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Scheme</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SCIP</a>
         		</li>
       		
 		</ul>
@@ -434,464 +348,10 @@
 <li>C语言应用的广泛性，也同时因为有Unix这个强大的后盾，基本再过20年也不会被彻底淘汰的。</li>
 <li>C语言是较“低级”的编程语言，特别是作为毕竟原始的系统编程语言，C语言毫无疑问是精简而底层的。（较接近汇编）</li>
 </ol>
-<p>希望能在有生之年把这个坑填完…</p>
-<hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="Preface-Preface-to-the-First-Edition-Introduction-Contents"><a href="#Preface-Preface-to-the-First-Edition-Introduction-Contents" class="headerlink" title="Preface / Preface to the First Edition / Introduction / Contents"></a>Preface / Preface to the First Edition / Introduction / Contents</h3><p>大意是说1978年从这本书的初版开始在计算机科学领域发生了很大的变化，C也有了其标准，即ANSI C，是一份为跨平台<br>而定制的标准。（Lua的出现也是建立在ANSI C优秀的跨平台表现的基础上的）</p>
-<p>序言中顺便提到了本书第二版新增的一些内容（如标准库等），作为C语言之父，K&amp;R（是两个人）的对C语言的相关叙述应<br>该算是很权威的，所以这本书的阅读价值也是有的，最起码在语言设计的思想上应该是表达得最准确而简洁的。</p>
-<p>第一版的序言没有什么好说的，毕竟是八十年代的东西。</p>
-<p>引言是对标准C语言的概述以及对书中内容编排的说明。</p>
-<p>接下来是很重点的目录分析！（其实有点像引言中的最后部分，不过这里是按照我个人的阅读感觉描述）</p>
-<ol>
-<li><a href="#a-tutorial-introduction"><strong>A Tutorial Introduction</strong></a><br> 感觉就是一C语言的quick-start，估计信息量很大。</li>
-<li><a href="#types-operators-and-expressions"><strong>Types Operators and Expressions</strong></a><br> 应该算是一个语言的组成元素了，倾向于Syntax。</li>
-<li><a href="#control-flow"><strong>Control Flow</strong></a><br> 控制流是命令式编程(Imperative programming)中很重要的几种语句的支持（运算、循环、条件、无条件）</li>
-<li><a href="#functions-and-program-structure"><strong>Functions and Program Structure</strong></a><br> 这部分就毕竟考验基本功了，对函数和各种变量常量等的<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" target="_blank" rel="noopener">Scope</a>的说明，比较期待这章。</li>
-<li><a href="#pointers-and-arrays"><strong>Pointers and Arrays</strong></a><br> 看看K&amp;R是怎么一章把指针讲清楚的！</li>
-<li><a href="#structures"><strong>Structures</strong></a><br> 结构体联合体什么的，单独一章还是很有必要的，毕竟数据结构的构成都靠这东西。</li>
-<li><a href="#input-and-output"><strong>Input and Output</strong></a><br> 很多坑啊……文件的处理至今仍没完全搞清楚</li>
-<li><a href="#the-unix-system-interface"><strong>The UNIX System Interface</strong></a><br> 这部分很有兴趣！因为接触得毕竟少。</li>
-<li><a href="#reference-manual"><strong>Reference Manual</strong></a><br> 当语言标准看就好。</li>
-<li><a href="#standard-library"><strong>Standard Library</strong></a><br>考验背诵的时候到了，顺便学学用setjmp写异常处理的宏。</li>
-<li><a href="#summary-of-changes"><strong>Summary of Changes</strong></a><br>俩版本的不同。</li>
-</ol>
-<p>诶我发现好像没单独讲宏的章节啊，我想看看K&amp;R是怎么花式写宏的哇。</p>
-<hr>
-<h3 id="A-Tutorial-Introduction"><a href="#A-Tutorial-Introduction" class="headerlink" title="A Tutorial Introduction"></a>A Tutorial Introduction</h3><p><code>updated on 2017-01-11</code></p>
-<p>这章是C语言的快速入门教程。下面列出其中的一些有趣的点：</p>
-<ul>
-<li><p>对于文中的第一个例程，即hello world：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world!\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>首先我们注意到main函数是没有返回值的，这并非是Undefined behavior，因为根据各版本的标准我们可以知道<br>不标明返回值程序就会返回一个不确定的值，但这并非是未定义行为。（注意区分两者差别，也就是说若是一个未定义<br>行为，那么这个程序可以选择死循环也可以选择偷偷打电话给你点一份外卖，也就是运行程序后程序的执行行为是不确<br>定的，但是返回unspecified value只表明返回的值不确定，但其他行为是可以确定的。</p>
-<blockquote>
-<p>A return from the initial call to the main function is equivalent to calling the exit function with the value returned by the main function as its argument. If the } that terminates the main function is reached, the termination status returned to the host environment is unspecified.</p>
-</blockquote>
-<p>我们用不同的编译器进行测试，发现常用的编译器(gcc, clang)都会适当给出warning，而tcc则是没有任何表<br>示：<br><img src="/img/c-programming/main-return-unspecified-value.png" alt="different compiler"></p>
-<p>相应的运行程序返回值也能得出unspecified value：<br><img src="/img/c-programming/main-return-unspecified-value.png" alt="unspecified value"></p>
-<p>然后文中说通过<code>cc hello.c</code>命令进行编译，这里又有一个小知识，就是cc究竟代表什么？<br>我们的实验环境是Ubuntu16.04 based on x86-64：<br><img src="/img/c-programming/cc.png" alt="cc"><br>可以看出其实它就是gcc，然而这事实是属于平台相关的，也就是说在SunOS上可能就是另外的编译器了，如MacOS上<br>是clang……</p>
-</li>
-<li><p>在上一点中我们引出了一个有趣而经典的话题，就是C的各个版本的标准问题。<br>在本书中使用的是ANSI C也就是传说中的C89/C90的最经典版本，根据维基百科的定义<a href="https://en.wikipedia.org/wiki/ANSI_C" target="_blank" rel="noopener">ANSI C</a>我们可以得<br>知最重要的三个版本就是<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">C89/C90</a>，<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>以及<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf" target="_blank" rel="noopener">C11</a>。我们主要讨论的是最早的版本，但也会设计部分的最新版本，毕<br>竟需要与时俱进。</p>
-<p>main函数的标准在多个版本中都基本是如下的定义：</p>
-<blockquote>
-<p>5.1.2.2.1 Program startup  </p>
-</blockquote>
-<ol>
-<li>The function called at program startup is named main. The implementation declares<br>no prototype for this function. It shall be defined with a return type of int and<br>with no parameters:<br> <code>int main(void) { /* ... */ }</code><br>or with two parameters (referred to here as argc and argv, though any names may be<br>used, as they are local to the function in which they are declared):<br> <code>int main(int argc, char *argv[]) { /* ... */ }</code><br>or equivalent;) or in some other implementation-defined manner.  </li>
-</ol>
-<p>– From <strong>ISO/IEC 9899:1999 TC3 (n1256)</strong></p>
-<p>也就是说虽然main函数可以不需要显示写出返回值或者可以返回void值，但标准建议理应是返回int值的。（其他平<br>台与实现相关，如某些嵌入式平台可能需要返回值为void）</p>
-</li>
-<li><p><strong>C语言程序都是由函数和变量组成的。</strong></p>
-</li>
-<li><p>如果字符串字面量中包含\0那么字符串会在对应地方截断，如</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"hello\0 world!\n"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>会显示<code>hello</code>并且不带换行。具体请看维基的<a href="https://en.wikipedia.org/wiki/Escape_sequences_in_C" target="_blank" rel="noopener">转义字符</a>。</p>
-</li>
-<li><p>由上一点我想到了最近在知乎上看到的一道C语言劝退题，差点就被劝退了：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">typedef char(*AP)[5];</span><br><span class="line"></span><br><span class="line"><span class="function">AP <span class="title">foo</span><span class="params">(<span class="keyword">char</span>* p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">        p[<span class="built_in">strlen</span>(p)] = <span class="string">'A'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (AP)p+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[] = <span class="string">"FROG\0SEAL\0LION\0LAMB"</span>;</span><br><span class="line">    <span class="built_in">puts</span>(foo(s)[<span class="number">1</span>] + <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">作者：孙明琦</span></span><br><span class="line"><span class="comment">链接：https://zhuanlan.zhihu.com/p/24799071</span></span><br><span class="line"><span class="comment">来源：知乎</span></span><br><span class="line"><span class="comment">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>答案的话自己编译运行看看吧我就不剧透了，做不出来的话还是不要学C语言毕竟好……</p>
-</li>
-<li><p>在1.2节中华氏温度转摄氏温度的程序中，提到了整数和浮点数作运算时的算术类型提升问题，这也是很重要的一点，    但是我们跟着书本，将这个知识点放在第二章来讲解。</p>
-</li>
-<li><p>1.4的最后提到printf和putchar两个函数可以交替调用，输出的次序与调用的次序一致。那什么情况下输出的次序<br>与调用的次序不一致呢？这时候我们联想到了C++中的cout和C的printf的同步问题了：C++中ios_base库中有定义sync_with_stdio函数，当参数为true时cout则同步stdio中的printf，在这里就不展开讲了。</p>
-</li>
-<li><p>1.5中实现了一个类似<a href="http://www.linfo.org/echo.html" target="_blank" rel="noopener">echo</a>的程序，即输出所有输入的字符：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 将输入复制到输出，版本一 */</span></span><br><span class="line">main() &#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line">    c = getchar();</span><br><span class="line">    <span class="keyword">while</span> (c != EOF) &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(c);</span><br><span class="line">        c = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们现在可以写成</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">/* 将输入复制到输出，现代版本 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c = getchar()) != EOF)</span><br><span class="line">        <span class="built_in">putchar</span>(c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里有个小知识点，为什么c的类型要声明成int呢？因为getchar这个函数返回的是int，但是为什么呢？<br>因为EOF可能是-1也可能不是，EOF只保证是一个负整数常量的宏定义，一般为-1</p>
-<blockquote>
-<p>which expands to a negative integral constant expression that is<br>returned by several functions to indicate end-of-file ,that is, no<br>more input from a stream;</p>
-</blockquote>
-<p>如果这里声明了<code>char c</code>而不是<code>int c</code>，那么有可能char是无符号整数而导致EOF被转换为非负整数（char并不<br>是unsigned char或者signed char，他们是三种类型）再提升为int，而使得<code>c != EOF</code>永远不成立。</p>
-<p>具体可以看看阮一峰老师写的一篇<a href="http://www.ruanyifeng.com/blog/2011/11/eof.html" target="_blank" rel="noopener">关于EOF的博文</a>。</p>
-</li>
-<li><p>字符字面量的类型是int，也就是说sizeof(‘a’) == sizeof(int)。</p>
-<blockquote>
-<p>An integer character constant has type int. (From ANSI C Draft 3.1.3.4)</p>
-</blockquote>
-</li>
-<li><p>注意事实上并没有else if这种语法，只是因为if-else语句嵌套而出现的if…else if…else…的情况。</p>
-<blockquote>
-<p>if ( expression ) statement [ else statement ]  （方括号为选）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (cond_1)</span><br><span class="line">    statement_1</span><br><span class="line">else if (cond_2)</span><br><span class="line">    statement_2</span><br><span class="line">else</span><br><span class="line">    statement_3</span><br></pre></td></tr></table></figure>
-
-<p>实际上是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (cond_1)</span><br><span class="line">    statement_1</span><br><span class="line">else</span><br><span class="line">    if (cond_2)</span><br><span class="line">        statement_2</span><br><span class="line">    else</span><br><span class="line">        statement_3</span><br></pre></td></tr></table></figure>
-
-<p>只是因为花括号可以省略而出现更加可读的else if的语句而已。</p>
-<p>并且我们经常错误地认为<code>if () {} else {}</code>中的花括号可以省掉是因为if-else语句支持有无花括号的两种<br>形式，实际上是因为<code>{ many-statements }</code>也是一个statement，然后参照上面列出的公式代入即可。</p>
-<p>while同理，即<code>while (cond) { many-statements }</code> =&gt; <code>while (cond) statement</code>。</p>
-</li>
-<li><p>最后吐槽一下，最后一个练习1-24竟然要写一个C语言的语法正确性检查器……这是要裸写C的lexer和parser啊……</p>
-</li>
-</ul>
-<hr>
-<h3 id="Types-Operators-and-Expressions"><a href="#Types-Operators-and-Expressions" class="headerlink" title="Types Operators and Expressions"></a>Types Operators and Expressions</h3><p><code>updated on 2017-01-12</code></p>
-<ul>
-<li><p>2.1提到<code>Don&#39;t begin variable names with underscore since libaray routines often use 
-such names.</code>。</p>
-</li>
-<li><blockquote>
-<p>31 significant initial characters in an internal identifier or a macro name.</p>
-</blockquote>
-<blockquote>
-<p>6 significant initial characters in an external identifier.</p>
-</blockquote>
-<p>各种Translation limits具体请参考<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C标准</a>的2.2.4.1部分。（如参数最多有31个之类的）</p>
-</li>
-<li><p>char == 1byte(不一定为8bits); 16bits &lt;= short &lt;= int &lt;= long &gt;= 32bits;</p>
-</li>
-<li><p>char不一定为unsigned char或signed char，又对应机器决定。</p>
-</li>
-<li><p>printable char &gt; 0;</p>
-</li>
-<li><p><img src="/img/c-programming/sizeof-types.png" alt="sizeof-types"></p>
-</li>
-<li><p>卡在练习2-1了，没什么头绪，不知道怎么写才能简洁准确。</p>
-</li>
-<li><p>同一枚举中不同的名字可以拥有相同的常量。（冷知识）</p>
-</li>
-<li><blockquote>
-<p>The expression that defines the value of an enumeration constant<br>shall be an integral constant expression that has a value representable as an int.</p>
-</blockquote>
-</li>
-<li><p>2.4的最后一段说<code>The result is implementation-defined if an attempt is made to change
-a const.</code>是错的，不是implementation-defined而是Undefined-behavior。<br>（具体请看<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C标准</a> 3.5.3第/57/点）</p>
-</li>
-</ul>
-<p><code>updated on 2017-01-13</code></p>
-<ul>
-<li><p>对于modulo operation，假设a (the dividend) and n (the divisor), a modulo n<br>(abbreviated as a mod n)，那么在<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C</a>标准下运算结果的符号是Implementation-defined的，<br>而<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>则是与Dividend一致。</p>
-<p>另外mod这里对于大部分语言来说有个小坑，即不同语言进行mod操作后正负符号取决于dividend还是divisor<br>的问题。如lua和python是与divisor一致（较特别），而C++98与<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C</a>一样是<br>Implementation-defined，C++11和<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>以及大部分语言如Rust是与Dividend一致。</p>
-</li>
-<li><p>要在char类型中储存非字符数据，请使用signed char或者unsigned char。（这条炸了，这么多年一直都直<br>接用char）即当需要将char转换为int时，请先转换为signed char或unsigned char再让其自动类型转换到<br>int，否则正负无法确定。所以千万别用char做下标，有越界的可能，而数组越界是UB。</p>
-</li>
-<li><p>忽然想到，一个很通用的UB就是整数溢出，也就是说<br><code>int n = 0; while(n++) { ...(n not be changed) }</code><br>也算是Undefined-behavior，是不保证n从正到溢出为负再增到零然后结束循环的。</p>
-</li>
-<li><p>容我吐槽一下C语言实在太多UB了具体请看<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C</a>的<code>A.6.2 Undefined behavior</code>部分。（非空源文<br>件不以换行(new-line)结尾也是UB，我的天）</p>
-</li>
-<li><p>进行二元算术运算时不同的算术类型会进行类型提升，表达式整体的类型就取决于此，具体请看<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C标准</a><br>中的<code>3.2.1.5 Usual arithmetic conversions</code>部分，或者阅读msdn上的<a href="https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx" target="_blank" rel="noopener">Usual Arithmetic<br>Conversions</a>。</p>
-</li>
-<li><p>2.7节中有一个有趣的部分，即rand和srand俩函数的实现，我查了一下标准发现它们就是标准里的Example：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> next = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand</span><span class="params">(<span class="keyword">void</span>)</span>   <span class="comment">/* RAND_MAX assumed to be 32767 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    next = next * <span class="number">1103515245</span> + <span class="number">12345</span>;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(next/<span class="number">65536</span>) % <span class="number">32768</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">srand</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> seed)</span> </span>&#123; next = seed; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>用的是线性同余法求的伪随机数，具体看wiki上的<a href="https://en.wikipedia.org/wiki/Linear_congruential_generator" target="_blank" rel="noopener">Linear congruential generator</a>。</p>
-</li>
-<li><p>2.8讲的是自增自减，这里坑毕竟多。</p>
-<ul>
-<li><p>(i+j)++不合法，因为右值不能后缀自增，对于左值右值的问题（以及C++里的prvalue、xvalue、glvalue等<br>不同类型的值）请参考wiki上的<a href="https://en.wikipedia.org/wiki/Value_(computer_science)" target="_blank" rel="noopener">Value (computer science)</a>。</p>
-</li>
-<li><p><code>i++ + ++i</code>是UB，因为无法确定左操作数和右操作数哪一个先进行求值，同理<code>func(i++, i)</code>也是，<br><code>i = i++</code>也是，还有很多，具体原理请看序列点原理，即wiki上的<a href="https://en.wikipedia.org/wiki/Sequence_point" target="_blank" rel="noopener">Sequence point</a>。其中最重要的<br>一点是：</p>
-<blockquote>
-<p>Between the previous and next sequence point a scalar object shall have its stored value modified at most once by the evaluation of an expression.</p>
-</blockquote>
-<p>摘录一段StackOverflow上关于<a href="http://stackoverflow.com/questions/4176328/undefined-behavior-and-sequence-points" target="_blank" rel="noopener">序列点产生UB</a>的内容：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">i++ * ++i;   <span class="comment">// UB, i is modified more than once btw two SPs</span></span><br><span class="line">i = ++i;     <span class="comment">// UB, same as above</span></span><br><span class="line">++i = <span class="number">2</span>;     <span class="comment">// UB, same as above</span></span><br><span class="line">i = ++i + <span class="number">1</span>; <span class="comment">// UB, same as above</span></span><br><span class="line">++++++i;     <span class="comment">// UB, parsed as (++(++(++i)))</span></span><br><span class="line"></span><br><span class="line">i = (i, ++i, ++i); <span class="comment">// UB, there's no SP between `++i` (right most) and assignment</span></span><br><span class="line">                      to `i` (`i` is modified more than once btw two SPs</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><a href="http://www.cplusplus.com/reference/cstring/strpbrk/" target="_blank" rel="noopener">strpbrk()</a>这个函数用来写lexer好像很不错啊之前都没有发现。</p>
-</li>
-<li><p>练习2-9有点有趣：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* bitcount函数：统计x中值为1的二进制位数 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bitcount</span><span class="params">(<span class="keyword">unsigned</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &amp;= (x - <span class="number">1</span>)) b++; <span class="comment">/* 利用了x &amp;= (x - 1)可以删除x中最右边值为1的一个二进制位 */</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>三元表达式（condition expression，即?:表达式)的类型由上面提到的<a href="https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx" target="_blank" rel="noopener">算术提升</a>有关。</p>
-</li>
-<li><p>善用三元表达式：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 格式输出：每10个元素及最后一行换行，其余每个元素用空格隔开 */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%6d%c"</span>, a[i], (i % <span class="number">10</span> == <span class="number">9</span> || i == n - <span class="number">1</span>) ? <span class="string">'\n'</span> : <span class="string">' '</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>注意sizeof是运算符(operator)不是函数(function)，即事实上不是<code>sizeof(expr)</code>而是<br><code>sizeof expr</code>或<code>sizeof(type)</code>：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">puts</span>(<span class="keyword">sizeof</span> <span class="string">'c'</span> == <span class="keyword">sizeof</span>(<span class="keyword">int</span>) ? <span class="string">"Equal"</span> : <span class="string">"Not Equal"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Output: Equal */</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>x = f() + g()</code>并非一定先运行f()再运行g()，两者求值顺序不定，详细请看上面的“序列点”部分。</p>
-</li>
-<li><p>下面代码会输出什么？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> _)</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, n++); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, n);</span><br><span class="line">    func(n++);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重点在于 _<strong>标准规定所有对参数的副作用都必须在函数调用前生效</strong>_。</p>
-</li>
-</ul>
-<h3 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h3><ul>
-<li><p>练习3-1中测不出binsearch函数在两种情况下的时间差，因为耗时实在太小了，贴上代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binsearch</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> first = <span class="number">0</span>, last = n, mid;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (first &lt; last - <span class="number">1</span>) &#123;</span><br><span class="line">        mid = (first + last) / <span class="number">2</span>;</span><br><span class="line">        x &lt; v[mid] ? (last = mid) : (first = mid);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> v[first] == x ? first : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3.5中有提到希尔排序的实现，我认为wiki上的实现比书里的好一些：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shell_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> gap, i, j;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">            temp = arr[i];              <span class="comment">/* 保存下key值 */</span></span><br><span class="line">            <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                arr[j + gap] = arr[j];  <span class="comment">/* 书里是在这里进行swap */</span></span><br><span class="line">            arr[j + gap] = temp;        <span class="comment">/* 而wiki这里是最后才恢复临时保存的key值 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>wiki上的以列排序解释步长排序挺清晰的，可以参考<a href="https://en.wikipedia.org/wiki/Shellsort" target="_blank" rel="noopener">Shellsort</a>。</p>
-</li>
-<li><p>atoi()和itoa()函数很有必要自己实现一遍，书里的实现很不错。特别是itoa有坑。（练习3-4）</p>
-</li>
-<li><p>3.8提到goto来跳出多层循环或进行统一错误处理，并显式说明不建议使用。</p>
-</li>
-</ul>
-<h3 id="Functions-and-Program-Structure"><a href="#Functions-and-Program-Structure" class="headerlink" title="Functions and Program Structure"></a>Functions and Program Structure</h3><ul>
-<li><p><a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C</a>允许函数省略返回值，这种情况下返回值为int，所以以前可以写成<code>main() { return 0; }</code><br>而<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>后必须要显式写为<code>int main() { return 0; }</code>，也可以省略为<code>int main() {}</code>，因为：</p>
-<blockquote>
-<p>If the return type of the main function is a type compatible with int, a return<br>from the initial call to the main function is equivalent to calling the exit function<br>with the value returned by the main function as its argument; reaching the } that<br>terminates the main function returns a value of 0. (From 5.1.2.2.3 Program<br>termination in <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99 standard draft</a>)</p>
-</blockquote>
-<p>所以现在就不能写没有返回值的函数了噢。</p>
-</li>
-<li><p>4.3信息量挺大的，提到了用外部变量共享栈来实现push和pop，以及用外部变量共享缓冲区（字符数组）实现getch<br>和ungetch（即对应标准库的getchar和ungetc）。感觉代码写得挺优雅的……这节实现了一个逆波兰表达式计算<br>器，很经典。</p>
-</li>
-<li><p>练习4-4的几种操作都和栈式计算机上的指令很像，如peek和dup什么的。</p>
-</li>
-<li><p>练习4-6是为计算器增加变量储存……想起了以前写过一个带变量的计算器，实际做起来也挺复杂的。</p>
-</li>
-<li><p>extern声明不需要指定数组的长度。</p>
-</li>
-<li><p>读4.7节register variables的时候忽然想到一个点，就是函数参数的类型声明可以有register修饰符但是不允<br>许使用auto或者static等其它的storage-class specifier，顺便register这个关键词现在基本是被抛弃了。</p>
-</li>
-<li><p>4.9节中关于变量初始化有点和C++不一样的是：</p>
-<p><img src="/img/c-programming/variables-initialization.png" alt></p>
-</li>
-<li><p>这里可以看书此书写得很严谨，除了表达严谨，内容排布也很严谨，即不会有超前的知识点，也不会有过多的交叉引<br>用等让初学者混乱的内容设计排布，如在3.3节中（尚未提到初始化）使用的是先声明后赋值。</p>
-</li>
-<li><p>4.10提到递归，有三个很经典的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Greatest Common Divisor */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b &gt; <span class="number">0</span> ? gcd(b, a % b) : a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* The Nth Fibonacci Number */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">3</span> ? <span class="number">1</span> : fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Quicksort */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> v[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> key = v[left], i = left, j = right;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; key &lt;= v[j]) j--;</span><br><span class="line">        v[i] = v[j];</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; key &gt;= v[i]) i++;</span><br><span class="line">        v[j] = v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    v[i] = key;</span><br><span class="line"></span><br><span class="line">    qsort(v, left, i - <span class="number">1</span>);</span><br><span class="line">    qsort(v, i + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>书里的qsort也写得不错，只是需要额外的swap函数比较麻烦，练习4-13是用递归翻转字符串。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* ugly code... */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_aux</span><span class="params">(<span class="keyword">char</span> s[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &gt;= right) <span class="keyword">return</span>;                  <span class="comment">/* the terminating procedure */</span></span><br><span class="line">    s[left] ^= s[right] ^= s[left] ^= s[right]; <span class="comment">/* swap s[left] and s[right] */</span></span><br><span class="line">    reverse_aux(s, left + <span class="number">1</span>, right - <span class="number">1</span>);        <span class="comment">/* recursive */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span> s[])</span> </span>&#123;</span><br><span class="line">    reverse_aux(s, <span class="number">0</span>, <span class="built_in">strlen</span>(s) - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原来宏在4.11节预处理这部分啊…这节并没有提到<code>do { ... } while(0)</code>大法，只提到了宏的不卫生性，对<br>应的有卫生宏(<a href="https://en.wikipedia.org/wiki/Hygienic_macro" target="_blank" rel="noopener">Hygienic macro</a>)的概念。Scheme和Rust等语言有对应的卫生宏实现，rust的实现可<br>以参考<a href="https://www.cs.indiana.edu/ftp/techreports/TR206.pdf" target="_blank" rel="noopener">Macro-By-Example</a>。</p>
-</li>
-<li><p>宏有很多黑魔法，在这里只提最常用的一个，就是连接两个token：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Macros for concatenating tokens */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> suffix 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __CAT_TOKEN(A, B) A##B</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CAT_TOKEN(A, B) __CAT_TOKEN(A, B)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FUNC(name) CAT_TOKEN(name, suffix) <span class="comment">/* can not use '##' */</span></span></span><br></pre></td></tr></table></figure>
-
-<p>附上一个简单的静态栈的宏实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The Template Stack implementation in C Macro.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> STACK_S_MACRO_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_S_MACRO_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt; // for malloc</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">void</span> *top;</span><br><span class="line">    <span class="keyword">void</span> *bottom;</span><br><span class="line">&#125; Stack_s;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> initStack(P, TYPE, SIZE) \</span></span><br><span class="line">    <span class="keyword">do</span> &#123;\</span><br><span class="line">        (P).top = (P).bottom = <span class="built_in">malloc</span>(((SIZE) + <span class="number">1</span>) * <span class="keyword">sizeof</span>(TYPE));\</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> destroyStack(P) \</span></span><br><span class="line">    <span class="keyword">do</span> &#123;\</span><br><span class="line">        <span class="built_in">free</span>((P).bottom);\</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sizeStack(P, TYPE) \</span></span><br><span class="line">    ((<span class="keyword">size_t</span>)(((TYPE*)(P).top) - ((TYPE*)(P).bottom)))</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> emptyStack(P) \</span></span><br><span class="line">    ((P).top == (P).bottom)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pushStack(P, TYPE, VALUE) \</span></span><br><span class="line">    <span class="keyword">do</span> &#123;\</span><br><span class="line">        TYPE* tmp = (TYPE*)((P).top);\</span><br><span class="line">        *tmp = (VALUE);\</span><br><span class="line">        (P).top = (<span class="keyword">void</span>*)(tmp + <span class="number">1</span>);\</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> popStack(P, TYPE) \</span></span><br><span class="line">    <span class="keyword">do</span> &#123;\</span><br><span class="line">        TYPE* tmp = (TYPE*)((P).top);\</span><br><span class="line">        (P).top = (<span class="keyword">void</span>*)(tmp - <span class="number">1</span>);\</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> peekStack(P, TYPE) \</span></span><br><span class="line">    (*(((TYPE*)((P).top)) - <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// STACK_S_MACRO_H_</span></span></span><br></pre></td></tr></table></figure>
-
-<p>这里可能有人会问为什么要用<code>do { ... } while(0)</code>而不直接用<code>{ ... }</code>。考虑以下情况：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (&lt;condition&gt;)</span><br><span class="line">    func_a();</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    func_b();</span><br></pre></td></tr></table></figure>
-
-<p>如果func_a是个宏函数，并且是用<code>{ ... }</code>(block)实现，那么就会出现</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (&lt;condition&gt;)</span><br><span class="line">    &#123; ... &#125;         <span class="comment">/* 因为是文本替换 */</span></span><br><span class="line">    ;               <span class="comment">/* 接下来是原来的分号，而非else，所以使得if语句结束 */</span></span><br><span class="line"><span class="keyword">else</span>                <span class="comment">/* else没有对应的if，编译错误 */</span></span><br><span class="line">    func_b();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再次提醒初学者，头文件加哨兵防止重复包含很重要：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* a header file named XXX */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __XXX_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __XXX_H_</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Some declarations */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __XXX_H_ */</span></span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="Pointers-and-Arrays"><a href="#Pointers-and-Arrays" class="headerlink" title="Pointers and Arrays"></a>Pointers and Arrays</h3><p><code>updated on 2017-01-14</code></p>
-<ul>
-<li><p><code>void *</code>是通用指针的类型。</p>
-</li>
-<li><p>类似<em>和++这样的一元运算符遵循从右至左的结合顺序，故<code>*p++</code>事实上等价于`</em>(p++)`。</p>
-</li>
-<li><p>C语言只有传值一种参数传递方式，因为指针也是值。</p>
-</li>
-<li><p>数组下标其实是偏移量(offset)，即<code>p[i]</code>等价于<code>*(p + i)</code>，其中i就是偏移量，故“从零开始”。</p>
-</li>
-<li><p>数组名不是变量，也不等价于指针常量，只是在作为 <em>函数形式参数</em> 的情况下<code>char s[]</code>和<code>char *s</code><br>是等价的。</p>
-</li>
-<li><p>C语言只保证对任意大小为N的合法数组提供最多N+1的连续空间，即当对数组arr[N]取&amp;arr[N + 1]时即为<br>Undefined-behavior，即使不对其地址解引用（访问其元素）也是UB，这点需要注意。</p>
-</li>
-<li><p>C语言保证，0永远不是有效的数据地址。并且指向不同数组的元素的指针之间的算术或比较运算是未定义行为。</p>
-</li>
-<li><p>注意以下两种定义的区别：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> amessage[] = <span class="string">"now is the time"</span>;    <span class="comment">/* define an array */</span></span><br><span class="line"><span class="keyword">char</span> *pmessage = <span class="string">"now is the time"</span>;     <span class="comment">/* define a pointer */</span></span><br></pre></td></tr></table></figure>
-
-<p>通过pmessage来试图修改字符串是未定义行为。</p>
-</li>
-<li><p>书中的strcpy()函数的实现很美观：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (*s++ = *t++) <span class="comment">/* loop */</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>练习5-7想说明访问栈空间比访问堆空间的速度快？</p>
-</li>
-<li><p>除数组的第一维可以不指定大小外，其余各维都必须明确指定大小。</p>
-</li>
-<li><p>5.9节对二维数组和指针数组的区别解释得很清楚，前者储存空间是矩形连续的，而后者不一定。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>][<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> *b[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
-
-<p>前者分配了大小为<code>10 * 20 * sizeof(int)</code>的空间，而后者只分配了<code>10 * sizeof(int*)</code>的空间。</p>
-</li>
-<li><p>5.10节的命令行参数是毕竟多初学者不清楚的，很多书都对其略过，但还是毕竟重要的。起码需要知道为什么<br>main函数的signature是<code>int main(int argc, char* argv[])</code>，并且知道两个参数代表什么。</p>
-</li>
-<li><p>5.11中用qsort的改版来解说函数指针，这里用的应该是策略模式(<a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="noopener">Strategy pattern</a>)。</p>
-</li>
-<li><p>5.12中实现了一个简单的递归下降分析算法来解析C语言的复杂的声明（如<code>char (*(*x[3])())[5]</code>这类），<br>看得我一脸懵逼。</p>
-</li>
-</ul>
-<h3 id="Structures"><a href="#Structures" class="headerlink" title="Structures"></a>Structures</h3><p><code>updated on 2017-01-16</code></p>
-<ul>
-<li><p>在所有运算符中，以下四个运算符优先级最高：结构运算符”.”和”-&gt;”、用于函数调用的”()”以及用于下标<br>的”[]”，即*p++-&gt;str意思是先读取指针str指向的对象的值，然后再将p加1。</p>
-</li>
-<li><p>记得有人问过，指针的步长值保存在哪里？事实上是在编译时编译器通过记住指针指向类型的大小乘以对应的步<br>数来确定步长的。</p>
-</li>
-<li><p>再次提醒，其实sizeof是一个操作符(operator)而不是函数(function)，即它可以<code>sizeof expression</code><br>这样来使用的，而平常只是因为类型需要加上括号<code>sizeof(type)</code>所以才让人有它是函数的错觉。sizeof是一种<br>编译时(compile-time)的一元运算符。（特别的，<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>的<a href="https://en.wikipedia.org/wiki/Variable-length_array" target="_blank" rel="noopener">VLA</a>除外）</p>
-<blockquote>
-<p>sizeof cannot be used with function types, incomplete types (including void), or<br>bit field lvalues.</p>
-</blockquote>
-<p><del>这里的bit field lvalues不是很懂指代的是什么。</del></p>
-<p>搞懂了，这句话有点错，应该是<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>里的<code>an expression that designates a bit-field member</code><br>毕竟准确，即bit-field的struct的成员（如<code>struct { unsigned b: 3 } a;</code>这样的情况就不能<br><code>sizeof a.b</code>）。</p>
-<blockquote>
-<p> If the type of the operand is a variable length array(<a href="https://en.wikipedia.org/wiki/Variable-length_array" target="_blank" rel="noopener">VLA</a>) type, the operand<br>is evaluated; otherwise, the operand is not evaluated and the result is an integer<br>constant.</p>
-</blockquote>
-<p>VLA是sizeof内表达式(expression)求值的唯一特例，贴上一段C99标准里的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stddef.h&gt;</span></span></span><br><span class="line"><span class="keyword">size_t</span> fsize3(<span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> b[n+<span class="number">3</span>]; <span class="comment">// variable length array</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">sizeof</span> b; <span class="comment">// execution time sizeof</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> size;</span><br><span class="line">    size = fsize3(<span class="number">10</span>); <span class="comment">// fsize3 returns 13</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>注意所谓的”指针退化“指的是数组类型自动转换成指针类型的过程。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> b[])</span> </span>&#123;</span><br><span class="line">    assert(<span class="keyword">sizeof</span> b == <span class="keyword">sizeof</span>(<span class="keyword">void</span>*));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line">    assert(<span class="keyword">sizeof</span> a / <span class="keyword">sizeof</span> a[<span class="number">0</span>] == <span class="number">10</span>);</span><br><span class="line">    func(a); <span class="comment">/* 这里数组a（类型为int[10]）退化成了指针b（类型为int*） */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为此现在的编译器基本都会报warning了。</p>
-</li>
-<li><p>因多次用到了ungetc这个东西，简单说下它的实现：基本思想就是getchar和ungetc共享一个缓冲区(buffer)，<br>即一个变量。这个变量可以是一个字符或者是一个字符数组，这取决于你最多能ungetc多少内容。然后当调用<br>ungetc时就将内容放进缓冲区，调用getchar时就先判断缓冲区是否为空，不为空则返回缓冲区的值，为空则从标<br>准输入获取。特别的，为了储存EOF的值，可能缓冲区的类型需要是int而不是char（或者int[]）。</p>
-</li>
-<li><p>结构体的长度不等于各成员长度之和：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>可能需要<code>2 * sizeof(int)</code>这么多的bytes而不是<code>sizeof(char) + sizeof(int)</code>。</p>
-<p>C语言似乎并没有规定ABI。</p>
-</li>
-</ul>
-<p><code>updated on 2017-01-17</code></p>
-<ul>
-<li><p>6.5节自引用结构部分提到相互引用，指针的大小是确定的所以非incomplete-type因此可以如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">t</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">s</span> *<span class="title">p</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">t</span> *<span class="title">q</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这节用了一个Word-count的例子来讲解使用自引用结构（二叉树）以及递归操作的程序示例。程序实现得很漂亮，核<br>心接口是<code>struct tnode *addtree(struct tnode *p, char *w)</code>，即在p的位置或p的下方增加一个w节<br>点。这部分还展示了二叉树的中序遍历，还提示了二叉树会出现的worst-case（线性查找）。</p>
-</li>
-<li><p>整型通常必须分配在偶数地址上（对其要求），为啥捏？据说第八章会讲解malloc的一种实现！</p>
-<p>这里想到一个知识点，其实对malloc的返回值是不需要强制类型转换的，因为<code>void *</code>会无条件转换为相应的其他<br>指针类型（反之亦然），即对于一般写法<code>int *p = (int*)malloc(sizeof(int));</code>可以写成<br><code>int *p = malloc(sizeof(int));</code>，大家可以按照自己的习惯进行取舍。</p>
-</li>
-<li><p>6.6节讲了散列表的实现，其中出现了一个简短有效的hash函数用作映射字符串到非负整数下标：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">hash</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> hashval;</span><br><span class="line">    <span class="keyword">while</span> (*s) hashval = *s++ + <span class="number">31</span> * hashval;</span><br><span class="line">    <span class="keyword">return</span> hashval % HASH_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之前一直很容易把<code>typedef int Length;</code>中int和Length的位置混淆（因为<code>#define Length int</code>作用类<br>似），但书中提到的typedef在语法上类似于储存类extern、static等，即通过<code>extern int Length;</code>容易记<br>忆typedef语句的参数位置。</p>
-</li>
-<li><p>联合(union)事实上就是一个结构(struct)，它的所有成员相对于基地址的偏移量都为0。</p>
-<p>联合只能用其第一个成员类型的值进行初始化。</p>
-<p>在lua的实现中联合起了一个很重要的作用（用于统一表示lua的所有对象的类型）。</p>
-</li>
-</ul>
-<ul>
-<li><p>6.9节提到位字段，通常采用的方法是定义相应的屏蔽码(<a href="https://en.wikipedia.org/wiki/Mask_(computing)" target="_blank" rel="noopener">Mask</a>)，即：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KEYWORD  01</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXTERNAL 02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STATIC   04</span></span><br><span class="line"></span><br><span class="line">flags |=  (EXTERNAL | STATIC);              <span class="comment">/* set flags to 1 */</span></span><br><span class="line">flags &amp;= ~(EXTERNAL | STATIC);              <span class="comment">/* set flags to 0 */</span></span><br><span class="line"><span class="keyword">if</span> (flags &amp; (EXTERNAL | STATIC) == <span class="number">0</span>) ...;  <span class="comment">/* check the flags */</span></span><br></pre></td></tr></table></figure>
-
-<p>而C语言提供了位域(bit-field)来供替代。只是某些机器上字段的分配是从字的左端至右端进行的，而某些<br>机器上则相反（即大端小端问题）。这意味着，在选择外部定义数据的情况下，需要考虑大小端问题，即不可<br>移植。所以在lua的实现中，使用的是上面提到的Mask方法而非位域。因为编译后的lua二进制程序与大端还<br>是小端有关，而lua的目的是可移植的。</p>
-<blockquote>
-<p> C gives no guarantee of the ordering of fields within machine words, so if you do<br>use them for the latter reason, you program will not only be non-portable, it will be<br>compiler-dependent too.</p>
-</blockquote>
-<p>当你仅需要维护<strong>内部定义的数据结构</strong>时则可以使用。</p>
-</li>
-<li><p>至此基本上C语言的语法部分就差不多了，后两章讲的主要是输入输出和各种库函数的使用和实现，还有Unix的接口，<br>内容将会比较多，估计是写不完了。</p>
-</li>
-</ul>
-<h3 id="Input-and-Output"><a href="#Input-and-Output" class="headerlink" title="Input and Output"></a>Input and Output</h3><ul>
-<li><p>补上一个冷知识<a href="https://en.wikipedia.org/wiki/Digraphs_and_trigraphs#C" target="_blank" rel="noopener">C_trigraph</a>，另在<a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf" target="_blank" rel="noopener">C99</a>中”&lt;: :&gt; &lt;% %&gt; %: %|%:”都是合法的punctuator。</p>
-</li>
-<li><p>C语言不保证字符集一定是ASCII，所以用<code>(c &gt;= 48 &amp;&amp; c &lt;= 57)</code>来代替<code>isdigit(c)</code>是不正确的。</p>
-</li>
-<li><p>以下两个表达式不等价：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(s);          <span class="comment">/* cannot include the '%' */</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>, s);    <span class="comment">/* ok */</span></span><br></pre></td></tr></table></figure>
-
-<p>以下是printf的格式例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* for "hello, world" (12 chars) */</span></span><br><span class="line">+---------------+----------------+</span><br><span class="line">|    format     |     output     |</span><br><span class="line">+---------------+----------------+</span><br><span class="line">|%s             |hello, world:   |</span><br><span class="line">|%<span class="number">10</span>s           |hello, world:   |</span><br><span class="line">|%<span class="number">.10</span>s          |hello, wor:     |</span><br><span class="line">|%<span class="number">-10</span>s          |hello, world:   |</span><br><span class="line">|%<span class="number">.15</span>s          |hello, world:   |</span><br><span class="line">|%<span class="number">-15</span>s          |hello, world   :|</span><br><span class="line">|%<span class="number">15.10</span>s        |     hello, wor:|</span><br><span class="line">|%<span class="number">-15.10</span>s       |hello, wor     :|</span><br><span class="line">+---------------+----------------+</span><br><span class="line"><span class="comment">/* ps: ':' for ending of string. */</span></span><br></pre></td></tr></table></figure>
-
-<p>另还有<code>printf(&quot;%*.*s&quot;, min_width, precision, string);</code>。</p>
-</li>
-<li><p>对于printf的接口实现，书中引出了一个概念叫变长参数列表(Variable Argument List)，具体参考<br><a href="https://en.wikipedia.org/wiki/Stdarg.h" target="_blank" rel="noopener">stdarg.h</a>。下面演示一个简单的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 找出并返回N个参数中最大的一个，N需要为正整数 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> N, ...)</span> </span>&#123;</span><br><span class="line">    assert(N &gt; <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    va_list ap;</span><br><span class="line">    va_start(ap, N);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> max_val = va_arg(ap, <span class="keyword">int</span>);</span><br><span class="line">    <span class="keyword">while</span> (--N) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = va_arg(ap, <span class="keyword">int</span>);</span><br><span class="line">        <span class="keyword">if</span> (tmp &gt; max_val) max_val = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    va_end(ap);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max_val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, max(<span class="number">4</span>, <span class="number">-1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>)); <span class="comment">/* output: 3 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对于scanf，书中描述”成功匹配并赋值的输入项的个数将作为函数值返回“，即<code>scanf(&quot;%*c&quot;);</code>的情况<br>下输入回车将会返回0，因为虽然匹配了一个值但是并没有赋值给输入项（没有输入项）而是直接抛弃。</p>
-<p>scanf无法直接匹配空白字符，因为格式参数format中的空格或制表符将会被忽略。</p>
-<p>总体来说scanf还是挺复杂的，文中提供了一个处理一般格式不确定的输入的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (getline(line, <span class="keyword">sizeof</span>(line)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sscanf</span>(line, <span class="string">"%d %s %d, &amp;day, monthname, &amp;year) == 3)</span></span><br><span class="line"><span class="string">        printf("</span>valid: %s\n<span class="string">", line);        /* 25 Dec 1988形式的日期数据 */</span></span><br><span class="line"><span class="string">    else if (sscanf(line, "</span>%d/%d/%d<span class="string">", &amp;month, &amp;day, &amp;year) == 3)</span></span><br><span class="line"><span class="string">        printf("</span>valid: %s\n<span class="string">", line);        /* mm/dd/yy形式的日期数据 */</span></span><br><span class="line"><span class="string">    else</span></span><br><span class="line"><span class="string">        printf("</span>invalid: %s\n<span class="string">", line);      /* 日期形式无效 */</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>大家可以思考一下，stdin, stdout, stderr都是常量，那么freopen是如何做到将它们重定向的呢？<br>（可能需要点操作系统里File Description的知识）</p>
-</li>
-<li><p>调用fclose是一个好习惯（而非必须），是因为一般来说操作系统会限制一个程序同时打开的文件数，并且<br>fclose会执行fflush的行为，即把缓冲区中的内容写到对应文件上。而程序正常终止（调用exit亦可）的<br>情况下程序会为每个打开的文件自动调用fclose。</p>
-</li>
-<li><p>吐槽一下malloc和calloc的接口不太一致，前者是”申请n个字节“而后者是”申请n个size字节大小的空间“。</p>
-</li>
-<li><p>练习7-9不是很能明白它想让我干嘛，用节省空间或时间的实现方式实现isupper，难道不是直接<br><code>#define isupper(c) ((c) &gt;= &#39;A&#39; &amp;&amp; (c) &lt;= &#39;Z&#39;)</code>吗。</p>
-</li>
-</ul>
-<p><code>updated on 2017-01-28</code></p>
-<ul>
-<li><p>注意下rand()函数的最大取值是RAND_MAX。</p>
-</li>
-<li><p>生成[0, 1)的浮点数可以用<code>#define frand() ((double)rand() / (RAND_MAX + 1.0))</code>。（我认<br>为这里的double类型转换应该是不用写的…因为1.0本身就是double，参考<a href="http://flash-gordon.me.uk/ansi.c.txt" target="_blank" rel="noopener">ANSI C</a>中3.1.3.1部分中<br>的“An unsuffixed floating constant has type double.”，然后根据<a href="https://msdn.microsoft.com/en-us/library/3t4w2bkb.aspx" target="_blank" rel="noopener">算术提升规则</a>，二者<br>中有一为double则表达式为double，故除数也是double，同理frand()表达式整体也是double，即rand()<br>的强制类型转换是不必要的）</p>
-</li>
-</ul>
-<h3 id="The-UNIX-System-Interface"><a href="#The-UNIX-System-Interface" class="headerlink" title="The UNIX System Interface"></a>The UNIX System Interface</h3><p>新年心情不好，就顺便更下吧。</p>
-<p>开章部分有提到“因为ANSI C标准函数是以UNIX系统为基础建立起来的”很重要。</p>
-<ul>
-<li><p>一个UNIX的常识是当用shell启动运行一个程序时，它将打开三个文件，分别是标准输入(0)、标准输出(1)、<br>标准错误(2)，所以我们平常才可以直接printf或者cout（即ostream头文件里<strong>定义</strong>的类对象），而<br>不用手动打开文件。</p>
-</li>
-<li><p><code>echo hello &gt;file 2&gt;&amp;1</code>为“标准输出重定向到file中，标准错误重定向到标准输出（现为file）中”。</p>
-</li>
-<li><p>原来C标准库中有个函数叫remove用于删除文件（底层是一般是unlink()函数或其他系统函数）。</p>
-</li>
-<li><p>文件指针指向的结构(FILE)的内容包括一个指向缓冲区的指针、一个记录缓冲区剩余字符数的计数器、一个指<br>向缓冲区下一个字符的指针、文件描述符、读写标志、错误状态标志等。</p>
-</li>
-<li><p>一般以下划线开头的标识(zhi)符表示约定好仅供内部使用。</p>
-</li>
-<li><p>若在“有缓冲”的状态下输出，则一般会在缓冲区满时进行flush，而未满时则只填充缓冲区。</p>
-</li>
-<li><p>On Linux, and Unix in general, “r” and “rb” are the same. </p>
-</li>
-<li><p>这章内容有点迷…略微有些看不懂，主要以一个用于递归显示文件（夹）大小的fsize的实例来描述UNIX的系统<br>调用等知识，提到了inode（文件系统相关）还有文件夹也是文件等的系统相关的内容，反正我好像没学到啥。</p>
-</li>
-</ul>
-<p><code>updated on 2017-02-03</code></p>
-<ul>
-<li><p>鉴于没搞懂8-6的fsize实例，我又认真看了一遍，把代码打了一遍，发现了一个很重要的问题，就是<code>read()</code><br>这个系统调用并不能用于文件夹文件（Unix下文件夹也是文件，若read函数的第一个参数是一个文件夹的文件<br>描述符，则会出错返回-1，perror显示的结果是“: Is a directory”。所以若我的操作没有问题，那么书<br>上的例程应该是不适用于POSIX.1-2001标准的。利用POSIX的<code>readdir()</code>、<code>opendir()</code>以及<code>closedir()</code><br>函数修改后的代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/dir.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fsize</span><span class="params">(<span class="keyword">char</span> *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc == <span class="number">1</span>)</span><br><span class="line">        fsize(<span class="string">"."</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">while</span> (--argc &gt; <span class="number">0</span>) fsize(*++argv);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dirwalk</span><span class="params">(<span class="keyword">char</span> *, <span class="keyword">void</span> (*fn)(<span class="keyword">char</span> *))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fsize</span><span class="params">(<span class="keyword">char</span> *name)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">stbuf</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (stat(name, &amp;stbuf) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"fsize: can't access %s\n"</span>, name);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((stbuf.st_mode &amp; S_IFMT) == S_IFDIR)</span><br><span class="line">        dirwalk(name, fsize);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%8ld %s\n"</span>, stbuf.st_size, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_PATH 1024</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dirwalk</span><span class="params">(<span class="keyword">char</span> *dir, <span class="keyword">void</span> (*fn)(<span class="keyword">char</span> *))</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[MAX_PATH];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> *<span class="title">dp</span>;</span></span><br><span class="line">    DIR *dfd;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ((dfd = opendir(dir)) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"dirwalk: can't open %s\n"</span>, dir);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((dp = readdir(dfd)) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(dp-&gt;d_name, <span class="string">"."</span>) == <span class="number">0</span> ||</span><br><span class="line">            <span class="built_in">strcmp</span>(dp-&gt;d_name, <span class="string">".."</span>) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strlen</span>(dir) + <span class="built_in">strlen</span>(dp-&gt;d_name) + <span class="number">2</span> &gt; <span class="keyword">sizeof</span>(name))</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"dirwalk: name %s/%s too long\n"</span>,</span><br><span class="line">                    dir, dp-&gt;d_name);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">sprintf</span>(name, <span class="string">"%s/%s"</span>, dir, dp-&gt;d_name);</span><br><span class="line">            (*fn)(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    closedir(dfd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>仅供参考。</p>
-</li>
-<li><p>上面这个实例涉及到了与系统相关和与系统无关的代码，但仍非“系统程序”。</p>
-</li>
-<li><p>8-7中的malloc-free实例很有实践意义（据说CSAPP里也有提到？）。首先是提到一点，malloc管理的<br>内存空间并一定不是连续的，因为如在Unix下，malloc所管理的空间是由<code>sbrk()</code>系统调用来获取相应<br>的空间。其中当有空间申请请求时，会通过first-fit方法来扫描malloc所管理的空闲块链表（有点像散<br>列表的线性探测法(<a href="https://en.wikipedia.org/wiki/Linear_probing" target="_blank" rel="noopener">Linear probing</a>)。</p>
-<p>其中有一个重要的点就是内存空间对齐问题，即确保由malloc函数返回的储存空间满足将要保存的对象的对<br>齐要求。</p>
-<blockquote>
-<p>Computers commonly address their memory in word-sized chunks. A word is a<br>computer’s natural unit for data. Its size is defined by the computers architecture.<br>Modern general purpose computers generally have a word-size of either 4 byte (32<br>bit) or 8 byte (64 bit). Classically, in early computers, memory could only be<br>addressed in words. This results in only being able to address memory at offsets<br>which are multiples of the word-size. It should be noted, however, that modern<br>computers do in fact have multiple word-sizes and can address memory down to<br>individual bytes as well as up to at least their natural word size. Recent computers<br>can operate on even larger memory chunks of 16 bytes and even a full cache line at<br>once (typically 64 bytes) in a single operation using special instructions.<br>(From <a href="https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2013_2014/epc-14-haase-svenhendrik-alignmentinc-paper.pdf" target="_blank" rel="noopener">Alignment in C</a>)</p>
-</blockquote>
-<p>书中利用Union来实现最受限类型的对齐：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> Align;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> header &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="keyword">union</span> header *ptr;</span><br><span class="line">        <span class="keyword">unsigned</span> size;</span><br><span class="line">    &#125; s;</span><br><span class="line">    Align x;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> header Header;</span><br></pre></td></tr></table></figure>
-
-<p>整个内存管理的思想是通过空闲块链表来管理可用的内存块，每一个内存块都包含一个头部来储存相关信息<br>（如size以及下一个块的指针等），每个内存块大小都是头部大小的整数倍。调用malloc时会从链表中取<br>出合适的块并返回其可用地址（头部后面），而调用free时则会将空间放回链表中，若有相邻空闲块则合并。</p>
-</li>
-</ul>
-<h3 id="Reference-Manual"><a href="#Reference-Manual" class="headerlink" title="Reference Manual"></a>Reference Manual</h3><p>等什么时候搞编译原理再补上这章吧。（虽然这么说但估计是没有的了）</p>
-<h3 id="Standard-Library"><a href="#Standard-Library" class="headerlink" title="Standard Library"></a>Standard Library</h3><p>有空的话这章还是可以看看的，很多有用的没有了解过的东西，如头文件<code>&lt;locale.h&gt;</code>或者<code>&lt;float.h&gt;</code>等等。</p>
-<p>再说吧。</p>
-<h3 id="Summary-of-Changes"><a href="#Summary-of-Changes" class="headerlink" title="Summary of Changes"></a>Summary of Changes</h3><p>这章没什么好看的。</p>
-<ul>
-<li><p>第一版的C竟然将8和9用作八进制数字……</p>
-</li>
-<li><p>原来以前是可以<code>a + = 1</code>这样用空格隔开的，即赋值增减是两个tokens。</p>
-</li>
-<li><p>算了吐槽这章也没啥意思。</p>
-</li>
-</ul>
-<hr>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>从开脑洞到今天为止刚好是一个月。当然了，实际看书和写东西的时间还是不多的，应该不到十天。寒假新年颓了<br>二十天左右，倒也挺舒服。</p>
-<p>这本书是第一本尝试逐字弄懂的书，估计也是最后一本。因为看这本书的前提是我已经学过C语言并且用的时间也<br>不少，以及有一定程度的了解。并且这本书十分薄，两百多页的书，正文也有两百页不到。所以耗时也相对少很多，<br>更多的时间是耗在回忆知识点（各种坑）还有翻标准文档上，只有很少时间是花在学习吸收新知识和概念上，所以<br>对阅读SICP等书并没有参考价值，因为后者是在完全不了解的情况下全新地开展阅读。总的来说后者花费的时间应<br>该最少也是前者的四倍。</p>
-<p>所以这篇东西叫做”Book Review”而不是”Learning Record”。</p>
-<p>下一篇”Book Review”应该是《程序员的自我修养——链接、装载与库》，不要期待。</p>
-<p><code>updated on 2017-01-15</code></p>
-<p>最后补一个C语言劝退题，C89/C90/C99/C11皆可：以下代码能否编译通过？若不行，为什么？若可以，是否是未定义<br>行为？若是则指出对应位置，若不是那么是否会出现Runtime Error？若不会，输出是什么？若会，为什么？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> r c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> s t</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _(a, b) a##b</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __(a, b) _(a, b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ___(a, b, c) __(__(a, b), c)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rev(f, a, b) f(b, a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> love(a) __(__(a, r), s)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> for(a) love(a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> i(hate) &#123;hate&#125;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ever</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> uct[] = <span class="string">"123\0x456"</span>;</span><br><span class="line">    rev(__, uct, str) &#123; <span class="keyword">char</span>* str; &#125;</span><br><span class="line">    a[(<span class="keyword">char</span>)<span class="number">2</span> % (<span class="keyword">signed</span> <span class="keyword">char</span>)<span class="number">253</span>] = &#123;</span><br><span class="line">        &#123;<span class="keyword">for</span>(u)&#125;, i(love(u)+<span class="number">4</span> ever)</span><br><span class="line">    &#125;, *p = a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%"</span><span class="string">"c"</span><span class="string">"\\"</span><span class="string">"n\n"</span>, (*p-&gt;str+=<span class="built_in">printf</span>(&amp;*p++-&gt;str), *++p-&gt;str));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果这本书的所有内容以及我上面提到的所有内容以及这道劝退题都搞懂了的话，那么你应该可以跟别人说“C语言<br>吗，我之前学过”。当然，离精通还是很远的。</p>
-<p>嗯我也是学过C语言的人了！</p>
-
+<p>希望能在有生之年把这个坑填完…（填完了）</p>
+        
+          <a class="article-more-a" href="/2017/01/03/2017-01-03-the-c-programming-language-book-review/#more">more >></a>
+        
       
 
       
@@ -1099,38 +559,9 @@ a const.</code>是错的，不是implementation-defined而是Undefined-behavior�
 </blockquote>
 <p>源码的话当然是选择最新版本来阅读了，原因有两个：一是5.3版本区分了浮点数(float)和整数(int)，GC采用增量式<br>垃圾回收算法，虚拟机基于寄存器而使得instructions的数量大大减少；二是我之前写的lua都是用的5.3版本，也就<br>顺其自然地看这个版本了。虽然相比于很早之前的版本代码量增加了约一倍，也就是20k行左右的标准C，但整体上应该变<br>化不会非常大。</p>
 <p>这里提供了很多的源码阅读相关建议和链接： <a href="http://lua-users.org/wiki/LuaSource" target="_blank" rel="noopener">http://lua-users.org/wiki/LuaSource</a><br>Lua5.3源码在线阅读： <a href="http://www.lua.org/source/5.3/" target="_blank" rel="noopener">http://www.lua.org/source/5.3/</a>  </p>
-<hr>
-<p><code>update on 2016-12-31</code>  </p>
-<p>看了<a href="http://blog.codingnow.com/" target="_blank" rel="noopener">云风的Blog</a>发现有 <em>The Implementation of Lua 5.0</em> 的<a href="http://blog.codingnow.com/2008/05/the_implementation_of_lua_50.html" target="_blank" rel="noopener">译文</a>(<a href="http://www.lua.org/doc/jucs05.pdf" target="_blank" rel="noopener">原文在此</a>)，也就顺便中<br>英对照着看了。先阅读了前六节（共八节），发现还是有不少看不懂的地方。后补充了第七、八节。  </p>
-<ul>
-<li><p>第一节是介绍Lua5.0的特点，如基于寄存器的虚拟机、散列表用作数组时的新优化算法、闭包的特殊实现和协程的加<br>入等。</p>
-</li>
-<li><p>第二节是提出Lua的设计理念和目标，如简洁高效、可移植（ANSI C）、可嵌入并易于嵌入（即实现需小巧高效）。</p>
-</li>
-<li><p>第三节讲解了Lua的值的内部表示，即其八种基本类型在C中的实现结构。Lua将值表示成带标志的联合结构(tagged<br>unions)，这里的联合更像是组合，用(tag, value)表示。其中value储存值或相应的引用（指针）。特别的，字<br>符串因常被用于比较等操作，所以lua会对内部化(internalized)了的字符串(string)进行hash并保存下hash<br>值，此后可通过对比hash值来快速判断两字符串是否相等。</p>
-</li>
-<li><p>第四节讲了Lua的表(table)。因为表作为lua唯一的表示数据结构的方式（数组通过表的整数索引来支持），意义重<br>大。因为这种混合型结构，Lua5.0中，对被用作数组的表使用了一种特殊的优化方式，即对于整数索引，将不保存此<br>键（即索引），而是将值存入一个真正的数组（C的原生数组）中。并且此数组的内存空间大小将由一种特殊的算法来<br>确定（较复杂，具体需看文章）。另外散列表那一part的实现暂时看不太懂（本节最后一段）。</p>
-</li>
-<li><p>第五节讲了函数和闭包的实现。在编译期会生成函数原型，在运行期会创建闭包（即函数原型的引用、环境的引用、<br>upvalue引用的数组）。upvalue即外部局部变量，引用<a href="https://www.quora.com/What-are-upvalues-in-Lua" target="_blank" rel="noopener">Quora中一个答案</a>的描述： “The local<br>variable that has been closed over by that function ‘jumps up’ into the new scope<br>which is why it’s called an upvalue.”。另外本节最后一段的flat闭包不太能理解。  </p>
-<p>鉴于译文的翻译有点迷，难以理解，所以我在这里翻译一下第五节的倒数第二段（关键段落）：  </p>
-<p><strong>原文</strong>： Mutable state is shared correctly among closures by creating at most one<br>upvalue per variable and reusing it as needed. To ensure this uniqueness, Lua<br>keeps a linked list with all open upvalues (that is, those that still point to the<br>stack) of a stack (the pending vars list in Figure 4). When Lua creates a new<br>closure, it goes through all its outer local variables. For each one, if it can find<br>an open upvalue in the list, it reuses that upvalue. Otherwise, Lua creates a new<br>upvalue and links it in the list. Notice that the list search typically probes only<br>a few nodes, because the list contains at most one entry for each local variable<br>that is used by a nested function. Once a closed upvalue is no longer referred by<br>any closure, it is eventually garbage collected.</p>
-<p><strong>译文</strong>：对每个变量通过创建至多一个upvalue（按需重用）来保证它们在不同的闭包间正确地被共享。为了保证<br>其唯一性，Lua维护一个链表来储存所有打开状态(open)的upvalues（即仍指向栈中变量的upvalues）。当Lua创<br>建一个新的闭包时，Lua将遍历所有其外部局部变量。对于其中的每一个，如果能在链表中找到相应的打开状态的<br>upvalue，就使用这个upvalue。否则，Lua将会创建一个新的upvalue并且将其插入到链表中。注意其中的链表搜<br>索过程一般只用检查少数几个节点，因为链表为每个被嵌套函数使用到的局部变量包含了至多一个入口（即<br>upvalue）。一旦一个关闭状态(closed)的upvalue不再被任何闭包引用时，其储存空间最终就会被GC回收。  </p>
-</li>
-<li><p>第六节讲的是线程和协程（其实就是协程，与一般程序的线程(thread)不是一个东西）。和Python的generator不<br>同，Lua的协程能够在多级函数嵌套中yield（即挂起，暂停执行），这是因为受利于每个协程都有各自的栈。当Lua<br>解释器的主循环里有CALL调用时，Lua将会像真实的CPU一般进行操作（具体参考CSAPP第三章）。</p>
-</li>
-</ul>
-<p><code>update on 2017-01-01</code></p>
-<ul>
-<li><p>第七节讲的是虚拟机的实现。先解释了一波register-based有多好多好，为此Lua5.0从stack-based切到<br>register-based。接下来用一个图简要解释了Lua虚拟机的35条指令（具体请看参考<a href="http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions.pdf" target="_blank" rel="noopener"> <em>A No-Frills<br>Introduction to Lua 5.1 VM Instructions</em> </a>），还有4bytes的指令的组成结构（具体请参考<br>源代码头文件<a href="http://www.lua.org/source/5.3/lopcodes.h.html" target="_blank" rel="noopener">lopcodes.h</a>），特别要注意的是函数中的常量（如a.f中的’f’索引）都存储在常量数组中而非<br>指令中。指令中毕竟特殊的实现是分支指令，有单独作处理。对于函数调用，Lua使用了 <em>register window</em> 来<br>处理调用参数传递的问题（这里不太能理解“the activation record of the function”代表什么，下面有对<br>应的猜测）。Lua使用双栈结构来处理函数调用的情况。一个栈储存被调用的函数的信息（即函数调用栈），另一个用<br>来储存activation record（我认为是指局部变量、函数参数等函数运行中的求值栈中的信息，文中“Each<br>activation record keeps all temporary values of the function (parameters, local<br>variables, etc.)”证实了这一猜想）。  </p>
-</li>
-<li><p>第八节总结了Lua5.0的各方面。文中展示了一个程序执行效率测试(benchmarks)，我们可以从中看出Lua5.0的整<br>体效率是较优于Lua4.0的。</p>
-</li>
-</ul>
-<hr>
-<p>忽然想起以前在github上Star过一个叫<a href="https://github.com/lichuang/Lua-Source-Internal" target="_blank" rel="noopener"> <em>Lua源码剖析(Lua-Source-Internal)</em> </a>的reposity，似乎写得不<br>错，可以研究一下。另外在作者的Blog中有一篇<a href="http://www.codedump.info/?p=464" target="_blank" rel="noopener">学习LUA源代码的一些经验和参考资料推荐</a>写得不错，可供参考。</p>
-<p><code>待续...</code></p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>暂时略过</p>
-
+        
+          <a class="article-more-a" href="/2016/12/30/2016-12-30-read-lua-source-code/#more">more >></a>
+        
       
 
       
@@ -1195,89 +626,6 @@ a const.</code>是错的，不是implementation-defined而是Undefined-behavior�
 
 
   
-    <article id="blog-2016-12-29-hello-world" class="article article-type-blog  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/29/2016-12-29-hello-world/">Hello Blog</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/29/2016-12-29-hello-world/" class="archive-article-date">
-  	<time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>“Ok, let’s begin.”</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是第一篇博客，虽然不会有第二篇或者更多，但是还是得写点东西占个位置。</p>
-<hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>今天顺路逛了下知乎发现有不错的Jekyll模板，就跑去<a href="https://github.com/huxpro" target="_blank" rel="noopener">作者黄玄的github</a>看了一下，发现他的github pages还不错，就拿来用了，在此感谢下。</p>
-<p>本来也在看各种static websites的建站引擎，基本都在推荐<a href="https://jekyllrb.com/" target="_blank" rel="noopener">jekyll</a>和<a href="https://hexo.io/" target="_blank" rel="noopener">hexo</a>，我就随便选了一个搭了起来，毕竟遵循能用就好原则，不把事情搞得太麻烦。</p>
-<p>鉴于markdown很方便，这引擎对其支持也很不错，推荐大家也可以用来写写日记或者技术博文什么的。（附上<a href="http://www.appinn.com/markdown/basic.html" target="_blank" rel="noopener">Markdown<br>使用教程</a>）  </p>
-<p>2016年快结束了，今年基本瞎过了一年，没多出啥认识的人也没做了啥可以炫耀的事，没有忙忙碌碌的每一天，基本都是靠发呆和睡觉来度过的。</p>
-<p>有空的话可能补个年终总结什么的吧，就这样好了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/29/2016-12-29-hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="blog-2016-12-29-summary-for-2016" class="article article-type-blog  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1310,15 +658,95 @@ a const.</code>是错的，不是implementation-defined而是Undefined-behavior�
 <li>九月初到十一月末</li>
 <li>十二月整月</li>
 </ul>
-<h3 id="勤奋学习"><a href="#勤奋学习" class="headerlink" title="勤奋学习"></a>勤奋学习</h3><p>相较于2015年的八月初，也就是刚开始接触编程的时候的热情，这个时段并没有那么专心致志，但相比于今年的其他时段而言，已经是属于奋发图强的级别了。学了下STL，看了看简单的栈式虚拟机，写写JavaScript和python，又跑去Coursera上了一半的Andrew Ng的Machine Learning，基本每一项都是半途而废，毕竟我也不像一个能坚持的人。</p>
-<h3 id="无所事事"><a href="#无所事事" class="headerlink" title="无所事事"></a>无所事事</h3><p>身体情况不稳定，决定先停下所有的学习，尝试不用脑好好修养，同时也是这个时候开始玩的LOL。期间突然心血来潮想写一个C++的JSON库，就把基础部分的实现好，之后就已经没有完善的欲望了，测试也没怎么写。暑假稍微尝试了下阅读Linux-0.11的源码还有去学习计算机网络的知识，都没有了下文。倒是迷上了lua这个优雅的语言。</p>
-<h3 id="败家国度"><a href="#败家国度" class="headerlink" title="败家国度"></a>败家国度</h3><p>暑假后半段时间开始看病，嗑药像吃糖一样，自己储的钱基本被吃得差不多了。而又在此时有很多的东西想买，父亲为此资助了大额的资金，我瞬间就从禁欲系变成了纵欲系。买了笔记本、台式、两台显示器、两个机械键盘、手表等等，一个月内的花费足以抵得上过去三年的花费。期间办了休学，呆宿舍无聊就逛淘宝京东亚马逊，吃了药精神也不是很稳定，东西想买就直接付款了，因此存款又再一次见底。然而败家仍在继续。</p>
-<h3 id="思考人生"><a href="#思考人生" class="headerlink" title="思考人生"></a>思考人生</h3><p>这年的最后一个月，钱全部花在了计算机相关书籍的购买上，宿舍书架也逐渐地被填满。当然，书都是买来收藏的，看不看也就是另一回事了。临近冬天人总是会习惯性地不想动，窝宿舍里发呆，也就免不了思考人存在的意义之类的问题了，即使知道大概是很难找到答案的。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><blockquote>
-<p>如果神知道有这个世界，那就没有活下去的意义了。</p>
+        
+          <a class="article-more-a" href="/2016/12/29/2016-12-29-summary-for-2016/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Summary</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Daily</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/29/2016-12-29-summary-for-2016/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="blog-2016-12-29-hello-world" class="article article-type-blog  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/29/2016-12-29-hello-world/">Hello Blog</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/29/2016-12-29-hello-world/" class="archive-article-date">
+  	<time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>“Ok, let’s begin.”</p>
 </blockquote>
-<p>我并不知道写总结有什么用，也不知道写技术性文章有什么用，就当做自说自话吧，一项项地写下来，起码知道自己在想的是什么。</p>
-<p>下年还是好好活吧，过一年是一年。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是第一篇博客，虽然不会有第二篇或者更多，但是还是得写点东西占个位置。（已从jekyll转向hexo，其实差不太多）</p>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>今天顺路逛了下知乎发现有不错的Jekyll模板，就跑去<a href="https://github.com/huxpro" target="_blank" rel="noopener">作者黄玄的github</a>看了一下，发现他的github pages还不错，就拿来用了，在此感谢下。</p>
+<p>本来也在看各种static websites的建站引擎，基本都在推荐<a href="https://jekyllrb.com/" target="_blank" rel="noopener">jekyll</a>和<a href="https://hexo.io/" target="_blank" rel="noopener">hexo</a>，我就随便选了一个搭了起来，毕竟遵循能用就好原则，不把事情搞得太麻烦。</p>
+<p>鉴于markdown很方便，这引擎对其支持也很不错，推荐大家也可以用来写写日记或者技术博文什么的。（附上<a href="http://www.appinn.com/markdown/basic.html" target="_blank" rel="noopener">Markdown<br>使用教程</a>）  </p>
+<p>2016年快结束了，今年基本瞎过了一年，没多出啥认识的人也没做了啥可以炫耀的事，没有忙忙碌碌的每一天，基本都是靠发呆和睡觉来度过的。</p>
+<p>有空的话可能补个年终总结什么的吧，就这样好了。</p>
 
       
 
@@ -1332,11 +760,7 @@ a const.</code>是错的，不是implementation-defined而是Undefined-behavior�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Life</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Summary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Daily</a>
         		</li>
       		
 		</ul>
@@ -1346,7 +770,7 @@ a const.</code>是错的，不是implementation-defined而是Undefined-behavior�
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/29/2016-12-29-summary-for-2016/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/12/29/2016-12-29-hello-world/">展开全文 >></a>
         </p>
       
 
@@ -1431,8 +855,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -1444,15 +866,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -1473,6 +893,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Computer Science</a>
               </li>
              
@@ -1489,22 +917,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
               </li>
              
@@ -1513,15 +925,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Life</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">Reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1553,7 +957,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scheme</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1561,7 +965,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1569,15 +973,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Racket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Functional Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Game of Life</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Rust</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">R5RS</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Language Standard</a>
+                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1593,19 +1025,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Design</a>
+                <a href="javascript:void(0)" class="js-tag color5">SCIP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">破事水</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Summary</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color1">Daily</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1652,27 +1076,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="#" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">最可悲的事是&lt;br&gt;写“关于我”这部分内容时&lt;br&gt;我竟然想不到有什么可以写</div>
   	  	
     	</section>
     
