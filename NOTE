@@ -1,0 +1,4 @@
+$ npm i        # 保证依赖已安装
+$ hexo g       # 生成到public文件夹
+$ hexo s       # 本地部署到localhost
+$ hexo deploy  # 部署到gh-pages

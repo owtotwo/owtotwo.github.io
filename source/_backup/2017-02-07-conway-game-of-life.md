@@ -16,7 +16,7 @@ tags:
 
 > Solve problems · Make languages -- Racket
 
-明淇大腿跟我提到有Racket可以画画图，就跟Mmathematica一样，我就兴致勃勃地跑去看看官方的
+MQ大佬跟我提到有Racket可以画画图，就跟Mathematica一样，我就兴致勃勃地跑去看看官方的
 [Quick Tutorials](https://docs.racket-lang.org/quick/index.html)和
 [The Racket Guide](https://docs.racket-lang.org/guide/index.html)，
 简直有毒啊！
